@@ -11,7 +11,7 @@ export default function ImageHover() {
       <ImageTrail
         key={key}
         items={[
-          "https://picsum.photos/id/287/300/300",
+          "https://picsum.photos/id/287/300/300",        //images 
           "https://picsum.photos/id/1001/300/300",
           "https://picsum.photos/id/1025/300/300",
           "https://picsum.photos/id/1026/300/300",
