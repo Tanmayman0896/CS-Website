@@ -1,0 +1,111 @@
+.container {
+    margin: 0;
+    min-height: 100vh;
+    background: black;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: sans-serif;
+}
+
+.heading {
+    color: white;
+    font-size: 5vmin;
+    margin-bottom: 8vmin;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.cards {
+    display: flex;
+    position: relative;
+}
+
+.card {
+
+    --offsetY: 0vmin;
+    --offsetTranslateX: 0vmin;
+
+    --rotate: 0deg;
+    --translateX: 0vmin;
+    --translateY: 0vmin;
+
+    position: relative;
+    flex-shrink: 0;
+
+    width: 30vmin;
+    height: 50vmin;
+    border-radius: 5vmin;
+    overflow: hidden;
+
+    transition: transform 0.5s ease;
+
+    transform:
+        rotate(var(--rotate))
+        translateX(calc(var(--translateX) + var(--offsetTranslateX)))
+        translateY(calc(var(--translateY) + var(--offsetY)));
+}
+
+.card:hover {
+    --offsetY: -5vmin;
+}
+
+.card:hover + .card { --offsetTranslateX: 15vmin; }
+.card:hover + .card + .card { --offsetTranslateX: 13vmin; }
+.card:hover + .card + .card + .card { --offsetTranslateX: 11vmin; }
+.card:hover + .card + .card + .card + .card { --offsetTranslateX: 7vmin; }
+
+.card:has(+ .card:hover) { --offsetTranslateX: -15vmin; }
+.card:has(+ .card + .card:hover) { --offsetTranslateX: -13vmin; }
+.card:has(+ .card + .card + .card:hover) { --offsetTranslateX: -11vmin; }
+.card:has(+ .card + .card + .card + .card:hover) { --offsetTranslateX: -7vmin; }
+
+
+.card:nth-child(1){
+    --rotate: -20deg;
+    --translateX: 45vmin;
+    --translateY: 30vmin;
+    z-index: 1;
+}
+
+.card:nth-child(2){
+    --rotate: -15deg;
+    --translateX: 30vmin;
+    --translateY: 15vmin;
+    z-index: 2;
+}
+
+.card:nth-child(3){
+    --rotate: -10deg;
+    --translateX: 15vmin;
+    --translateY: 5vmin;
+    z-index: 3;
+}
+
+.card:nth-child(4){
+    z-index: 4;
+}
+
+.card:nth-child(5){
+    --rotate: 10deg;
+    --translateX: -15vmin;
+    --translateY: 5vmin;
+    z-index: 3;
+}
+
+.card:nth-child(6){
+    --rotate: 15deg;
+    --translateX: -30vmin;
+    --translateY: 15vmin;
+    z-index: 2;
+}
+
+.card:nth-child(7){
+    --rotate: 20deg;
+    --translateX: -45vmin;
+    --translateY: 30vmin;
+    z-index: 1;
+}
