@@ -24,8 +24,13 @@ export default function Navbar() {
     { name: "About", href: "/" },
     { name: "Team", href: "/what" },
     { name: "Events", href: "/idk" },
+
     { name: "Blog", href: "/de" },
     { name: "Contact", href: "/hbdewl" }
+
+    { name: "Blog THAT", href: "/what" },
+    { name: "Contact", href: "/about" }
+
   ];
 
   return (
