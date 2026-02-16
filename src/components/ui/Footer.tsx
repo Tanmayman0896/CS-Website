@@ -66,12 +66,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-24 mb-24 justify-start max-w-6xl w-full">
           {/* IEEE CS Brand Section */}
           <div className={`reveal text-left pt-16 ${isVisible ? 'active' : ''}`}>
-            <div className="flex items-center justify-start gap-4 mb-8">
-              <img src="/ieee-cs-logo.png" alt="IEEE CS Logo" className="w-16 h-16 object-contain flex-shrink-0" />
-              <div>
-                <h3 className="font-orbitron font-bold text-2xl text-white">IEEE CS</h3>
-                <p className="font-mono text-sm text-gray-500 mt-1">MUJ Chapter</p>
-              </div>
+            <div className="mb-8">
+              <img src="/ieee-cs-logo.png" alt="IEEE CS Logo" className="w-full h-auto object-contain" />
             </div>
             <p className="text-gray-400 text-base leading-relaxed mb-10 max-w-sm">
               Advancing technology for humanity through innovation, education, and collaboration.
