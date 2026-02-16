@@ -2,13 +2,13 @@ import Image from "next/image";
 import styles from "@/src/components/common/CardStack.module.css";
 
 const images = [
-  "/images/events/1.png",
-  "/images/events/2.jpg",
-  "/images/events/3.jpeg",
-  "/images/events/4.jpeg",
-  "/images/events/5.jpeg",
-  "/images/events/6.jpeg",
-  "/images/events/7.png",
+  "/images/events/1.svg",
+  "/images/events/2.svg",
+  "/images/events/3.svg",
+  "/images/events/4.svg",
+  "/images/events/5.svg",
+  "/images/events/6.svg",
+  "/images/events/7.svg",
 ];
 export default function CardStack() {
   return (
