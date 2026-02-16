@@ -1,8 +1,7 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, ComponentProps } from 'react';
 import { motion } from 'motion/react';
-import type { HTMLMotionProps } from 'motion/react';
 
-interface DecryptedTextProps extends HTMLMotionProps<'span'> {
+interface DecryptedTextProps extends ComponentProps<typeof motion.span> {
   text: string;
   speed?: number;
   maxIterations?: number;

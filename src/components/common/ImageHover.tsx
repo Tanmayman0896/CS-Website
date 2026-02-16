@@ -20,7 +20,7 @@ export default function ImageHover() {
           "https://picsum.photos/id/1029/300/300",
           "https://picsum.photos/id/1030/300/300",
         ]}
-        variant="1"
+        variant={1}
       />
     </div>
   );

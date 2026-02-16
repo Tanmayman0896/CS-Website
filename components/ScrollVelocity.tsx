@@ -7,7 +7,7 @@ import {
   useMotionValue,
   useVelocity,
   useAnimationFrame
-} from 'motion/react';
+} from 'framer-motion';
 
 interface VelocityMapping {
   input: [number, number];
@@ -113,13 +113,13 @@ export const ScrollVelocity: React.FC<ScrollVelocityProps> = ({
       return mod + min;
     }
 
-    const x = useTransform(baseX, v => {
+    const x = useTransform(baseX, (v: number) => {
       if (copyWidth === 0) return '0px';
       return `${wrap(-copyWidth, 0, v)}px`;
     });
 
     const directionFactor = useRef<number>(1);
-    useAnimationFrame((t, delta) => {
+    useAnimationFrame((t: number, delta: number) => {
       let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
       if (velocityFactor.get() < 0) {
