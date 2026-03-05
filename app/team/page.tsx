@@ -1,6 +1,7 @@
-import LightFXBackground from '@/components/LightFXBackground';
+
 import TeamCard from '@/src/components/common/TeamCard';
 import LightRays from '@/components/LightRays';
+import DotGrid from '@/components/DotGrid';
 
 export default function TeamPage() {
   const executiveMembers = [
@@ -26,7 +27,7 @@ export default function TeamPage() {
    
 
     
-      <LightFXBackground />
+      <DotGrid />
      <div className="absolute inset-0 z-10 pointer-events-none">
       
   <LightRays

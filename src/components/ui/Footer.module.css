@@ -1,100 +1,240 @@
-/* ── Footer grid ── */
-.footer {
-    position: relative;
-    padding-bottom: 2rem;
-    overflow: hidden;
-    background-color: #000;
-    z-index: 50;
-    width: 100%;
-    box-sizing: border-box;
+.footerWrapper {
+  position: relative;
+  padding: 10rem 2rem 5rem;
+  overflow: visible;
+  background: transparent;
+}
+
+.glow {
+  position: absolute;
+  bottom: -4rem;
+  left: -8rem;
+  right: -8rem;
+  height: 250%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 90% 100% at 10% 100%, rgba(244, 161, 25, 0.45) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 90% at 90% 100%, rgba(244, 161, 25, 0.40) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 80% at 50% 100%, rgba(255, 166, 0, 0.35) 0%, transparent 60%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, black 30%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  mask-image: linear-gradient(to top, black 0%, black 30%, rgba(0,0,0,0.5) 60%, transparent 100%);
+  filter: blur(55px);
+}
+
+.footerCard {
+  position: relative;
+  z-index: 1;
+  background: #0b0b0b;
+  border-radius: 2.5rem;
+  border: 1px solid rgba(255, 230, 0, 0.08);
+  min-height: 420px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 20px 60px rgba(0, 0, 0, 0.7),
+    0 0 80px rgba(255, 106, 0, 0.06);
+  overflow: hidden;
+  padding: 2.5rem 4rem 3rem;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.footerCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 230, 0, 0.3), rgba(255, 106, 0, 0.3), transparent);
+}
+
+.topRule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.6), transparent);
 }
 
 .container {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* 4-column desktop grid */
 .grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-    column-gap: 2rem;
-    row-gap: 2rem;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  column-gap: 3rem;
+  row-gap: 3rem;
+  padding-top: 0.75rem;
+  padding-bottom: 2.5rem;
+  align-items: start;
 }
 
-/* ── Tablet (≤ 768px) → 2 columns ── */
-@media (max-width: 768px) {
-    .grid {
-        grid-template-columns: 1fr 1fr;
-        column-gap: 1.5rem;
-        row-gap: 2rem;
-    }
-
-    .container {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-    }
-}
-
-/* ── Mobile (≤ 480px) → 1 column ── */
-@media (max-width: 480px) {
-    .grid {
-        grid-template-columns: 1fr;
-        row-gap: 2rem;
-    }
-
-    .container {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-}
-
-/* ── Bottom bar ── */
 .bottomBar {
-    border-top: 0.001px solid rgba(249, 115, 22, 0.2);
-    padding-top: 0.01rem;
+  border-top: 1px solid rgba(249, 115, 22, 0.15);
+  padding-top: 1.25rem;
+  margin-top: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 .terminal {
-    border-radius: 100px;
-    padding: 0.35rem 0.35rem;
-    font-family: monospace;
-    font-size: 0.875rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(249, 115, 22, 0.2);
+  border-radius: 100px;
+  padding: 0.45rem 0.9rem;
+  font-family: monospace;
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(249, 115, 22, 0.18);
 }
 
-@media (max-width: 480px) {
-    .terminal {
-        flex-direction: column;
-        border-radius: 14px;
-        text-align: center;
-        padding: 0.6rem 1rem;
-    }
+.cardReveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
-/* ── Reveal animation ── */
+.cardReveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.6s ease-out;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+@media (min-width: 1400px) {
+  .footerCard {
+    padding: 3rem 5rem 3.5rem;
+  }
+  .grid {
+    column-gap: 4rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .footerCard {
+    padding: 2.5rem 3rem 3rem;
+    border-radius: 2rem;
+  }
+  .grid {
+    column-gap: 2rem;
+    row-gap: 2.5rem;
+  }
+  .footerWrapper {
+    padding: 8rem 1.5rem 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerWrapper {
+    padding: 6rem 1.25rem 3.5rem;
+  }
+  .footerCard {
+    padding: 2rem 2rem 2.5rem;
+    border-radius: 1.75rem;
+    min-height: unset;
+  }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 2.5rem;
+  }
+  .glow {
+    left: -4rem;
+    right: -4rem;
+    height: 200%;
+    filter: blur(45px);
+  }
+  .terminal {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerWrapper {
+    padding: 5rem 1rem 3rem;
+  }
+  .footerCard {
+    padding: 2rem 1.75rem 2rem;
+    border-radius: 1.5rem;
+  }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+    row-gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerWrapper {
+    padding: 4rem 0.75rem 3rem;
+  }
+  .footerCard {
+    padding: 1.75rem 1.25rem 1.75rem;
+    border-radius: 1.25rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+    padding-bottom: 1.5rem;
+  }
+  .glow {
+    left: -2rem;
+    right: -2rem;
+    height: 160%;
+    filter: blur(35px);
+  }
+  .terminal {
+    flex-direction: column;
+    border-radius: 14px;
+    text-align: center;
+    padding: 0.6rem 1rem;
+    font-size: 0.75rem;
+  }
+  .bottomBar {
+    padding-top: 1rem;
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .footerWrapper {
+    padding: 3rem 0.5rem 2.5rem;
+  }
+  .footerCard {
+    padding: 1.5rem 1rem 1.5rem;
+    border-radius: 1rem;
+  }
+  .grid {
+    row-gap: 1.75rem;
+  }
+  .glow {
+    left: -1rem;
+    right: -1rem;
+    height: 130%;
+    filter: blur(28px);
+  }
 }
