@@ -22,30 +22,48 @@ const TeamCard: React.FC<TeamCardProps> = ({
   socials = {},
   className = ""
 }) => {
+  const [hovered, setHovered] = React.useState(false);
+
   return (
-    <div className={`group relative overflow-hidden rounded-2xl cursor-pointer ${className}`}>
+    <div
+      className={`relative overflow-hidden rounded-2xl cursor-pointer ${className}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
 
       {/* Image */}
       <img
         src={image}
         alt={name}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
+          transform: hovered ? 'scale(1.05)' : 'scale(1)',
+          transition: 'filter 0.5s ease, transform 0.5s ease',
+          display: 'block',
+        }}
       />
 
-      {/* Dark gradient overlay — always present, intensifies on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {/* Dark gradient overlay */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 55%, transparent 100%)',
+        opacity: hovered ? 1 : 0,
+        transition: 'opacity 0.3s ease',
+      }} />
 
-      {/* Info box — fades + slides up on hover */}
-      <div
-        className="
-          absolute left-1/2 bottom-3
-          -translate-x-1/2
-          translate-y-4 opacity-0
-          group-hover:translate-y-0 group-hover:opacity-100
-          transition-all duration-300 ease-out
-          w-[90%]
-        "
-      >
+      {/* Info box */}
+      <div style={{
+        position: 'absolute',
+        left: '50%',
+        bottom: '12px',
+        transform: hovered ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(16px)',
+        opacity: hovered ? 1 : 0,
+        transition: 'all 0.3s ease-out',
+        width: '90%',
+      }}>
         <div
           className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg flex items-center justify-between"
           style={{ padding: '8px 12px' }}

@@ -7,43 +7,43 @@ const PAPER_BG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 
 const teamMembers = [
   {
-    image: 'https://ui-avatars.com/api/?name=Arya+Sharma&background=1a1a2e&color=57ede0&size=400&bold=true',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&q=80',
     name: 'Arya Sharma',
     role: 'President',
     socials: { linkedin: '#', instagram: '#', github: '#' },
   },
   {
-    image: 'https://ui-avatars.com/api/?name=Rohan+Verma&background=1a1a2e&color=57ede0&size=400&bold=true',
+    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=500&fit=crop&q=80',
     name: 'Rohan Verma',
     role: 'Vice President',
     socials: { linkedin: '#', instagram: '#', github: '#' },
   },
   {
-    image: 'https://ui-avatars.com/api/?name=Priya+Nair&background=1a1a2e&color=57ede0&size=400&bold=true',
+    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&q=80',
     name: 'Priya Nair',
     role: 'Secretary',
     socials: { linkedin: '#', instagram: '#' },
   },
   {
-    image: 'https://ui-avatars.com/api/?name=Kabir+Singh&background=1a1a2e&color=57ede0&size=400&bold=true',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&q=80',
     name: 'Kabir Singh',
     role: 'Treasurer',
     socials: { linkedin: '#', instagram: '#' },
   },
   {
-    image: 'https://ui-avatars.com/api/?name=Meera+Joshi&background=1a1a2e&color=57ede0&size=400&bold=true',
+    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=500&fit=crop&q=80',
     name: 'Meera Joshi',
     role: 'Tech Lead',
     socials: { linkedin: '#', instagram: '#' },
   },
   {
-    image: 'https://ui-avatars.com/api/?name=Aditya+Rao&background=1a1a2e&color=57ede0&size=400&bold=true',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=500&fit=crop&q=80',
     name: 'Aditya Rao',
     role: 'Design Lead',
     socials: { linkedin: '#', instagram: '#', github: '#' },
   },
   {
-    image: 'https://ui-avatars.com/api/?name=Sneha+Patel&background=1a1a2e&color=57ede0&size=400&bold=true',
+    image: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&h=500&fit=crop&q=80',
     name: 'Sneha Patel',
     role: 'Events Head',
     socials: { linkedin: '#', instagram: '#' },
