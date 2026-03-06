@@ -154,7 +154,7 @@ export default function Gallery3D({
 
     function onMouseMove(e: MouseEvent) {
       const cur = cursorRef.current;
-      if (!cur) return;
+      if (!cur || !scene) return;
       const rect = scene.getBoundingClientRect();
       cur.style.left = `${e.clientX - rect.left}px`;
       cur.style.top = `${e.clientY - rect.top}px`;
