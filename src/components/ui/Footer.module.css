@@ -1,8 +1,11 @@
 .footerWrapper {
   position: relative;
-  padding: 10rem 2rem 5rem;
-  overflow: visible;
+  padding: 5rem 2rem 0.25rem;
+  overflow-x: hidden;
+  overflow-y: visible;
   background: transparent;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .glow {
@@ -35,7 +38,7 @@
     0 0 80px rgba(255, 106, 0, 0.06);
   overflow: hidden;
   padding: 2.5rem 4rem 3rem;
-  max-width: 1300px;
+  max-width: 1350px;
   margin: 0 auto;
 }
 

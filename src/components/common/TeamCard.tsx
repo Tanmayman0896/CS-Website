@@ -1,5 +1,6 @@
+"use client";
 import React from 'react';
-import { FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
 
 export interface TeamCardProps {
   image: string;
@@ -7,10 +8,10 @@ export interface TeamCardProps {
   role: string;
   socials?: {
     linkedin?: string;
-    twitter?: string;
+    instagram?: string;
     github?: string;
   };
-  className?: string; // allows free placement styling
+  className?: string;
 }
 
 const TeamCard: React.FC<TeamCardProps> = ({
@@ -21,80 +22,78 @@ const TeamCard: React.FC<TeamCardProps> = ({
   className = ""
 }) => {
   return (
-    <div
-      className={`group relative overflow-hidden rounded-2xl cursor-pointer ${className}`}
-    >
+    <div className={`group relative overflow-hidden rounded-2xl cursor-pointer ${className}`}>
+
       {/* Image */}
       <img
         src={image}
         alt={name}
-        className="w-full h-full object-cover transition-transform duration-500"
+        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
 
-      {/* White Info Box */}
-        <div
-        className="
-            absolute left-1/2 bottom-6
-            -translate-x-1/2 translate-y-32
-            group-hover:translate-y-0
-            transition-transform duration-700 ease-out
-            w-[85%]
-        "
-        >
-        <div className="bg-[#f2f2f2] rounded-2xl shadow-xl flex items-center justify-between"
-        style={{ padding: '20px' }}
-        >
-            
-            {/* Text */}
-            <div>
-            <h3 className="text-xl font-semibold text-gray-900" 
-            >
-                {name}
-            </h3>
-            <p className="text-gray-600 mt-1"
-            >
-                {role}
-            </p>
-            </div>
+      {/* Dark gradient overlay — always present, intensifies on hover */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-            {/* Icons */}
-            <div className="flex items-center gap-4">
+      {/* Info box — fades + slides up on hover */}
+      <div
+        className="
+          absolute left-1/2 bottom-3
+          -translate-x-1/2
+          translate-y-4 opacity-0
+          group-hover:translate-y-0 group-hover:opacity-100
+          transition-all duration-300 ease-out
+          w-[90%]
+        "
+      >
+        <div
+          className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg flex items-center justify-between"
+          style={{ padding: '8px 12px' }}
+        >
+          {/* Name + Role */}
+          <div className="min-w-0 pr-2">
+            <h3 className="text-sm font-semibold text-gray-900 truncate leading-tight">
+              {name}
+            </h3>
+            <p className="text-xs text-gray-500 truncate mt-0.5">
+              {role}
+            </p>
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex items-center gap-1.5 shrink-0">
             {socials.linkedin && (
-                <a
+              <a
                 href={socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 hover:scale-105 hover:bg-[#57ede0] transition"
-                >
-                <FaLinkedin className="text-gray-800" />
-                </a>
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#57ede0] hover:scale-110 transition-all duration-200"
+              >
+                <FaLinkedin className="text-gray-800 text-xs" />
+              </a>
             )}
-
-            {socials.twitter && (
-                <a
-                href={socials.twitter}
+            {socials.instagram && (
+              <a
+                href={socials.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 hover:scale-105 hover:bg-[#57ede0] transition"
-                >
-                <FaTwitter className="text-gray-800" />
-                </a>
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#57ede0] hover:scale-110 transition-all duration-200"
+              >
+                <FaInstagram className="text-gray-800 text-xs" />
+              </a>
             )}
-
             {socials.github && (
-                <a
+              <a
                 href={socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 hover:scale-105 hover:bg-[#57ede0] transition"
-                >
-                <FaGithub className="text-gray-800" />
-                </a>
+                className="w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 hover:bg-[#57ede0] hover:scale-110 transition-all duration-200"
+              >
+                <FaGithub className="text-gray-800 text-xs" />
+              </a>
             )}
-            </div>
-
+          </div>
         </div>
-        </div>
+      </div>
 
     </div>
   );
