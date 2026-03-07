@@ -67,7 +67,6 @@ export default function Navbar() {
     { name: "Team", href: "/team" },
     { name: "Events", href: "/events" },
     { name: "Blogs", href: "https://medium.com/@ieeecs" },
-    { name: "Project", href: "/projects" },
     { name: "Gallery", href: "/gallery" },
 
 
