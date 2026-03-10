@@ -24,34 +24,72 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
       smoothWheel: true,
       wheelMultiplier: 0.8,
       touchMultiplier: 1.5,
-      // allow touch to be smooth properly
       syncTouch: true,
     })
 
     lenisRef.current = lenis
 
-    // Proxy ScrollTrigger to use Lenis scroll position (keeps animations moving with scroll)
-    lenis.on('scroll', ScrollTrigger.update)
+    // Store the listener so we can remove it
+    const handleLenisScroll = () => ScrollTrigger.update()
+    lenis.on('scroll', handleLenisScroll)
 
-    // Use GSAP ticker to drive Lenis instead of a raw rAF loop
-    // This avoids the RAF cleanup leak and keeps both systems on the same clock
+    // Use GSAP ticker to drive Lenis
     const tickerFn = (time: number) => lenis.raf(time * 1000)
     gsap.ticker.add(tickerFn)
     gsap.ticker.lagSmoothing(0)
 
     return () => {
+      // STOP ticker before destroying anything else
       gsap.ticker.remove(tickerFn)
+
+      // Remove scroll listener
+      lenis.off('scroll', handleLenisScroll)
+
+      // Kill ALL ScrollTriggers with force unpin - this unpins pinned elements (like HorizontalGallery)
+      ScrollTrigger.getAll().forEach((trigger) => {
+        trigger.kill(true) // true = force unpin and revert inline styles
+      })
+
+      // Destroy Lenis completely
       lenis.destroy()
       lenisRef.current = null
 
-      // Force remove any overflow locks manually that GSAP or Lenis might have left behind
-      document.body.style.removeProperty('overflow')
-      document.documentElement.style.removeProperty('overflow')
-      document.body.style.removeProperty('height')
-      document.documentElement.style.removeProperty('height')
+      // AGGRESSIVE cleanup - Lenis might have locked scroll
+      // Force enable scrolling on all elements
+      document.body.style.overflow = 'auto'
+      document.documentElement.style.overflow = 'auto'
+      document.body.style.height = 'auto'
+      document.documentElement.style.height = 'auto'
+      
+      // Remove any transform/scroll-behavior CSS
+      document.body.style.transform = ''
+      document.documentElement.style.transform = ''
+      
+      // Force scroll position to top
+      window.scrollY = 0
+      window.pageYOffset = 0
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
 
-      // Kill all active scroll triggers to prevent them from interfering globally
-      ScrollTrigger.getAll().forEach((t) => t.kill())
+      // Re-enable scrolling on html/body
+      document.documentElement.style.scrollBehavior = 'auto'
+      document.body.style.scrollBehavior = 'auto'
+
+      // Force browser to recalculate scroll capacity
+      window.dispatchEvent(new Event('scroll', { bubbles: true }))
+
+      // Give browser time to process changes before next page mounts
+      setTimeout(() => {
+        // Double-check scroll is unlocked
+        if (document.body.style.overflow === 'hidden') {
+          document.body.style.overflow = 'auto'
+        }
+        if (document.documentElement.style.overflow === 'hidden') {
+          document.documentElement.style.overflow = 'auto'
+        }
+        // Refresh ScrollTrigger to reset global state for next page
+        ScrollTrigger.refresh()
+      }, 0)
     }
   }, [])
 

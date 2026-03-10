@@ -13,29 +13,26 @@ export default function HorizontalGallery() {
   useEffect(() => {
     if (!scroller.current) return;
 
-    const sections = gsap.utils.toArray<HTMLElement>('.skill-set');
+    const ctx = gsap.context(() => {
+      const sections = gsap.utils.toArray<HTMLElement>('.skill-set');
 
-    const animation = gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: scroller.current,
-        pin: true,
-        scrub: 0.8,
-        snap: 1 / (sections.length - 1),
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-        end: () => '+=' + scroller.current!.offsetWidth,
-      },
-    });
-
-    const st =
-      ScrollTrigger.getById(animation.vars?.scrollTrigger as string) ??
-      animation.scrollTrigger;
+      gsap.to(sections, {
+        xPercent: -100 * (sections.length - 1),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: scroller.current,
+          pin: true,
+          scrub: 0.8,
+          snap: 1 / (sections.length - 1),
+          invalidateOnRefresh: true,
+          anticipatePin: 1,
+          end: () => '+=' + scroller.current!.offsetWidth,
+        },
+      });
+    }, scroller);
 
     return () => {
-      st?.kill();
-      animation.kill();
+      ctx.revert(); // Kills animation and unpins the trigger
     };
   }, []);
 

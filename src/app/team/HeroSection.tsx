@@ -94,87 +94,107 @@ export default function HeroSection() {
   }, [])
 
   useEffect(() => {
-    // ENTRANCE: content slides up
-    gsap.from(contentRef.current, {
-      y: 150,
-      opacity: 1,
-      duration: 3,
-      ease: 'power4.out',
-    })
-
-    gsap.from(mobileContentRef.current, {
-      y: 80,
-      opacity: 1,
-      duration: 3,
-      ease: 'power4.out',
-    })
-
-    // DESKTOP scroll animation
-    const mm = gsap.matchMedia()
-
-    mm.add('(min-width: 1025px)', () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: ourStoryWrapper.current,
-          start: 'top top',
-          end: '+=1400',
-          scrub: 0.5,
-          pin: true,
-          anticipatePin: 1,
-        },
+    const ctx = gsap.context(() => {
+      // ENTRANCE: content slides up
+      gsap.from(contentRef.current, {
+        y: 150,
+        opacity: 1,
+        duration: 3,
+        ease: 'power4.out',
       })
 
-      // Step 1: fade & blur the text
-      tl.to(contentRef.current, {
-        opacity: 0,
-        filter: 'blur(8px)',
-        scale: 0.9,
-        duration: 2,
-        ease: 'power4.inOut',
-        immediateRender: false,
+      gsap.from(mobileContentRef.current, {
+        y: 80,
+        opacity: 1,
+        duration: 3,
+        ease: 'power4.out',
       })
 
-      // Step 2: slide halves apart simultaneously
-      tl.to(
-        leftRef.current,
-        { x: '-100%', ease: 'power4.inOut', duration: 3.5 },
-      )
-      tl.to(rightRef.current, { x: '100%', ease: 'power4.inOut', duration: 3.5 }, '<')
-    })
+      // DESKTOP scroll animation
+      const mm = gsap.matchMedia()
 
-    // MOBILE/TABLET scroll animation
-    mm.add('(max-width: 1024px)', () => {
-      gsap.to([mobileHeroRef.current, mobileContentRef.current], {
-        y: -window.innerHeight * 1.3,
-        ease: 'power1.inOut',
-        scrollTrigger: {
-          trigger: ourStoryWrapper.current,
-          start: 'top top',
-          end: '+=1450',
-          scrub: 0.35,
-          pin: true,
-          pinSpacing: true, // Restored to prevent succeeding content from scrolling underneath
-          anticipatePin: 1,
-        },
-      })
-    })
+      mm.add('(min-width: 1025px)', () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: ourStoryWrapper.current,
+            start: 'top top',
+            end: '+=1400',
+            scrub: 0.5,
+            pin: true,
+            anticipatePin: 1,
+          },
+        })
 
-    // Delay refresh until after the browser has painted the new page DOM.
-    // Without this, ScrollTrigger calculates pin positions against stale
-    // layout values from the previous page visit, causing lag on navigation.
-    const refreshId = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        ScrollTrigger.refresh()
+        // Step 1: fade & blur the text
+        tl.to(contentRef.current, {
+          opacity: 0,
+          filter: 'blur(8px)',
+          scale: 0.9,
+          duration: 2,
+          ease: 'power4.inOut',
+          immediateRender: false,
+        })
+
+        // Step 2: slide halves apart simultaneously
+        tl.to(
+          leftRef.current,
+          { x: '-100%', ease: 'power4.inOut', duration: 3.5 },
+        )
+        tl.to(rightRef.current, { x: '100%', ease: 'power4.inOut', duration: 3.5 }, '<')
       })
+
+      // MOBILE/TABLET scroll animation
+      mm.add('(max-width: 1024px)', () => {
+        gsap.to([mobileHeroRef.current, mobileContentRef.current], {
+          y: -window.innerHeight * 1.3,
+          ease: 'power1.inOut',
+          scrollTrigger: {
+            trigger: ourStoryWrapper.current,
+            start: 'top top',
+            end: '+=1450',
+            scrub: 0.35,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+          },
+        })
+      })
+
+      // Delay refresh until after the browser has painted the new page DOM
+      const refreshId = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh()
+        })
+      })
+
+      return () => {
+        cancelAnimationFrame(refreshId)
+      }
     })
 
     return () => {
-      cancelAnimationFrame(refreshId)
-      mm.revert()
-      // Kill all tweens on unmount so GSAP doesn't carry stale inline styles
-      // into the next visit
-      gsap.killTweensOf([contentRef.current, mobileContentRef.current, leftRef.current, rightRef.current, mobileHeroRef.current])
-      ScrollTrigger.getAll().forEach((t) => t.kill())
+      // Kill all animations and ScrollTriggers in this context
+      ctx.revert()
+      
+      // Additional safety: manually unpin any pinned elements
+      const allTriggers = ScrollTrigger.getAll()
+      allTriggers.forEach((trigger) => {
+        if (trigger.vars?.pin) {
+          // Unpin by setting transform to none
+          if (trigger.pin && typeof trigger.pin === 'object') {
+            (trigger.pin as HTMLElement).style.transform = ''
+          }
+        }
+      })
+
+      // Reset any inline styles left on elements
+      ;[contentRef, leftRef, rightRef, mobileContentRef, mobileHeroRef, heroRef].forEach((ref) => {
+        if (ref.current) {
+          ref.current.style.transform = ''
+          ref.current.style.filter = ''
+          ref.current.style.opacity = ''
+        }
+      })
     }
   }, [])
 

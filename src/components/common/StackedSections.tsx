@@ -58,12 +58,37 @@ export default function StackedSections() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: panel2Ref.current, start: "top bottom", end: "top top", scrub: 1.2,
-        onUpdate: (self) => { gsap.set(panel1Ref.current, { scale: 1 - self.progress * 0.04, filter: `brightness(${1 - self.progress * 0.28})` }); },
+      const trigger = ScrollTrigger.create({
+        trigger: panel2Ref.current, 
+        start: "top bottom", 
+        end: "top top", 
+        scrub: 1.2,
+        onUpdate: (self) => { 
+          gsap.set(panel1Ref.current, { 
+            scale: 1 - self.progress * 0.04, 
+            filter: `brightness(${1 - self.progress * 0.28})` 
+          }); 
+        },
       });
+
+      return () => {
+        trigger.kill()
+      }
     }, containerRef);
-    return () => ctx.revert();
+
+    return () => {
+      ctx.revert()
+      
+      // Reset panel styles
+      if (panel1Ref.current) {
+        panel1Ref.current.style.transform = ''
+        panel1Ref.current.style.filter = ''
+      }
+      if (panel2Ref.current) {
+        panel2Ref.current.style.transform = ''
+        panel2Ref.current.style.filter = ''
+      }
+    };
   }, []);
 
   return (
