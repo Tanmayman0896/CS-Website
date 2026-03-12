@@ -12,6 +12,7 @@ const CascadingCards = dynamic(() => import("@/src/components/common/CascadingCa
 const ImpactText = dynamic(() => import("@/src/components/common/ImpactText"), { ssr: false });
 
 import LineBackground from "@/components/LineBackground";
+import Newsletter from "@/components/Newsletter";
 
 const HELLO_LANGUAGES = [
   "नमस्ते",
@@ -105,11 +106,13 @@ export default function Home() {
       </div>
 
 
-
       <div>
         <Carousel
           
         />
+      </div>
+      <div>
+        <Newsletter />
       </div>
 
     </>
