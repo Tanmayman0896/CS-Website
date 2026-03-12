@@ -9,6 +9,7 @@ const TeamCard = dynamic(() => import("@/src/components/common/TeamCard"), { ssr
 const HorizontalGallery = dynamic(() => import("@/src/app/gallery/HorizontalGallery"), { ssr: false });
 const CardStack = dynamic(() => import("@/src/components/common/CardStack"), { ssr: false });
 const CascadingCards = dynamic(() => import("@/src/components/common/CascadingCards"), { ssr: false });
+const ImpactText = dynamic(() => import("@/src/components/common/ImpactText"), { ssr: false });
 
 import LineBackground from "@/components/LineBackground";
 
@@ -54,7 +55,7 @@ export default function Home() {
           animated={true}
         />
       </div>
-
+{/* Line 2 
       <AnimatePresence mode="wait">
         {showIntro ? (
           <motion.div
@@ -89,8 +90,11 @@ export default function Home() {
         ) : null}
       </AnimatePresence>
 
-
+*/}
       <div>
+        <ImpactText />
+      </div>
+      <div className="mt-32">
         <HorizontalGallery />
       </div>
       <div>

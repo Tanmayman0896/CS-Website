@@ -143,7 +143,7 @@ export default function FAQ() {
 
           {/* Left */}
           <div style={{ flexShrink: 0, width: 220, position: "sticky", top: 112 }}>
-           
+
             <h2 style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: 84, fontWeight: 900,
@@ -169,7 +169,7 @@ export default function FAQ() {
               />
             ))}
             <p style={{ marginTop: 16, fontSize: 13, color: "#a1a1aa", paddingLeft: 4 }}>
-              
+
             </p>
           </div>
         </div>

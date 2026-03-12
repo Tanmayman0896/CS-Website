@@ -7,37 +7,108 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Lerp between two hex color strings at t (0–1)
+function lerpColor(from: string, to: string, t: number): string {
+  const f = parseInt(from.slice(1), 16);
+  const e = parseInt(to.slice(1), 16);
+  const r = Math.round(((f >> 16) & 0xff) + (((e >> 16) & 0xff) - ((f >> 16) & 0xff)) * t);
+  const g = Math.round(((f >> 8) & 0xff) + (((e >> 8) & 0xff) - ((f >> 8) & 0xff)) * t);
+  const b = Math.round((f & 0xff) + ((e & 0xff) - (f & 0xff)) * t);
+  return `rgb(${r},${g},${b})`;
+}
+
 export default function HorizontalGallery() {
   const scroller = useRef<HTMLDivElement | null>(null);
+  const wrapper = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!scroller.current) return;
+    if (!scroller.current || !wrapper.current) return;
+    const wrapperEl = wrapper.current;
+
+    // Normalize scroll so GSAP pin works alongside Lenis
+    ScrollTrigger.normalizeScroll(true);
 
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray<HTMLElement>('.skill-set');
 
-      gsap.to(sections, {
-        xPercent: -100 * (sections.length - 1),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: scroller.current,
-          pin: true,
-          scrub: 0.8,
-          snap: 1 / (sections.length - 1),
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-          end: () => '+=' + scroller.current!.offsetWidth,
+      // Main horizontal scroll animation
+      // end = (number of sections - 1) * viewport width so we scroll exactly one screen per section
+      const st = ScrollTrigger.create({
+        trigger: scroller.current,
+        pin: true,
+        scrub: 1,
+
+
+       // snap: 1 / (sections.length - 1),(causing autoscroll)******
+        
+       
+       
+       invalidateOnRefresh: true,
+        anticipatePin: 1,
+        end: () => '+=' + (sections.length - 1) * window.innerWidth,
+        animation: gsap.to(sections, {
+          xPercent: -100 * (sections.length - 1),
+          ease: 'none',
+        }),
+      });
+
+      // Use GSAP ticker (runs every frame, works with Lenis) to drive bg color
+      const tickerFn = () => {
+        const progress = st.progress ?? 0;
+        wrapperEl.style.backgroundColor = lerpColor('#000000', '#ffffff', progress);
+      };
+      gsap.ticker.add(tickerFn);
+
+      // Animate section 1 elements from bottom-right on first enter (one-shot)
+      const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div');
+      gsap.set(section1Items, { y: 120, x: 60, opacity: 0 });
+
+      ScrollTrigger.create({
+        trigger: scroller.current,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => {
+          gsap.to(section1Items, {
+            y: 0,
+            x: 0,
+            opacity: 1,
+            ease: 'power2.out',
+            stagger: 0.12,
+            duration: 0.9,
+          });
         },
       });
+
+      // Animate section 2 elements from bottom-right (scrub-based)
+      const section2Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(2) > div');
+      gsap.set(section2Items, { y: 120, x: 60, opacity: 0 });
+
+      ScrollTrigger.create({
+        trigger: scroller.current,
+        scrub: 0.8,
+        start: 'top top',
+        end: () => '+=' + scroller.current!.offsetWidth,
+        animation: gsap.to(section2Items, {
+          y: 0,
+          x: 0,
+          opacity: 1,
+          ease: 'power2.out',
+          stagger: 0.05,
+        }),
+      });
+
+      return () => {
+        gsap.ticker.remove(tickerFn);
+      };
     }, scroller);
 
     return () => {
-      ctx.revert(); // Kills animation and unpins the trigger
+      ctx.revert();
     };
   }, []);
 
   return (
-    <div className="overflow-hidden">
+    <div ref={wrapper} className="overflow-hidden" style={{ backgroundColor: '#000000' }}>
       <div
         ref={scroller}
         className="flex w-[200vw] min-h-screen text-white relative bg-transparent"

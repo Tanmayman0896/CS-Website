@@ -3,21 +3,49 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import DecryptedText from "@/components/DecryptedText";
 import TopographicBackground from "@/components/LineBackground";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
+import { X, Menu } from "lucide-react";
 import style from "./Navbar.module.css";
 import { useRouter } from "next/navigation";
 import TargetCursor from "@/src/components/common/TargetCursor";
+import Image from "next/image";
 
-function NorrisText({ text, cascadeIndex }: { text: string; cascadeIndex: number }) {
+const NAV_IMAGES = [
+  "/images/team/photo1.svg",
+  "/images/team/pic2.svg",
+  "/images/team/pic3.svg",
+  "/images/team/pic4.svg",
+];
+
+const ScribbleIcon = () => (
+  <svg
+    viewBox="0 0 200 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={style.scribble}
+  >
+    <path
+      d="M2 10C20 2 40 18 60 10C80 2 100 18 120 10C140 2 160 18 180 10C190 6 198 10 198 10"
+      stroke="currentColor"
+      strokeWidth="6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+function NorrisText({
+  text,
+  cascadeIndex,
+}: {
+  text: string;
+  cascadeIndex: number;
+}) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    // Trigger the scrolling animation
     const timerIn = setTimeout(() => setAnimate(true), 150);
-    // Let the animation fade/revert after 1.5 seconds as requested
     const timerOut = setTimeout(() => setAnimate(false), 1650);
 
     return () => {
@@ -33,10 +61,12 @@ function NorrisText({ text, cascadeIndex }: { text: string; cascadeIndex: number
           key={index}
           className={style.norrisChar}
           data-char={char === " " ? "\u00A0" : char}
-          style={{
-            "--char-index": index,
-            "--line-index": cascadeIndex,
-          } as React.CSSProperties}
+          style={
+            {
+              "--char-index": index,
+              "--line-index": cascadeIndex,
+            } as React.CSSProperties
+          }
         >
           {char === " " ? "\u00A0" : char}
         </span>
@@ -69,115 +99,113 @@ export default function Navbar() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Team", href: "/team" },
-    { name: "Events", href: "/events" },
-    { name: "Blogs", href: "https://medium.com/@ieeecs" },
+    { name: "Event", href: "/events" },
+    { name: "Blog", href: "https://medium.com/@ieeecs" },
     { name: "Gallery", href: "/gallery" },
-
-
   ];
 
   return (
     <>
-    {cursorActive && (
-      <TargetCursor
-        targetSelector=".cursor-target"
-        spinDuration={2}
-        hideDefaultCursor
-        parallaxOn
-        hoverDuration={0.2}
-      />
-    )}
-      <nav
-        className={`${style.navbar} ${scrolled ? style.fixed : ""}`}
+      {cursorActive && (
+        <TargetCursor
+          targetSelector=".cursor-target"
+          spinDuration={2}
+          hideDefaultCursor
+          parallaxOn
+          hoverDuration={0.2}
+        />
+      )}
+
+      <header
+        className={`${style.header} ${scrolled ? style.scrolled : ""}`}
         onMouseEnter={() => setCursorActive(true)}
         onMouseLeave={() => setCursorActive(false)}
       >
-        <div className={style["nav-container"]}>
-          <div className={style.logo}>
-            ieee
-            <br />
-            computer society<span> muj</span>
+        <div className={style.headerContainer}>
+          <div className={style.logo} onClick={() => router.push("/")}>
+            <Image
+              src="/logos/ieee-cs-logo.png"
+              alt="IEEE CS MUJ Logo"
+              width={240}
+              height={60}
+              className={style.logoImage}
+              priority
+            />
           </div>
 
-          <div
-            className={`${style.hamburger} ${menuOpen ? style.open : ""}`}
+          <button
+            className={style.menuToggle}
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-
-          <ul className={style["nav-menu"]}>
-            {navItems.map((item) => (
-              <li key={item.href}>
-                <button
-                  className={`cursor-target ${style["nav-button"]} ${
-                    pathname === item.href ? style.active : ""
-                  }`}
-                  onClick={() => router.push(item.href)}
-                >
-                  <p>
-                    {item.name}
-                  </p>
-                </button>
-              </li>
-            ))}
-          </ul>
+            {menuOpen ? <X size={32} /> : <Menu size={32} />}
+          </button>
         </div>
-      </nav>
+      </header>
 
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-            className={style["mobile-overlay"]}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className={style.overlay}
           >
-            {/* Topographic Background */}
-            <div className={style["mobile-bg"]}>
+            <div className={style.overlayBg}>
               <TopographicBackground
-                lineColor="rgba(180, 140, 60, 0.4)"
-                backgroundColor="#050505"
-                lineCount={12}
+                lineColor="rgba(180, 140, 60, 0.15)"
+                backgroundColor="#1a1d17"
+                lineCount={15}
                 animated={true}
               />
             </div>
 
-            {/* Close Button */}
-            <button
-              className={style["close-btn"]}
-              onClick={() => setMenuOpen(false)}
-            >
-              <X size={24} color="#000" strokeWidth={3} />
-            </button>
-
-            {/* Links */}
-            <div className={style["mobile-links"]}>
-              {navItems.map((item, i) => {
-                return (
-                  <div
-                    key={item.href}
-                    className={style["mobile-link-wrapper"]}
-                  >
-                    <Link
-                      href={item.href}
-                      className={`${style["mobile-link"]} ${pathname === item.href ? style["mobile-active"] : ""
-                        }`}
-                      onClick={() => setMenuOpen(false)}
+            <div className={style.overlayContent}>
+              <div className={style.gridSection}>
+                <div className={style.photoGrid}>
+                  {NAV_IMAGES.map((src, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ delay: 0.1 + idx * 0.1, duration: 0.6 }}
+                      className={style.photoContainer}
                     >
-                      <NorrisText text={item.name.toUpperCase()} cascadeIndex={i} />
-                    </Link>
-                  </div>
-                )
-              })}
-            </div>
+                      <Image
+                        src={src}
+                        alt={`Menu Visual ${idx + 1}`}
+                        fill
+                        className={style.photo}
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
 
-            {/* Bottom Footer Text */}
-            <div className={style["mobile-footer"]}>
-              IEEE CS MUJ
+              <div className={style.linksSection}>
+                <nav className={style.navLinks}>
+                  {navItems.map((item, idx) => (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 + idx * 0.1, duration: 0.5 }}
+                      className={style.linkWrapper}
+                    >
+                      <Link
+                        href={item.href}
+                        className={`${style.navLink} ${
+                          pathname === item.href ? style.activeLink : ""
+                        }`}
+                        onClick={() => setMenuOpen(false)}
+                      >
+                        <NorrisText text={item.name} cascadeIndex={idx} />
+                        {pathname === item.href && <ScribbleIcon />}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+              </div>
             </div>
           </motion.div>
         )}

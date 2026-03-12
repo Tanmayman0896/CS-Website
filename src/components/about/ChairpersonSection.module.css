@@ -1,0 +1,98 @@
+/* ── Chairperson Section ── */
+
+.section {
+    position: relative;
+    z-index: 20;
+    padding-left: calc((100vw - min(95vw, 1300px)) / 2 + 28px);
+    padding-right: calc((100vw - min(95vw, 1300px)) / 2 + 28px);
+    padding-top: 8vh;
+    padding-bottom: 8vh;
+}
+
+.innerRow {
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(2rem, 5vw, 6rem);
+}
+
+/* ── Left: sticky image column ── */
+.imageColumn {
+    flex: 0 0 clamp(280px, 32vw, 440px);
+    position: sticky;
+    top: 15vh;
+    align-self: flex-start;
+}
+
+.imageWrap {
+    border-radius: 1.25rem;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 3 / 4;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.imageGradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(21, 20, 26, 0.65) 0%, transparent 35%);
+    pointer-events: none;
+}
+
+.nameMeta {
+    margin-top: 1.25rem;
+    padding-left: 0.25rem;
+}
+
+.nameText {
+    font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+}
+
+.roleText {
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.2rem;
+}
+
+/* ── Right: text column ── */
+.textColumn {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    padding-top: 4vh;
+    padding-bottom: 20vh;
+}
+
+.eyebrow {
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.title {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    margin-top: -0.75rem;
+}
+
+.divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.05));
+    border-radius: 2px;
+}
+
+.quote {
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.72);
+    border-left: 2px solid rgba(255, 255, 255, 0.15);
+    padding-left: 1.5rem;
+    font-style: italic;
+}
+
+.bodyText {
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.58);
+}

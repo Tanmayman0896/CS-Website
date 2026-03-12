@@ -1,0 +1,41 @@
+/* ── About Page ── */
+
+.scrollCanvas {
+    height: 150vh;
+}
+
+.stickyHero {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-left: calc(12vw + 28px);
+}
+
+.heroTitle {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+}
+
+.contentSection {
+    padding-top: 10vh;
+    padding-bottom: 12vh;
+}
+
+/* Mirrors the navbar container: 95% wide, max 1300px, centered */
+.navContainer {
+    width: 95%;
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bodyText {
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
+}
+
+.whoWeAreTitle {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+}

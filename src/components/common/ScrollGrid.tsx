@@ -148,8 +148,8 @@ export default function ScrollGrid() {
     // Subscribe once, re-subscribe only when gridComplete changes — properly cleaned up
     useEffect(() => {
         const unsub = scrollYProgress.on('change', (v) => {
-            if (v > 0.88 && !gridComplete) setGridComplete(true);
-            if (v < 0.6 && gridComplete) {
+            if (v > 0.55 && !gridComplete) setGridComplete(true);
+            if (v < 0.35 && gridComplete) {
                 setGridComplete(false);
                 setActiveIndex(null);
             }
@@ -161,10 +161,10 @@ export default function ScrollGrid() {
         setActiveIndex((prev) => (prev === index ? null : index));
     };
 
-    const gridOpacity = useTransform(scrollYProgress, [0.85, 1], [1, 0]);
+    const gridOpacity = useTransform(scrollYProgress, [0.92, 1], [1, 0]);
 
     return (
-        <div ref={containerRef} style={{ height: '200vh', position: 'relative' }}>
+        <div ref={containerRef} style={{ height: '350vh', position: 'relative' }}>
             <div
                 style={{
                     position: 'sticky',
@@ -250,6 +250,8 @@ export default function ScrollGrid() {
                     </div>
                 </motion.div>
             </div>
+            <br /><br /><br /><br /><br />
         </div>
+        
     );
 }
