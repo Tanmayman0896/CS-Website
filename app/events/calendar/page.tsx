@@ -26,14 +26,6 @@ export default function RollingSections() {
         },
     });
 
-    gsap.to(logoRef.current, {
-        filter: "drop-shadow(0px 0px 25px rgba(250,204,21,0.9))",
-        duration: 1.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-    });
-
 
     }, []);
 
@@ -42,7 +34,7 @@ export default function RollingSections() {
 
       <section
         ref={landingRef}
-        className="h-screen sticky top-0 flex items-center justify-between px-32 bg-gray-950 text-white z-10 relative"
+        className="h-screen sticky top-0 flex items-center justify-between px-32 bg-[#1a1a1a] text-white z-10 relative"
         >
 
         <div className="z-10 translate-x-30">
@@ -112,8 +104,8 @@ export default function RollingSections() {
       />
       </section>
 
-      <section className="h-screen flex items-center justify-center bg-blue-500 text-white">
-        <h1 className="text-6xl font-bold">Section 3</h1>
+      <section className="h-screen flex items-center justify-center bg-gray-900 text-white">
+        
       </section>
 
     </div>
