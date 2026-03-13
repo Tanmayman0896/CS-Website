@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import TargetCursor from "@/src/components/common/TargetCursor";
 import Carousel from "@/components/Carousel";
 const TeamCard = dynamic(() => import("@/src/components/common/TeamCard"), { ssr: false });
 const HorizontalGallery = dynamic(() => import("@/src/app/gallery/HorizontalGallery"), { ssr: false });

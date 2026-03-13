@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import TargetCursor from "@/src/components/common/TargetCursor";
 import FadishBlackBackground from "@/components/FadishBlackBackground";
 import SmoothScrollProvider from "@/src/components/common/SmoothScrollProvider";
 import ChairpersonSection from "@/src/components/about/ChairpersonSection";
