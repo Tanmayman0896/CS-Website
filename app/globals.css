@@ -168,3 +168,79 @@ img {
     scroll-behavior: auto !important;
   }
 }
+
+.logoWrapper{
+  width:350px;
+  height:350px;
+  overflow:hidden;
+}
+
+.logoGlow{
+  filter: drop-shadow(0 0 12px rgba(250,204,21,0.6));
+}
+
+/* shimmer sweep */
+.shimmer{
+  position:absolute;
+  width:120%;
+  height:120%;
+  background:linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,215,0,0.8),
+    transparent 70%
+  );
+  top:-10%;
+  left:-120%;
+  transform:skewX(-20deg);
+  pointer-events:none;
+  z-index:20;
+}
+
+.sparkContainer{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.spark{
+  position:absolute;
+  width:4px;
+  height:4px;
+  background:#facc15;
+  border-radius:50%;
+  box-shadow:0 0 8px #facc15;
+  opacity:0;
+  animation:sparkFloat 4s infinite ease-in-out;
+}
+
+.spark:nth-child(1){top:20%;left:10%;animation-delay:0s;}
+.spark:nth-child(2){top:80%;left:20%;animation-delay:1s;}
+.spark:nth-child(3){top:60%;left:90%;animation-delay:2s;}
+.spark:nth-child(4){top:30%;left:85%;animation-delay:0.5s;}
+.spark:nth-child(5){top:10%;left:50%;animation-delay:1.5s;}
+.spark:nth-child(6){top:75%;left:60%;animation-delay:2.5s;}
+.spark:nth-child(7){top:40%;left:5%;animation-delay:1.2s;}
+.spark:nth-child(8){top:15%;left:75%;animation-delay:0.8s;}
+.spark:nth-child(9){top:90%;left:40%;animation-delay:1.7s;}
+.spark:nth-child(10){top:50%;left:95%;animation-delay:2.2s;}
+.spark:nth-child(11){top:65%;left:30%;animation-delay:0.6s;}
+.spark:nth-child(12){top:25%;left:60%;animation-delay:1.3s;}
+
+@keyframes sparkFloat{
+
+  0%{
+    opacity:0;
+    transform:translateY(0px) scale(0.6);
+  }
+
+  40%{
+    opacity:1;
+  }
+
+  100%{
+    opacity:0;
+    transform:translateY(-20px) scale(1.2);
+  }
+
+}

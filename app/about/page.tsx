@@ -21,13 +21,6 @@ export default function AboutPage() {
         <FadishBlackBackground />
       </div>
 
-      <TargetCursor
-        spinDuration={2}
-        hideDefaultCursor
-        parallaxOn
-        hoverDuration={0.2}
-      />
-
       {/* ── Page Wrapper: z-index 1 so ChairpersonSection (z-20) overlays it ── */}
       <div id="about-page-wrapper" className="relative w-full z-[1]">
 

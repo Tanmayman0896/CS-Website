@@ -10,7 +10,6 @@ interface Exhibition {
   tag: string;
 }
 
-
 const EXHIBITIONS: Exhibition[] = [
   {
     id: 1,
@@ -18,7 +17,8 @@ const EXHIBITIONS: Exhibition[] = [
     description:
       "A sweeping survey of works from Monet, Renoir, and Pissarro that redefines how we experience the play of natural light.",
     date: "MAR 01 – MAY 18, 2025",
-    image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&auto=format&fit=crop",
     isFree: true,
     tag: "EXHIBITION",
   },
@@ -28,7 +28,8 @@ const EXHIBITIONS: Exhibition[] = [
     description:
       "Concrete poetry in three dimensions — explore monumental structures that challenged the very notion of shelter and society.",
     date: "FEB 14 – APR 27, 2025",
-    image: "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&auto=format&fit=crop",
     isFree: true,
     tag: "EXHIBITION",
   },
@@ -38,49 +39,24 @@ const EXHIBITIONS: Exhibition[] = [
     description:
       "Rothko, de Kooning, and Pollock in dialogue — a meditation on emotion, scale, and the raw language of paint.",
     date: "JAN 09 – MAR 30, 2025",
-    image: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&auto=format&fit=crop",
     isFree: false,
     tag: "EXHIBITION",
   },
 ];
 
-
 function TornEdge() {
   return (
-    <div className="w-full overflow-hidden leading-none" aria-hidden="true">
-      <svg
-        viewBox="0 0 1440 80"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-        className="w-full h-16 md:h-20"
-      >
-        <path
-          d="M0,0 
-             L0,45 
-             C30,52 55,38 80,46 
-             C105,54 128,62 160,50 
-             C192,38 215,28 248,36 
-             C281,44 300,58 335,52 
-             C370,46 388,30 420,34 
-             C452,38 468,55 505,58 
-             C542,61 562,42 598,38 
-             C634,34 655,50 692,52 
-             C729,54 748,38 785,34 
-             C822,30 840,46 878,50 
-             C916,54 934,40 970,38 
-             C1006,36 1024,52 1062,56 
-             C1100,60 1118,42 1155,38 
-             C1192,34 1210,50 1248,52 
-             C1286,54 1305,40 1340,38 
-             C1375,36 1410,46 1440,44 
-             L1440,0 Z"
-          fill="#ffffff"
-        />
-      </svg>
+    <div className="absolute top-0 left-0 w-full pointer-events-none z-0 overflow-hidden">
+      <img
+        src="/images/events/tear.svg"
+        alt="tear"
+        className="w-full -translate-y-1/2 opacity-90"
+      />
     </div>
   );
 }
-
 
 interface EventCardProps {
   exhibition: Exhibition;
@@ -88,8 +64,7 @@ interface EventCardProps {
 
 function EventCard({ exhibition }: EventCardProps) {
   return (
-   <article className="relative bg-[#121212] overflow-hidden w-full max-w-xs flex flex-col rounded-[3px] min-h-[calc(100%+3px)]">
-
+    <article className="relative bg-[#121212] overflow-hidden w-full max-w-xs flex flex-col rounded-[3px] min-h-[calc(100%+3px)]">
       {/* Image */}
       <div className="relative h-56 overflow-hidden">
         <img
@@ -106,7 +81,6 @@ function EventCard({ exhibition }: EventCardProps) {
 
       {/* Content */}
       <div className="flex flex-col flex-1 px-6 pt-6">
-
         {/* Date */}
         <p className="text-[#9AC53F] text-xs font-semibold tracking-[0.18em] uppercase mb-2">
           {exhibition.date}
@@ -121,12 +95,10 @@ function EventCard({ exhibition }: EventCardProps) {
         <p className="text-zinc-400 text-[15px] leading-relaxed mb-12 line-clamp-3">
           {exhibition.description}
         </p>
-
       </div>
 
       {/* Footer */}
       <div className="flex items-center justify-between px-6 pb-6">
-
         <span
           className={`text-lg font-bold uppercase tracking-wide ${
             exhibition.isFree ? "text-[#9AC53F]" : "text-zinc-500"
@@ -142,22 +114,18 @@ function EventCard({ exhibition }: EventCardProps) {
         >
           Learn more →
         </a>
-
       </div>
     </article>
   );
 }
 
-
 export default function PastExhibitions() {
   const filtered = EXHIBITIONS;
 
   return (
-    <section className="bg-black min-h-screen font-sans">
-      <TornEdge />
+    <section className="relative bg-black min-h-screen font-sans overflow-hidden">
 
-      <div className="max-w-7xl justify-items-center mx-auto px-6 pt-4 pb-24 flex flex-col items-center gap-[25px]">
-
+      <div className="relative z-10 m-10 max-w-7xl justify-items-center mx-auto px-6 pt-4 pb-24 flex flex-col items-center gap-[25px]">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-20 w-full">
           <h2 className="text-5xl md:text-6xl font-bold text-white leading-tight">
@@ -167,7 +135,7 @@ export default function PastExhibitions() {
           </h2>
 
           <a
-            href="#"
+            href="/events/calendar"
             onClick={(e) => e.preventDefault()}
             className="text-sm text-zinc-500 tracking-widest uppercase flex items-center gap-2"
           >
