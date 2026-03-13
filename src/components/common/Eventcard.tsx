@@ -7,7 +7,6 @@ interface Exhibition {
   description: string;
   date: string;
   image: string;
-  isFree: boolean;
   tag: string;
 }
 
@@ -20,8 +19,8 @@ const EXHIBITIONS: Exhibition[] = [
     date: "MAR 01 – MAY 18, 2025",
     image:
       "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=800&auto=format&fit=crop",
-    isFree: true,
-    tag: "EXHIBITION",
+
+    tag: "",
   },
   {
     id: 2,
@@ -31,8 +30,7 @@ const EXHIBITIONS: Exhibition[] = [
     date: "FEB 14 – APR 27, 2025",
     image:
       "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&auto=format&fit=crop",
-    isFree: true,
-    tag: "EXHIBITION",
+    tag: "",
   },
   {
     id: 3,
@@ -42,8 +40,7 @@ const EXHIBITIONS: Exhibition[] = [
     date: "JAN 09 – MAR 30, 2025",
     image:
       "https://images.unsplash.com/photo-1549490349-8643362247b5?w=800&auto=format&fit=crop",
-    isFree: false,
-    tag: "EXHIBITION",
+    tag: "",
   },
 ];
 
@@ -100,13 +97,7 @@ function EventCard({ exhibition }: EventCardProps) {
 
       {/* Footer */}
       <div className="flex items-center justify-between px-6 pb-6">
-        <span
-          className={`text-lg font-bold uppercase tracking-wide ${
-            exhibition.isFree ? "text-[#9AC53F]" : "text-zinc-500"
-          }`}
-        >
-          {exhibition.isFree ? "FREE" : "TICKETED"}
-        </span>
+
 
         <a
           href="#"
@@ -128,16 +119,22 @@ export default function PastExhibitions() {
 
       <div className="relative z-10 m-10 max-w-7xl justify-items-center mx-auto px-6 pt-4 pb-24 flex flex-col items-center gap-[25px]">
         {/* Header */}
+
+        <h1 className="text-6xl md:text-8xl font-extrabold text-white leading-tight tracking-tight text-center w-full mb-4"
+          style={{ textShadow: '0 0 20px rgba(250,204,21,0.3)' }}
+        >
+          Events
+        </h1>
+
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-20 w-full">
+
           <h2 className="text-5xl md:text-6xl font-bold text-white leading-tight">
-            View past
-            <br />
-            <span className="italic text-zinc-400">exhibitions</span>
+            View Past Events
           </h2>
 
           <Link
             href="/events/calendar"
-            className="text-sm text-zinc-500 tracking-widest uppercase flex items-center gap-2"
+            className="text-sm text-white-500 tracking-widest uppercase flex items-center gap-2"
           >
             View calendar
           </Link>
@@ -145,7 +142,7 @@ export default function PastExhibitions() {
 
         {/* Grid */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 justify-items-center w-full mx-auto mt-[50px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 place-items-center w-full max-w-5xl mx-auto mt-[50px]">
             {filtered.map((ex) => (
               <EventCard key={ex.id} exhibition={ex} />
             ))}

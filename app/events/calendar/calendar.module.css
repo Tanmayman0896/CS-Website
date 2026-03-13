@@ -1,0 +1,414 @@
+
+.calendarContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: transparent;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+  overflow: hidden;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #ffffff;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.monthTitle {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.yearBadge {
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.headerNav {
+  display: flex;
+  gap: 8px;
+}
+
+.calendarGrid {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+}
+
+.dayRow {
+  display: contents;
+}
+
+.dayLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.dayName {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+
+.dayDate {
+  font-size: 0.75rem;
+  color: #aaaaaa;
+  margin-top: 2px;
+}
+
+.todayLabel {
+  background: linear-gradient(135deg, #f3af28, #f3af28);
+  border-radius: 12px;
+  margin: 4px;
+  border-bottom-color: transparent !important;
+}
+
+.todayLabel .dayName {
+  color: #fff;
+  font-weight: 800;
+}
+
+.todayLabel .dayDate {
+  color: rgba(255,255,255,0.8);
+}
+
+.eventArea {
+  position: relative;
+  min-height: 85px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.eventBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 40px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  max-width: fit-content;
+  animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.eventBar:hover {
+  transform: translateX(4px) scale(1.02);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.eventTeal {
+  background: linear-gradient(135deg, #0d9488, #14b8a6);
+}
+
+.eventOrange {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  opacity: 0.85;
+}
+
+.eventPink {
+  background: linear-gradient(135deg, #f43f5e, #ec4899);
+}
+
+.eventPurple {
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+}
+
+.eventGreen {
+  background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.eventBlue {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.5);
+  flex-shrink: 0;
+}
+
+.eventText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.eventImageWrapper {
+  width: 300px;
+  height: 50px;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.eventImageWrapper:hover {
+  transform: scale(1.02);
+}
+
+.eventImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.eventIcon {
+  width: 24px;
+  height: 24px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.eventCard {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px 16px;
+  max-width: 280px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.eventCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  border-color: #d1d5db;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.cardTitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.4;
+  max-width: 180px;
+}
+
+.cardMenu {
+  color: #9ca3af;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 2px;
+  letter-spacing: 1px;
+}
+
+.cardProgress {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.cardAttachment {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 500;
+}
+
+.cardAvatars {
+  display: flex;
+}
+
+.cardAvatars img {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-left: -8px;
+  object-fit: cover;
+}
+
+.cardAvatars img:first-child {
+  margin-left: 0;
+}
+
+.dayIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.iconTeal {
+  background: rgba(20, 184, 166, 0.12);
+  color: #0d9488;
+}
+
+.iconYellow {
+  background: rgba(250, 204, 21, 0.15);
+  color: #ca8a04;
+}
+
+.floatingDot {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.dotYellow {
+  background: #facc15;
+  color: #713f12;
+}
+
+.dotGreen {
+  background: rgba(74, 222, 128, 0.15);
+  color: #16a34a;
+}
+
+/* Section title */
+.sectionTitle {
+  text-align: center;
+  padding: 40px 20px 30px;
+  color: #facc15;
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .calendarContainer {
+    border-radius: 16px;
+    margin: 0 8px;
+  }
+
+  .calendarGrid {
+    grid-template-columns: 65px 1fr;
+  }
+
+  .calendarHeader {
+    padding: 16px 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .monthTitle {
+    font-size: 1.2rem;
+  }
+
+  .dayLabel {
+    padding: 14px 6px;
+  }
+
+  .dayName {
+    font-size: 0.75rem;
+  }
+
+  .eventArea {
+    padding: 8px 10px;
+  }
+
+  .eventBar {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .eventCard {
+    max-width: 200px;
+    padding: 10px 12px;
+  }
+
+  .sectionTitle {
+    font-size: 1.4rem;
+  }
+}
