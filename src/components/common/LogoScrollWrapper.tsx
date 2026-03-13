@@ -25,22 +25,17 @@ export default function LogoScrollWrapper() {
         const logoW = () => el.offsetWidth;
         const logoH = () => el.offsetHeight;
 
-        // ── START: right side, vertically centered (alongside "About Us") ──
-        const startX = () => vw() - logoW() - 40;          // ~40px from right edge
-        const startY = () => vh() * 0.5 - logoH() * 0.5;  // vertically centered
+        const startX = () => vw() - logoW() - 40;          
+        const startY = () => vh() * 0.5 - logoH() * 0.5;  
 
-        // ── MID: sweep through center ──────────────────────────────────────
-        const mid1X = () => vw() * 0.50 - logoW() * 0.5;  // exact center
-        const mid1Y = () => vh() * 0.55 - logoH() * 0.5;  // slight downward drift
+        const mid1X = () => vw() * 0.50 - logoW() * 0.5;
+        const mid1Y = () => vh() * 0.55 - logoH() * 0.5;  
 
-        // ── END: left side, lined up with "Who We Are" heading ────────────
-        const endX = () => vw() * 0.03;                    // ~3% from left edge
-        const endY = () => vh() * 0.5 - logoH() * 0.5;    // vertically centered
+        const endX = () => vw() * 0.03;                   
+        const endY = () => vh() * 0.5 - logoH() * 0.5;    
 
-        // ── Set initial position ───────────────────────────────────────────
         gsap.set(el, { x: startX(), y: startY(), autoAlpha: 1 });
 
-        // ── GSAP motion path, scrubbed to 1800px scroll canvas ────────────
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: "#about-scroll-canvas",

@@ -6,7 +6,6 @@ import SmoothScrollProvider from "@/src/components/common/SmoothScrollProvider";
 import ChairpersonSection from "@/src/components/about/ChairpersonSection";
 import styles from "./about.module.css";
 
-// Both are canvas / GSAP heavy — no SSR
 const LogoScrollWrapper = dynamic(
   () => import("@/src/components/common/LogoScrollWrapper"),
   { ssr: false }
@@ -15,12 +14,10 @@ const LogoScrollWrapper = dynamic(
 export default function AboutPage() {
   return (
     <SmoothScrollProvider>
-      {/* ── Background: covers full scrollable height ── */}
       <div className="fixed inset-0 -z-10">
         <FadishBlackBackground />
       </div>
 
-      {/* ── Scroll canvas: About Us hero + logo animation ── */}
       <div id="about-page-wrapper" className="relative w-full z-[1]">
         <div id="about-scroll-canvas" className={styles.scrollCanvas}>
           <div className={styles.stickyHero}>
@@ -33,7 +30,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* ── Panel 1: Who We Are — sticky, stays pinned while Chairperson slides over ── */}
       <section
         id="about-content-section"
         style={{
@@ -44,7 +40,6 @@ export default function AboutPage() {
         }}
         className={`relative ${styles.contentSection}`}
       >
-        {/* Background for this panel */}
         <div className="absolute inset-0 -z-10">
           <FadishBlackBackground />
         </div>
@@ -54,39 +49,27 @@ export default function AboutPage() {
             <h2
               className={`font-semibold tracking-tight leading-snug uppercase mb-8 ${styles.whoWeAreTitle}`}
             >
-              Who We Are
+              IEEE Computer Society
             </h2>
 
             <p className={`leading-relaxed mb-6 text-white/75 ${styles.bodyText}`}>
-              IEEE Computer Society MUJ is the student chapter of the world&apos;s
-              leading professional organization devoted to advancing technology
-              for humanity. We bring together passionate students from all
-              branches, united by their curiosity for computing, software
-              engineering, and emerging technologies.
+              “Serving computing at its best with inclusion and diversity” is the prime motto of the IEEE Computer Society. This society was created keeping in mind IEEE’s continued commitment to providing options at best. The IEEE Computer Society is driven by the central goals of equity, diversity, inclusion, and yearn to serve computing at its perfection.
             </p>
 
             <p className={`leading-relaxed mb-6 text-white/75 ${styles.bodyText}`}>
-              Through hackathons, workshops, speaker sessions, and open-source
-              collaborations, we cultivate a community where ideas transform into
-              innovation. Our mission is to bridge the gap between academic
-              learning and real-world problem-solving — empowering every member
-              to build, learn, and lead.
+              With an intent to expand the IEEE’s reach and learnings, this society was started a year back in early 2020. Since then, society has tried every possible course of action by conducting diverse events such as webinars, competitions, workshops, and mentorship programs to set a goal for the young achievers. The members of IEEE CS have been skilled and earned minimal expertise in roughly all possible sub-sections of CS via our accelerator program. The senior student mentors steer them on each stage they take and deliver them with the professional material for further reference.
             </p>
 
             <p className={`leading-relaxed text-white/75 ${styles.bodyText}`}>
-              From cutting-edge AI research to full-stack web development, from
-              competitive programming to design thinking — IEEE CS MUJ is where
-              the next generation of technologists comes together to shape the
-              future.
+              We aim to proactively support diversity and inclusion by being the premier source for information, inspiration, and collaboration in computer science and engineering. Connecting members on campus, this IEEE Computer Society empowers the students who wish to advance in technology by delivering tools at all stages of their professional careers.
+              “Computer science is the operating system for all innovations.” At IEEE CS, we look at it similarly, trying to make a better world by working as a team.
             </p>
           </div>
         </div>
       </section>
-
-      {/* ── Panel 2: Chairperson — scrolls up from below, covering Who We Are ── */}
+<br />
       <ChairpersonSection />
 
-      {/* ── Logo: fixed, animated by GSAP ── */}
       <LogoScrollWrapper />
     </SmoothScrollProvider>
   );
