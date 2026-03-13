@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import LineBackground from '@/components/LineBackground';
 import ScrollGrid from '@/src/components/common/ScrollGrid';
@@ -9,6 +10,20 @@ import ZoomGallery from '@/src/app/gallery/ZoomGallery';
 const Gallery3D = dynamic(() => import('@/src/components/common/Gallery3D'), { ssr: false });
 
 export default function Gallery() {
+  const videoRef = useRef(null);
+
+useEffect(() => {
+  const video = videoRef.current;
+  if (!video) return;
+
+  const isSafari =
+    /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  if (isSafari) {
+    video.muted = true;
+  }
+}, []);
+
   return (<>
 
     <SmoothScrollProvider>
@@ -21,17 +36,18 @@ export default function Gallery() {
         <div className="relative z-10 w-full">
           <div className="relative w-full h-screen">
   <video
-    src="/images/gallery/IMG_2175.MOV"
-    autoPlay
-    playsInline
-    loop={false}
-    controls={false}
-    className="w-full h-full object-cover"
-    style={{
-      filter: 'grayscale(100%) brightness(0.6) blur(1px)',
-      transform: 'scale(1.02)',
-    }}
-  />
+  ref={videoRef}
+  src="/images/gallery/IMG_2175.MOV"
+  autoPlay
+  playsInline
+  loop={false}
+  controls={false}
+  className="w-full h-full object-cover"
+  style={{
+    filter: "grayscale(100%) brightness(0.6) blur(1px)",
+    transform: "scale(1.02)",
+  }}
+/>
   <div
     className="absolute inset-0 flex items-center justify-center pointer-events-none"
     style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
