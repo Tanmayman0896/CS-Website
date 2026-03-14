@@ -35,11 +35,11 @@ export default function HorizontalGallery() {
         scrub: 1,
 
 
-       // snap: 1 / (sections.length - 1),(causing autoscroll)******
-        
-       
-       
-       invalidateOnRefresh: true,
+        // snap: 1 / (sections.length - 1),(causing autoscroll)******
+
+
+
+        invalidateOnRefresh: true,
         anticipatePin: 1,
         end: () => '+=' + (sections.length - 1) * window.innerWidth,
         animation: gsap.to(sections, {

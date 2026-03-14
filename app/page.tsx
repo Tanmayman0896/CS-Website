@@ -10,7 +10,7 @@ const HorizontalGallery = dynamic(() => import("@/src/app/gallery/HorizontalGall
 const CardStack = dynamic(() => import("@/src/components/common/CardStack"), { ssr: false });
 const ProjectCard = dynamic(() => import("@/src/components/common/ProjectCard"), { ssr: false });
 const LandingText = dynamic(() => import("@/src/components/common/LandingText"), { ssr: false });
-
+import SmoothScrollProvider from "@/src/components/common/SmoothScrollProvider";
 import LineBackground from "@/components/LineBackground";
 import Newsletter from "@/components/Newsletter";
 
@@ -47,7 +47,8 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    
+    <SmoothScrollProvider>
       <div className="fixed inset-0 -z-10">
         <LineBackground
           lineColor="rgba(180, 140, 60, 0.75)"
@@ -119,16 +120,10 @@ export default function Home() {
         <ProjectCard />
       </div>
 
+        <div><Newsletter/></div>
 
-      <div>
-        <FAQ
-        />
-      </div>
+        <div><FAQ/></div>
 
-      <div>
-        <Newsletter />
-      </div>
-
-    </>
+    </SmoothScrollProvider>
   );
 }
