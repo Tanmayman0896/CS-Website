@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import TopographicBackground from "@/components/LineBackground";
@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X, Menu } from "lucide-react";
 import style from "./Navbar.module.css";
 import { useRouter } from "next/navigation";
-import TargetCursor from "@/src/components/common/TargetCursor";
 import Image from "next/image";
 
 const NAV_IMAGES = [
@@ -81,6 +80,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,7 +92,12 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     setMenuOpen(false);
+    window.location.reload();
   }, [pathname]);
 
   const navItems = [
@@ -106,15 +111,7 @@ export default function Navbar() {
 
   return (
     <>
-      {cursorActive && (
-        <TargetCursor
-          targetSelector=".cursor-target"
-          spinDuration={2}
-          hideDefaultCursor
-          parallaxOn
-          hoverDuration={0.2}
-        />
-      )}
+
 
       <header
         className={`${style.header} ${scrolled ? style.scrolled : ""}`}
@@ -194,9 +191,8 @@ export default function Navbar() {
                     >
                       <Link
                         href={item.href}
-                        className={`${style.navLink} ${
-                          pathname === item.href ? style.activeLink : ""
-                        }`}
+                        className={`${style.navLink} ${pathname === item.href ? style.activeLink : ""
+                          }`}
                         onClick={() => setMenuOpen(false)}
                       >
                         <NorrisText text={item.name} cascadeIndex={idx} />

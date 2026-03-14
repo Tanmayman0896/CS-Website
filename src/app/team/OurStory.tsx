@@ -1,5 +1,5 @@
 'use client'
-import TeamCard from '@/src/components/common/TeamCard'
+import TeamCard from '@/src/app/team/TeamCard'
 import React from 'react'
 
 // Paper texture as inline SVG data URI

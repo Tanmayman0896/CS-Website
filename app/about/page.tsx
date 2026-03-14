@@ -1,13 +1,11 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import TargetCursor from "@/src/components/common/TargetCursor";
 import FadishBlackBackground from "@/components/FadishBlackBackground";
 import SmoothScrollProvider from "@/src/components/common/SmoothScrollProvider";
 import ChairpersonSection from "@/src/components/about/ChairpersonSection";
 import styles from "./about.module.css";
 
-// Both are canvas / GSAP heavy — no SSR
 const LogoScrollWrapper = dynamic(
   () => import("@/src/components/common/LogoScrollWrapper"),
   { ssr: false }
@@ -16,18 +14,12 @@ const LogoScrollWrapper = dynamic(
 export default function AboutPage() {
   return (
     <SmoothScrollProvider>
-      {/* ── Background: covers full scrollable height ── */}
       <div className="fixed inset-0 -z-10">
         <FadishBlackBackground />
       </div>
 
-      {/* ── Page Wrapper: z-index 1 so ChairpersonSection (z-20) overlays it ── */}
       <div id="about-page-wrapper" className="relative w-full z-[1]">
-
-        {/* ── Scroll canvas: 300vh gives ScrollTrigger drive distance ── */}
         <div id="about-scroll-canvas" className={styles.scrollCanvas}>
-
-          {/* Sticky hero — pinned for the full 300vh scroll */}
           <div className={styles.stickyHero}>
             <h1
               className={`font-bold tracking-tighter leading-none uppercase text-white ${styles.heroTitle}`}
@@ -36,54 +28,49 @@ export default function AboutPage() {
             </h1>
           </div>
         </div>
-
-        {/* ── Content section: logo settles left, text right ── */}
-        <section
-          id="about-content-section"
-          className={`relative min-h-screen ${styles.contentSection}`}
-        >
-          {/* Centered container matching navbar width */}
-          <div className={styles.navContainer}>
-            {/* Right-side text — right ~55% of viewport */}
-            <div className="text-white ml-auto max-w-[55%]">
-              <h2
-                className={`font-semibold tracking-tight leading-snug uppercase mb-8 ${styles.whoWeAreTitle}`}
-              >
-                Who We Are
-              </h2>
-
-              <p className={`leading-relaxed mb-6 text-white/75 ${styles.bodyText}`}>
-                IEEE Computer Society MUJ is the student chapter of the world&apos;s
-                leading professional organization devoted to advancing technology
-                for humanity. We bring together passionate students from all
-                branches, united by their curiosity for computing, software
-                engineering, and emerging technologies.
-              </p>
-
-              <p className={`leading-relaxed mb-6 text-white/75 ${styles.bodyText}`}>
-                Through hackathons, workshops, speaker sessions, and open-source
-                collaborations, we cultivate a community where ideas transform into
-                innovation. Our mission is to bridge the gap between academic
-                learning and real-world problem-solving — empowering every member
-                to build, learn, and lead.
-              </p>
-
-              <p className={`leading-relaxed text-white/75 ${styles.bodyText}`}>
-                From cutting-edge AI research to full-stack web development, from
-                competitive programming to design thinking — IEEE CS MUJ is where
-                the next generation of technologists comes together to shape the
-                future.
-              </p>
-            </div>
-          </div>
-        </section>
       </div>
 
-      {/* ── Logo: fixed, animated by GSAP ── */}
-      <LogoScrollWrapper />
+      <section
+        id="about-content-section"
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1,
+          minHeight: "100vh",
+        }}
+        className={`relative ${styles.contentSection}`}
+      >
+        <div className="absolute inset-0 -z-10">
+          <FadishBlackBackground />
+        </div>
 
-      {/* ── Chairperson parallax section ── */}
+        <div className={styles.navContainer}>
+          <div className="text-white ml-auto max-w-[55%]">
+            <h2
+              className={`font-semibold tracking-tight leading-snug uppercase mb-8 ${styles.whoWeAreTitle}`}
+            >
+              IEEE Computer Society
+            </h2>
+
+            <p className={`leading-relaxed mb-6 text-white/75 ${styles.bodyText}`}>
+              “Serving computing at its best with inclusion and diversity” is the prime motto of the IEEE Computer Society. This society was created keeping in mind IEEE’s continued commitment to providing options at best. The IEEE Computer Society is driven by the central goals of equity, diversity, inclusion, and yearn to serve computing at its perfection.
+            </p>
+
+            <p className={`leading-relaxed mb-6 text-white/75 ${styles.bodyText}`}>
+              With an intent to expand the IEEE’s reach and learnings, this society was started a year back in early 2020. Since then, society has tried every possible course of action by conducting diverse events such as webinars, competitions, workshops, and mentorship programs to set a goal for the young achievers. The members of IEEE CS have been skilled and earned minimal expertise in roughly all possible sub-sections of CS via our accelerator program. The senior student mentors steer them on each stage they take and deliver them with the professional material for further reference.
+            </p>
+
+            <p className={`leading-relaxed text-white/75 ${styles.bodyText}`}>
+              We aim to proactively support diversity and inclusion by being the premier source for information, inspiration, and collaboration in computer science and engineering. Connecting members on campus, this IEEE Computer Society empowers the students who wish to advance in technology by delivering tools at all stages of their professional careers.
+              “Computer science is the operating system for all innovations.” At IEEE CS, we look at it similarly, trying to make a better world by working as a team.
+            </p>
+          </div>
+        </div>
+      </section>
+<br />
       <ChairpersonSection />
+
+      <LogoScrollWrapper />
     </SmoothScrollProvider>
   );
 }

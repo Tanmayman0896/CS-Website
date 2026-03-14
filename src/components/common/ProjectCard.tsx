@@ -113,7 +113,6 @@ const Card = ({ image, title, description }: CardProps) => {
   );
 };
 
-// ── Mobile: plain 2×2 grid, no scroll effect ──────────────────────────────────
 const MobileGrid = () => (
   <section className="w-full py-[40px] px-4">
     <div className="grid grid-cols-2 gap-[12px]">
@@ -126,7 +125,6 @@ const MobileGrid = () => (
   </section>
 );
 
-// ── Desktop: sticky scroll — cards reveal one by one ─────────────────────────
 const DesktopScroll = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visibleCount, setVisibleCount] = useState(0);
@@ -185,7 +183,6 @@ const DesktopScroll = () => {
   );
 };
 
-// ── Root: swap based on screen size ──────────────────────────────────────────
 const CascadingCards = () => {
   const [isMobile, setIsMobile] = useState(false);
 

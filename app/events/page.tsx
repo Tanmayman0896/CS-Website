@@ -6,6 +6,7 @@ import TiltedPhotoGrid from "@/src/components/common/TiltedPhotoGrid";
 import Eventcard from "@/src/components/common/Eventcard";
 
 
+
 export default function Event() {
   const landingRef = useRef<HTMLDivElement | null>(null);
   const section2Ref = useRef<HTMLDivElement | null>(null);

@@ -1,98 +1,125 @@
-/* ── Chairperson Section ── */
 
 .section {
     position: relative;
     z-index: 20;
-    padding-left: calc((100vw - min(95vw, 1300px)) / 2 + 28px);
-    padding-right: calc((100vw - min(95vw, 1300px)) / 2 + 28px);
-    padding-top: 8vh;
-    padding-bottom: 8vh;
-}
-
-.innerRow {
-    display: flex;
-    align-items: flex-start;
-    gap: clamp(2rem, 5vw, 6rem);
-}
-
-/* ── Left: sticky image column ── */
-.imageColumn {
-    flex: 0 0 clamp(280px, 32vw, 440px);
-    position: sticky;
-    top: 15vh;
-    align-self: flex-start;
-}
-
-.imageWrap {
-    border-radius: 1.25rem;
+    min-height: 100vh;
+    background: #faf3e1;           
     overflow: hidden;
-    position: relative;
-    aspect-ratio: 3 / 4;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.imageGradient {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(21, 20, 26, 0.65) 0%, transparent 35%);
-    pointer-events: none;
-}
-
-.nameMeta {
-    margin-top: 1.25rem;
-    padding-left: 0.25rem;
-}
-
-.nameText {
-    font-size: clamp(1.1rem, 1.4vw, 1.3rem);
-}
-
-.roleText {
-    font-size: clamp(0.8rem, 1vw, 0.9rem);
-    color: rgba(255, 255, 255, 0.4);
-    margin-top: 0.2rem;
-}
-
-/* ── Right: text column ── */
-.textColumn {
-    flex: 1 1 400px;
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
-    padding-top: 4vh;
-    padding-bottom: 20vh;
+    justify-content: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 28% 40% 32%;
+    min-height: 100vh;
+    align-items: center;
+}
+
+/*Left: label + title*/
+.titleCol {
+    padding: 8vh 5vw 8vh calc((100vw - min(95vw, 1300px)) / 2 + 28px);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-self: center;
+    z-index: 2;
+    position: relative;
 }
 
 .eyebrow {
-    font-size: clamp(0.75rem, 1vw, 0.9rem);
-    letter-spacing: 0.2em;
+    font-size: clamp(0.65rem, 0.9vw, 0.8rem);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: #888;
+    font-weight: 500;
 }
 
 .title {
-    font-size: clamp(2rem, 4.5vw, 3.5rem);
-    margin-top: -0.75rem;
+    font-size: clamp(2.8rem, 5.5vw, 5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    color: #0d0d0d;
+    letter-spacing: -0.03em;
+    font-family: Georgia, 'Times New Roman', serif;
 }
 
-.divider {
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.05));
-    border-radius: 2px;
+/*Center: full-height portrait*/
+.photoCol {
+    position: relative;
+    height: 100vh;
+    align-self: stretch;
+}
+
+.photo {
+    mix-blend-mode: multiply;    
+    object-position: top center;
+    filter: grayscale(20%);
+}
+
+.photoFadeLeft {
+    position: absolute;
+    top: 0; left: 0;
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(to right, #f2f0eb, transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.photoFadeRight {
+    position: absolute;
+    top: 0; right: 0;
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(to left, #f2f0eb, transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.photoFadeBottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 35%;
+    background: linear-gradient(to top, #f2f0eb, transparent);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ── Right: quote ── */
+.quoteCol {
+    padding: 8vh calc((100vw - min(95vw, 1300px)) / 2 + 28px) 8vh 4vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-self: center;
+    position: relative;
+    z-index: 2;
 }
 
 .quote {
-    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
     line-height: 1.85;
-    color: rgba(255, 255, 255, 0.72);
-    border-left: 2px solid rgba(255, 255, 255, 0.15);
-    padding-left: 1.5rem;
+    color: #333;
+    text-align: center;
     font-style: italic;
 }
 
-.bodyText {
-    font-size: clamp(1rem, 1.35vw, 1.15rem);
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.58);
+.name {
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.role {
+    font-size: clamp(0.75rem, 0.9vw, 0.85rem);
+    color: #888;
+    text-align: center;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: -0.75rem;
 }

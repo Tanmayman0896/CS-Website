@@ -1,7 +1,7 @@
 /* ── About Page ── */
 
 .scrollCanvas {
-    height: 150vh;
+    height: calc(100vh + 1800px);
 }
 
 .stickyHero {

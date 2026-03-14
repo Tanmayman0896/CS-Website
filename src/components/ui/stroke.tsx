@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
-const TeamCard = dynamic(() => import('@/src/components/common/TeamCard'), { ssr: false });
+const TeamCard = dynamic(() => import('@/src/app/team/TeamCard'), { ssr: false });
 import DecryptedText from "@/components/DecryptedText";
 
 import { useSpring } from "framer-motion";
