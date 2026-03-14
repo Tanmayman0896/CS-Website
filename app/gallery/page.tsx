@@ -10,7 +10,7 @@ import ZoomGallery from '@/src/app/gallery/ZoomGallery';
 const Gallery3D = dynamic(() => import('@/src/components/common/Gallery3D'), { ssr: false });
 
 export default function Gallery() {
-  const videoRef = useRef(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
 useEffect(() => {
   const video = videoRef.current;
