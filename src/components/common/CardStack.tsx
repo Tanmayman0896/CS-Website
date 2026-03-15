@@ -43,7 +43,7 @@ export default function CardStack() {
   }, []);
 
   return (
-    <section ref={containerRef} className={styles.container}>
+    <section ref={containerRef} id="card-stack-section" className={styles.container}>
       <div className={`${styles.cards} ${open ? styles.open : ""}`}>
         {images.map((src, index) => (
           <div key={index} className={styles.card}>

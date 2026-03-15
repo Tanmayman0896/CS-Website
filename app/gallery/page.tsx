@@ -35,38 +35,38 @@ useEffect(() => {
 
         <div className="relative z-10 w-full">
           <div className="relative w-full h-screen">
-  <video
-  ref={videoRef}
-  src="/images/gallery/IMG_2175.MOV"
-  autoPlay
-  playsInline
-  loop={false}
-  controls={false}
-  className="w-full h-full object-cover"
-  style={{
-    filter: "grayscale(100%) brightness(0.6) blur(1px)",
-    transform: "scale(1.02)",
-  }}
-/>
-  <div
-    className="absolute inset-0 flex items-center justify-center pointer-events-none"
-    style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
-  >
-    <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&display=swap');`}</style>
-    <h1
-      className="text-[90px] md:text-[150px] leading-[1] text-white uppercase"
-      style={{
-        fontFamily: "'Cormorant Garamond', serif",
-        fontWeight: 700,
-        fontStyle: 'italic',
-        letterSpacing: '0.05em',
-        textShadow: '0 4px 60px rgba(0,0,0,0.6)',
-      }}
-    >
-      Gallery
-    </h1>
-  </div>
-</div>
+                  <video
+                  ref={videoRef}
+                  src="/images/gallery/IMG_2175.MOV"
+                  autoPlay
+                  playsInline
+                  loop={false}
+                  controls={false}
+                  className="w-full h-full object-cover"
+                  style={{
+                    filter: "grayscale(100%) brightness(0.6) blur(1px)",
+                    transform: "scale(1.02)",
+                  }}
+                />
+              <div
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+              >
+                <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&display=swap');`}</style>
+                <h1
+                  className="text-[90px] md:text-[150px] leading-[1] text-white uppercase"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontWeight: 700,
+                    fontStyle: 'italic',
+                    letterSpacing: '0.05em',
+                    textShadow: '0 4px 60px rgba(0,0,0,0.6)',
+                  }}
+                >
+                  Gallery
+                </h1>
+              </div>
+            </div>
           <HorizontalGallery />
           <ScrollGrid />
           {/*<div className="hidden md:block">

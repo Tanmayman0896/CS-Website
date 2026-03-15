@@ -7,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Lerp between two hex color strings at t (0–1)
 function lerpColor(from: string, to: string, t: number): string {
   const f = parseInt(from.slice(1), 16);
   const e = parseInt(to.slice(1), 16);
@@ -25,25 +24,22 @@ export default function HorizontalGallery() {
     if (!scroller.current || !wrapper.current) return;
     const wrapperEl = wrapper.current;
 
-    // Normalize scroll so GSAP pin works alongside Lenis
     ScrollTrigger.normalizeScroll(true);
 
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray<HTMLElement>('.skill-set');
 
-      // Main horizontal scroll animation
-      // end = (number of sections - 1) * viewport width so we scroll exactly one screen per section
       const st = ScrollTrigger.create({
         trigger: scroller.current,
         pin: true,
         scrub: 1,
 
 
-       // snap: 1 / (sections.length - 1),(causing autoscroll)******
-        
-       
-       
-       invalidateOnRefresh: true,
+        // snap: 1 / (sections.length - 1),(causing autoscroll)******
+
+
+
+        invalidateOnRefresh: true,
         anticipatePin: 1,
         end: () => '+=' + (sections.length - 1) * window.innerWidth,
         animation: gsap.to(sections, {
@@ -52,14 +48,13 @@ export default function HorizontalGallery() {
         }),
       });
 
-      // Use GSAP ticker (runs every frame, works with Lenis) to drive bg color
       const tickerFn = () => {
         const progress = st.progress ?? 0;
-        wrapperEl.style.backgroundColor = lerpColor('#000000', '#ffffff', progress);
+        const alpha = Math.min(0.8, progress);
+        wrapperEl.style.backgroundColor = `rgba(255,255,255,${alpha})`;
       };
       gsap.ticker.add(tickerFn);
 
-      // Animate section 1 elements from bottom-right on first enter (one-shot)
       const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div');
       gsap.set(section1Items, { y: 120, x: 60, opacity: 0 });
 
@@ -79,7 +74,7 @@ export default function HorizontalGallery() {
         },
       });
 
-      // Animate section 2 elements from bottom-right (scrub-based)
+      // Animate section 2 elements from bottom-right
       const section2Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(2) > div');
       gsap.set(section2Items, { y: 120, x: 60, opacity: 0 });
 
@@ -108,7 +103,7 @@ export default function HorizontalGallery() {
   }, []);
 
   return (
-    <div ref={wrapper} className="overflow-hidden" style={{ backgroundColor: '#000000' }}>
+    <div ref={wrapper} className="overflow-hidden" style={{ backgroundColor: 'rgba(255,255,255,0)' }}>
       <div
         ref={scroller}
         className="flex w-[200vw] min-h-screen text-white relative bg-transparent"

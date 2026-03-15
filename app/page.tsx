@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+const StackingImage = dynamic(() => import("@/src/components/common/StackingImage"), { ssr: false });
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import FAQ from "@/components/FAQ";
@@ -9,7 +10,7 @@ const HorizontalGallery = dynamic(() => import("@/src/app/gallery/HorizontalGall
 const CardStack = dynamic(() => import("@/src/components/common/CardStack"), { ssr: false });
 const ProjectCard = dynamic(() => import("@/src/components/common/ProjectCard"), { ssr: false });
 const LandingText = dynamic(() => import("@/src/components/common/LandingText"), { ssr: false });
-
+import SmoothScrollProvider from "@/src/components/common/SmoothScrollProvider";
 import LineBackground from "@/components/LineBackground";
 import Newsletter from "@/components/Newsletter";
 
@@ -46,7 +47,8 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    
+    <SmoothScrollProvider>
       <div className="fixed inset-0 -z-10">
         <LineBackground
           lineColor="rgba(180, 140, 60, 0.75)"
@@ -97,23 +99,31 @@ export default function Home() {
       <div className="mt-32">
         <HorizontalGallery />
       </div>
-      <div>
-        <CardStack />
+
+
+      {/*CardStack pinned*/}
+      <div className="relative">
+        <div className="sticky top-0 z-0">
+          <CardStack />
+        </div>
+        <div className="relative z-10">
+          <StackingImage
+            src="/images/events/3.png"
+            alt="Events"
+            targetId="card-stack-section"
+          />
+        </div>
       </div>
+
+
       <div>
         <ProjectCard />
       </div>
 
+        <div><Newsletter/></div>
 
-      <div>
-        <FAQ
+        <div><FAQ/></div>
 
-        />
-      </div>
-      <div>
-        <Newsletter />
-      </div>
-
-    </>
+    </SmoothScrollProvider>
   );
 }

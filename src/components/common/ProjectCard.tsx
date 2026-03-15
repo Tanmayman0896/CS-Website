@@ -1,8 +1,13 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { Barlow_Condensed, Barlow } from 'next/font/google';
+
+function progressToBg(t: number): string {
+  const alpha = Math.min(0.8, Math.max(0, t));
+  return `rgba(255,255,255,${alpha})`;
+}
 
 const barlowCondensed = Barlow_Condensed({
   weight: ['700', '800'],
@@ -113,19 +118,39 @@ const Card = ({ image, title, description }: CardProps) => {
   );
 };
 
-const MobileGrid = () => (
-  <section className="w-full py-[40px] px-4">
-    <div className="grid grid-cols-2 gap-[12px]">
-      {cards.map((card, index) => (
-        <div key={index} className="h-[340px]">
-          <Card {...card} />
-        </div>
-      ))}
-    </div>
-  </section>
-);
+const MobileGrid = ({ onProgress }: { onProgress: (p: number) => void }) => {
+  const sectionRef = useRef<HTMLElement>(null);
 
-const DesktopScroll = () => {
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const onScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      const total = rect.height + windowH;
+      const scrolled = windowH - rect.top;
+      const progress = Math.min(1, Math.max(0, scrolled / total));
+      onProgress(progress);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [onProgress]);
+
+  return (
+    <section ref={sectionRef} className="w-full py-[40px] px-4">
+      <div className="grid grid-cols-2 gap-[12px]">
+        {cards.map((card, index) => (
+          <div key={index} className="h-[340px]">
+            <Card {...card} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+const DesktopScroll = ({ onProgress }: { onProgress: (p: number) => void }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visibleCount, setVisibleCount] = useState(0);
 
@@ -140,11 +165,14 @@ const DesktopScroll = () => {
       const totalScrollable = rect.height - windowH;
 
       if (scrolled < 0) {
+        onProgress(0);
         setVisibleCount(0);
         return;
       }
 
-      const progress = scrolled / totalScrollable;
+      const clampedScrolled = Math.min(scrolled, totalScrollable);
+      const progress = clampedScrolled / totalScrollable;
+      onProgress(Math.min(1, Math.max(0, progress)));
       const count = Math.min(cards.length, Math.floor(progress * cards.length) + 1);
       setVisibleCount(count);
     };
@@ -152,7 +180,7 @@ const DesktopScroll = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [onProgress]);
 
   return (
     <div ref={containerRef} style={{ height: `${cards.length * 100}vh` }} className="relative">
@@ -185,6 +213,11 @@ const DesktopScroll = () => {
 
 const CascadingCards = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [bgColor, setBgColor] = useState("rgba(255,255,255,0)");
+
+  const handleProgress = useCallback((progress: number) => {
+    setBgColor(progressToBg(progress));
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -194,7 +227,18 @@ const CascadingCards = () => {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  return isMobile ? <MobileGrid /> : <DesktopScroll />;
+  return (
+    <div
+      style={{
+        backgroundColor: bgColor,
+        transition: "background-color 0.05s linear",
+      }}
+    >
+      {isMobile
+        ? <MobileGrid onProgress={handleProgress} />
+        : <DesktopScroll onProgress={handleProgress} />}
+    </div>
+  );
 };
 
 export default CascadingCards;
