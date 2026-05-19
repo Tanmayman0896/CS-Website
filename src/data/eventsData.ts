@@ -14,7 +14,7 @@ export const eventsData: EventItem[] = [
 // https://images.prismic.io/ieeemuj/abnnvbbci2UF6J9H_Venom.png?auto=format,compress
 
  {
-  id: 1,
+  id: 28,
   title: "Genify",
   description: "Burnout is a fast paced MotoGP-themed datathon where every second counts,each dataset was a curve and only the sharpest minds make it to the finish line",
   image: "https://images.prismic.io/ieeemuj/abnoP7bci2UF6J9U_GENIFY.png?auto=format,compress",
