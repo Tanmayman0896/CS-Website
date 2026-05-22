@@ -90,9 +90,9 @@ export default function ImpactText() {
               </Word>
               <Word>LASTING</Word>
               <Word>IMPACT.</Word>
-              <Word>1</Word>
+              
             </div>
-
+              
             {/* Line 6 */}
             <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-full mt-1 sm:mt-2 lg:mt-3">
               <Word>ON</Word>

@@ -219,10 +219,6 @@
     color: #b48c3c;
 }
 
-.navLink:hover {
-    transform: translateX(10px);
-}
-
 .scribble {
     position: absolute;
     left: -5%;
@@ -288,10 +284,6 @@
     .navLink {
         font-size: clamp(3rem, 14vw, 5rem);
         text-align: center;
-    }
-    
-    .navLink:hover {
-        transform: none; 
     }
 }
 
