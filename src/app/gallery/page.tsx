@@ -38,7 +38,6 @@ export default function Gallery() {
           <div className="relative w-full h-[70vh] sm:h-[85vh] md:h-screen">
             <video
               ref={videoRef}
-              src="/images/gallery/IMG_2175.MOV"
               autoPlay
               playsInline
               loop={false}
@@ -48,18 +47,19 @@ export default function Gallery() {
                 filter: "grayscale(100%) brightness(0.6) blur(1px)",
                 transform: "scale(1.02)",
               }}
-            />
+            >
+              <source src="/images/gallery/IMG_2175.webm" type="video/webm" />
+              <source src="/images/gallery/IMG_2175.MOV" type="video/quicktime" />
+            </video>
 
             <div
               className="absolute inset-0 flex items-center justify-center pointer-events-none px-4"
               style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
             >
-              <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&display=swap');`}</style>
-
               <h1
                 className="text-[48px] sm:text-[70px] md:text-[120px] lg:text-[150px] leading-[1] text-white uppercase text-center"
                 style={{
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily: "var(--font-cormorant), serif",
                   fontWeight: 700,
                   fontStyle: 'italic',
                   letterSpacing: '0.05em',

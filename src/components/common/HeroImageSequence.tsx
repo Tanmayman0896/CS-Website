@@ -7,19 +7,20 @@ import { useGLTF, Environment, Float } from "@react-three/drei";
 
 import * as THREE from "three";
 
+const sharedMaterial = new THREE.MeshStandardMaterial({
+  color: new THREE.Color("#F5A623"),
+  roughness: 0.35,
+  metalness: 0.4,
+});
+
 function Model({ url, scale = 0.35, position = [0, 0, 0] }: { url: string; scale?: number; position?: [number, number, number] }) {
-  const { scene } = useGLTF(url);
+  const { scene } = useGLTF(url, true);
   const modelRef = useRef<THREE.Group>(null);
   
   useLayoutEffect(() => {
     scene.traverse((obj) => {
       if ((obj as THREE.Mesh).isMesh) {
-        const mesh = obj as THREE.Mesh;
-        mesh.material = new THREE.MeshStandardMaterial({
-          color: new THREE.Color("#F5A623"),
-          roughness: 0.35,
-          metalness: 0.4,
-        });
+        (obj as THREE.Mesh).material = sharedMaterial;
       }
     });
   }, [scene]);
@@ -78,7 +79,7 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
     for (let i = 1; i <= totalFrames; i++) {
         const img = new Image();
         const frameIndex = i.toString().padStart(4, '0');
-        img.src = `/Heroimg/${frameIndex}.png`;
+        img.src = `/Heroimg/${frameIndex}.avif`;
         img.onload = () => {
             loadedCount++;
             if (loadedCount === totalFrames) {
@@ -109,13 +110,15 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
     const img = images[index];
     const dpr = window.devicePixelRatio || 1;
     
-    // Set actual size in memory (scaled by DPR)
-    canvas.width = window.innerWidth * dpr;
-    canvas.height = window.innerHeight * dpr;
-    
-    // Scale CSS size
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
+    // Set size in memory only if it has changed, preventing layout thrashing on scroll
+    const targetWidth = window.innerWidth * dpr;
+    const targetHeight = window.innerHeight * dpr;
+    if (canvas.width !== targetWidth || canvas.height !== targetHeight) {
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+    }
 
     const imgRatio = img.width / img.height;
     const canvasRatio = canvas.width / canvas.height;

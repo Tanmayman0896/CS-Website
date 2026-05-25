@@ -66,7 +66,7 @@ export default function TopographicBackground({
 
       // Create a responsive grid so the topographic lines are never stretched
       const maxDim = Math.max(w, h);
-      const cellSize = Math.max(20, maxDim / 100); 
+      const cellSize = Math.max(32, maxDim / 60); 
       
       const cols = Math.ceil(w / cellSize);
       const rows = Math.ceil(h / cellSize);
@@ -153,7 +153,7 @@ export default function TopographicBackground({
     };
 
     const animate = () => {
-      timeRef.current += animated ? 0.04 : 0;
+      timeRef.current += animated ? 0.04 : 0; // Restored original step speed of 0.04
       drawContours(timeRef.current);
       animFrameRef.current = requestAnimationFrame(animate);
     };

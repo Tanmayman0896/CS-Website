@@ -5,8 +5,7 @@ import Image from "next/image";
 import { Barlow_Condensed, Barlow } from 'next/font/google';
 
 function progressToBg(t: number): string {
-  const alpha = Math.min(0.85, Math.max(0, t));
-  return `rgba(255,255,255,${alpha})`;
+  return "rgba(0,0,0,0)";
 }
 
 const barlowCondensed = Barlow_Condensed({

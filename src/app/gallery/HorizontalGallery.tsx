@@ -35,13 +35,6 @@ export default function HorizontalGallery() {
         }),
       });
 
-      const tickerFn = () => {
-        const progress = st.progress ?? 0;
-        const alpha = Math.min(0.8, progress);
-        wrapperEl.style.backgroundColor = `rgba(255,255,255,${alpha})`;
-      };
-      gsap.ticker.add(tickerFn);
-
       const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div');
       gsap.set(section1Items, { y: 120, x: 60, opacity: 0 });
 
@@ -77,10 +70,6 @@ export default function HorizontalGallery() {
           stagger: 0.05,
         }),
       });
-
-      return () => {
-        gsap.ticker.remove(tickerFn);
-      };
     });
 
     // Mobile specific animations if any
@@ -101,18 +90,6 @@ export default function HorizontalGallery() {
             }
           }
         );
-      });
-
-      ScrollTrigger.create({
-        trigger: scroller.current,
-        start: "top 20%",
-        end: "bottom bottom",
-        scrub: true,
-        onUpdate: (self) => {
-          const alpha = self.progress;
-          // Transition to a background color similar to the reference (lighter beige/grey)
-          wrapperEl.style.backgroundColor = `rgba(230, 230, 225, ${Math.min(0.95, alpha * 1.5)})`;
-        }
       });
     });
 

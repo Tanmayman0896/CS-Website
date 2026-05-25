@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useScroll, useTransform } from "framer-motion";
 
 function HeroModel({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement | null> }) {
-  const { scene } = useGLTF("/Hero.glb");
+  const { scene } = useGLTF("/Hero.glb", true);
   const ref = useRef<THREE.Group>(null);
   
   const { scrollYProgress } = useScroll({

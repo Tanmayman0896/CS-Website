@@ -128,12 +128,12 @@ export default function Home() {
       <div>
         <NewComponent />
       </div>
-      {/*CardStack pinned*/}
+      {/* CardStack and TeamsInfoComponent in normal scroll flow */}
       <div className="relative">
-        <div className="sticky top-0 z-0">
+        <div>
           <CardStack />
         </div>
-        <div className="relative z-10">
+        <div>
           <TeamsInfoComponent />
         </div>
       </div>

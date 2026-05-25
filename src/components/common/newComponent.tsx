@@ -13,20 +13,24 @@ export default function NewComponent() {
   useEffect(() => {
     if (!sectionRef.current || !imageDivRef.current) return;
 
-    gsap.fromTo(
-      imageDivRef.current,
-      { yPercent: 10 },
-      {
-        yPercent: -10,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5, 
-        },
-      }
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        imageDivRef.current,
+        { yPercent: 10 },
+        {
+          yPercent: -10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5, 
+          },
+        }
+      );
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (

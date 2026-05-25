@@ -5,8 +5,14 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 
+const sharedMaterial = new THREE.MeshStandardMaterial({
+  color: new THREE.Color("#F5A623"),
+  roughness: 0.35,
+  metalness: 0.4,
+});
+
 function Model() {
-  const gltf = useGLTF("/logos/ieee.glb");
+  const gltf = useGLTF("/logos/ieee.glb", true);
   const ref = useRef<THREE.Group>(null);
 
   useEffect(() => {
@@ -16,11 +22,7 @@ function Model() {
 
     ref.current.traverse((child) => {
       if ((child as THREE.Mesh).isMesh) {
-        (child as THREE.Mesh).material = new THREE.MeshStandardMaterial({
-          color: new THREE.Color("#F5A623"),
-          roughness: 0.35,
-          metalness: 0.4,
-        });
+        (child as THREE.Mesh).material = sharedMaterial;
       }
     });
   }, []);
