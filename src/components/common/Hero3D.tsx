@@ -71,7 +71,7 @@ export default function Hero3D({ scrollContainerRef }: { scrollContainerRef?: Re
         />
         <Suspense fallback={null}>
           <HeroModel scrollContainerRef={scrollContainerRef} />
-          <Environment preset="city" />
+          <Environment files="/potsdamer_platz_1k.hdr" />
         </Suspense>
       </Canvas>
     </div>

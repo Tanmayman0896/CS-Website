@@ -219,7 +219,7 @@ export default function HeroImageSequence({ scrollContainerRef }: { scrollContai
               scale={windowSize.width < 768 ? 0.22 : 0.35} 
               position={windowSize.width < 768 ? [0, 0, 0] : [0, 0, 0]} 
             />
-            <Environment preset="city" />
+            <Environment files="/potsdamer_platz_1k.hdr" />
           </Suspense>
         </Canvas>
       </motion.div>
