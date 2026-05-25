@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useLoading } from "@/context/LoadingContext";
@@ -22,7 +22,6 @@ export default function Preloader() {
   }, [isReady]);
 
   const handleVideoEnd = () => {
-    sessionStorage.setItem("preloaderShown", "true");
     setVideoFinished(true);
   };
 
@@ -44,7 +43,6 @@ export default function Preloader() {
           >
             <source src="/cs-microchip.webm" type="video/webm" />
             <source src="/cs-microchip.mp4" type="video/mp4" />
-            
           </video>
         </motion.div>
       )}

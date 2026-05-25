@@ -185,13 +185,13 @@
     position: absolute;
     left: 0;
     color: #f5f5dc;
-    transition: all ease-out 400ms;
-    transition-delay: calc(var(--char-index) * 35ms);
+    transition: all ease-out 300ms;
+    transition-delay: calc(var(--char-index) * 20ms);
 }
 
 .norrisWrapper.animate .norrisChar::before,
 .norrisWrapper.animate .norrisChar::after {
-    transition-delay: calc((var(--char-index) + var(--line-index) * 2) * 35ms);
+    transition-delay: calc((var(--char-index) + var(--line-index) * 2) * 20ms);
 }
 
 .norrisChar::before {

@@ -44,8 +44,8 @@ function NorrisText({
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    const timerIn = setTimeout(() => setAnimate(true), 150);
-    const timerOut = setTimeout(() => setAnimate(false), 1650);
+    const timerIn = setTimeout(() => setAnimate(true), 100);
+    const timerOut = setTimeout(() => setAnimate(false), 800);
 
     return () => {
       clearTimeout(timerIn);
