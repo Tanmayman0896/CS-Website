@@ -34,35 +34,8 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "IEEE Computer Society MUJ | Innovation, Technology & Community",
-  description:
-    "IEEE Computer Society, Manipal University Jaipur — the largest technical society driving innovation through events, workshops, hackathons, and a vibrant tech community.",
-  keywords: [
-    "IEEE",
-    "Computer Society",
-    "MUJ",
-    "Manipal University Jaipur",
-    "tech community",
-    "hackathons",
-    "workshops",
-    "coding",
-  ],
-  openGraph: {
-    title: "IEEE Computer Society MUJ",
-    description:
-      "Advancing technology for humanity through innovation, education, and collaboration at Manipal University Jaipur.",
-    url: "https://ieeecsmuj.com",
-    siteName: "IEEE CS MUJ",
-    type: "website",
-    locale: "en_US",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "IEEE Computer Society MUJ",
-    description:
-      "Advancing technology for humanity through innovation, education, and collaboration.",
-  },
-  metadataBase: new URL("https://ieeecsmuj.com"),
+  title: "ieee cs muj",
+  description: "ieee cs muj website",
 };
 
 import Preloader from "@/components/common/Preloader";
@@ -79,11 +52,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${dmSans.variable} ${cormorant.variable} antialiased flex flex-col min-h-screen`}
         suppressHydrationWarning
       >
-        <a href="#main-content" className="skip-link">Skip to main content</a>
         <LoadingProvider>
           <Preloader />
           <Navbar />
-          <main id="main-content" className="flex-grow">
+          <main className="flex-grow">
             {children}
           </main>
           <Footer />

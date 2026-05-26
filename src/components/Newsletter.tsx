@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import Image from "next/image";
+import styled from "styled-components";
 
 interface NewsletterEdition {
   title: string;
@@ -34,7 +34,6 @@ const Card = () => {
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -71,78 +70,128 @@ const Card = () => {
       }}>
         Our Newsletter
       </h2>
-      <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+      <StyledWrapper>
+        <div className="container">
           {editions.map((edition, index) => (
             <a
               key={index}
               href={edition.link}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: "none", cursor: "pointer" }}
+              className="glass-link"
             >
               <div
-                style={{
-                  position: "relative",
-                  width: "clamp(140px, 20vw, 280px)",
-                  height: "clamp(210px, 28vw, 400px)",
-                  background: "linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                  boxShadow: "0 25px 25px rgba(0, 0, 0, 0.25)",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  transition: "transform 0.5s, margin 0.5s",
-                  borderRadius: "10px",
-                  margin: isHovered ? "0 14px" : "0 clamp(-35px, -5vw, -80px)",
-                  transform: isHovered ? "rotate(0deg)" : `rotate(${edition.rotation}deg)`,
-                  overflow: "hidden",
-                }}
+                data-text={edition.title}
+                style={{ ["--r" as any]: edition.rotation }}
+                className="glass"
               >
-                <Image
+                <img
                   src={edition.image}
                   alt={edition.title}
-                  fill
-                  sizes="(max-width: 768px) 20vw, 15vw"
-                  className="object-cover"
+                  className="glass-image"
                 />
-                {/* Title overlay */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    width: "100%",
-                    height: "52px",
-                    background: "rgba(0, 0, 0, 0.5)",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    color: "white",
-                    fontSize: "14px",
-                    letterSpacing: "0.05em",
-                    borderBottomLeftRadius: "10px",
-                    borderBottomRightRadius: "10px",
-                    zIndex: 10,
-                  }}
-                >
-                  {edition.title}
-                </div>
               </div>
             </a>
           ))}
         </div>
-      </div>
+      </StyledWrapper>
     </div>
   );
 };
+
+const StyledWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .glass-link {
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .container .glass {
+    position: relative;
+    width: 280px;
+    height: 400px;
+    background: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 10px;
+    margin: 0 -80px;
+    /* Removed backdrop-filter: blur(10px) — forces per-frame recompositing
+       of all layers behind this element during scroll, causing jitter. */
+    transform: rotate(calc(var(--r) * 1deg));
+    overflow: hidden;
+  }
+
+  .container:hover .glass {
+    transform: rotate(0deg);
+    margin: 0 14px;
+  }
+
+  .glass-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .container .glass::before {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 52px;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 10;
+  }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 1024px) {
+    .container .glass {
+      width: 220px;
+      height: 320px;
+      margin: 0 -60px;
+    }
+  }
+
+  /* Tablet */
+@media (max-width: 768px) {
+  .container .glass {
+    width: 180px;
+    height: 260px;
+    margin: 0 -45px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .container .glass {
+    width: 140px;
+    height: 210px;
+    margin: 0 -35px;
+  }
+}
+`;
 
 export default Card;

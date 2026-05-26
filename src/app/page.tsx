@@ -1,49 +1,18 @@
 "use client";
 
 import dynamic from "next/dynamic";
-const TeamsInfoComponent = dynamic(() => import("@/components/common/TeamsInfoComponent"), {
-  ssr: false,
-  loading: () => <div className="min-h-screen w-full bg-[#0d0d0d]" />
-});
-import { motion, AnimatePresence } from "framer-motion";
+const TeamsInfoComponent = dynamic(() => import("@/components/common/TeamsInfoComponent"), { ssr: false });
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 import FAQ from "@/components/FAQ";
-const TeamCard = dynamic(() => import("@/app/team/TeamCard"), {
-  ssr: false,
-  loading: () => <div className="w-full h-80 bg-zinc-900/50 animate-pulse rounded-2xl" />
-});
-const HorizontalGallery = dynamic(() => import("@/app/gallery/HorizontalGallery"), {
-  ssr: false,
-  loading: () => <div className="min-h-screen w-full bg-[#0d0d0d] flex items-center justify-center"><div className="w-10 h-10 border-2 border-[#f9a71f]/30 border-t-[#f9a71f] rounded-full animate-spin" /></div>
-});
-const CardStack = dynamic(() => import("@/components/common/CardStack"), {
-  ssr: false,
-  loading: () => <div className="min-h-screen w-full bg-[#0d0d0d]" />
-});
-const ProjectCard = dynamic(() => import("@/components/common/ProjectCard"), {
-  ssr: false,
-  loading: () => <div className="min-h-screen w-full bg-[#0d0d0d]" />
-});
-const LandingText = dynamic(() => import("@/components/common/LandingText"), {
-  ssr: false,
-  loading: () => <div className="min-h-screen w-full bg-[#0d0d0d] flex items-center justify-center"><div className="w-10 h-10 border-2 border-[#f9a71f]/30 border-t-[#f9a71f] rounded-full animate-spin" /></div>
-});
-const HeroImageSequence = dynamic(() => import("@/components/common/HeroImageSequence"), {
-  ssr: false,
-  loading: () => <div className="h-screen w-full bg-[#0d0d0d]" />
-});
+const TeamCard = dynamic(() => import("@/app/team/TeamCard"), { ssr: false });
+const HorizontalGallery = dynamic(() => import("@/app/gallery/HorizontalGallery"), { ssr: false });
+const CardStack = dynamic(() => import("@/components/common/CardStack"), { ssr: false });
+const ProjectCard = dynamic(() => import("@/components/common/ProjectCard"), { ssr: false });
+const LandingText = dynamic(() => import("@/components/common/LandingText"), { ssr: false });
+const HeroImageSequence = dynamic(() => import("@/components/common/HeroImageSequence"), { ssr: false });
 import SmoothScrollProvider from "@/components/common/SmoothScrollProvider";
-const NewComponent = dynamic(() => import("@/components/common/newComponent"), {
-  ssr: false,
-  loading: () => <div className="min-h-screen w-full bg-[#0d0d0d]" />
-});
+const NewComponent = dynamic(() => import("@/components/common/newComponent"),{ ssr: false });
 import LineBackground from "@/components/LineBackground";
 import Newsletter from "@/components/Newsletter";
 import ScrollVelocity from "@/components/ScrollVelocity";
@@ -66,21 +35,20 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const heroPinRef = useRef<HTMLDivElement>(null);
-  const heroContentRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (!heroPinRef.current || !heroContentRef.current) return;
-
-    ScrollTrigger.create({
-      trigger: heroPinRef.current,
-      start: "top top",
-      end: "bottom bottom",
-      pin: heroContentRef.current,
-      pinType: "fixed",
-      pinSpacing: false,
-      anticipatePin: 1,
-    });
-  }, { scope: heroPinRef });
+  // ── Transform-based pinning ──
+  // Replaces CSS `position: sticky` which triggers a main-thread layout
+  // recalculation on every scroll frame, causing subpixel vertical jitter.
+  // Instead, we compute a translateY that counteracts the scroll, running
+  // entirely on the GPU compositor — no layout thrashing, no pixel snapping.
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroPinRef,
+    offset: ["start start", "end end"]
+  });
+  // As the 200vh wrapper scrolls through the viewport, the inner element
+  // needs translateY = scrollProgress * 100% of its own height (100vh)
+  // to stay visually "pinned" at the top.
+  const stickyY = useTransform(heroScrollProgress, [0, 1], ["0%", "100%"]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -110,11 +78,11 @@ export default function Home() {
      
   
       {/* Pinning Wrapper for Hero Section */}
-      <div id="hero-scroll-track" ref={heroPinRef} className="relative h-[200vh] z-10">
-        <div
-          ref={heroContentRef}
-          className="h-dvh w-full overflow-hidden flex items-center justify-center"
+      <div ref={heroPinRef} className="relative h-[200vh] z-10">
+        <motion.div
+          className="h-screen w-full overflow-hidden flex items-center justify-center"
           style={{
+            y: stickyY,
             willChange: 'transform',
             backfaceVisibility: 'hidden',
           }}
@@ -133,7 +101,7 @@ export default function Home() {
           <div className="relative z-10 w-full h-full">
             <HeroImageSequence scrollContainerRef={heroPinRef} />
           </div>
-        </div>
+        </motion.div>
       </div>
       
       <AnimatePresence mode="wait">

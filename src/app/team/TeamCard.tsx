@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-import Image from 'next/image';
 import { FaLinkedin, FaInstagram, FaGithub, FaTwitter } from 'react-icons/fa';
 
 export interface TeamCardProps {
@@ -32,16 +31,18 @@ const TeamCard: React.FC<TeamCardProps> = ({
       onMouseLeave={() => setHovered(false)}
     >
 
-      <Image
+      {/* Image */}
+      <img
         src={image}
         alt={name}
-        fill
-        sizes="(max-width: 768px) 50vw, 25vw"
         style={{
+          width: '100%',
+          height: '100%',
           objectFit: 'cover',
           filter: hovered ? 'grayscale(0)' : 'grayscale(1)',
           transform: hovered ? 'scale(1.05)' : 'scale(1)',
           transition: 'filter 0.5s ease, transform 0.5s ease',
+          display: 'block',
         }}
       />
 

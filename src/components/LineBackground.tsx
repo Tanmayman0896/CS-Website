@@ -20,7 +20,6 @@ export default function TopographicBackground({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animFrameRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
-  const visibleRef = useRef<boolean>(true);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -29,44 +28,14 @@ export default function TopographicBackground({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // --- IntersectionObserver: pause animation when offscreen ---
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        visibleRef.current = entry.isIntersecting;
-        // Resume the loop when becoming visible again
-        if (entry.isIntersecting && animated) {
-          cancelAnimationFrame(animFrameRef.current);
-          animFrameRef.current = requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(canvas);
-
-    // Cap DPR on mobile to reduce canvas backing store size
-    const rawDpr = window.devicePixelRatio || 1;
-    const isMobile = window.innerWidth < 768;
-    const dpr = isMobile ? Math.min(1.25, rawDpr) : Math.min(2, rawDpr);
-
-    // Reduce line count on mobile for performance
-    const effectiveLineCount = isMobile ? Math.min(lineCount, 7) : lineCount;
-
     const resize = () => {
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     };
 
     resize();
-
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(resize, 150);
-    };
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", resize);
 
     const noise = (x: number, y: number, t: number): number => {
       return (
@@ -97,7 +66,7 @@ export default function TopographicBackground({
 
       // Create a responsive grid so the topographic lines are never stretched
       const maxDim = Math.max(w, h);
-      const cellSize = Math.max(40, maxDim / 45); 
+      const cellSize = Math.max(20, maxDim / 100); 
       
       const cols = Math.ceil(w / cellSize);
       const rows = Math.ceil(h / cellSize);
@@ -119,10 +88,10 @@ export default function TopographicBackground({
       const minV = -0.85;
       const maxV = 0.85;
 
-      ctx.beginPath(); // Start a single compound path for all contour lines
+      for (let c = 0; c < lineCount; c++) {
+        const threshold = minV + ((maxV - minV) * c) / (lineCount - 1);
 
-      for (let c = 0; c < effectiveLineCount; c++) {
-        const threshold = minV + ((maxV - minV) * c) / (effectiveLineCount - 1);
+        ctx.beginPath();
 
         for (let j = 0; j < rows; j++) {
           for (let i = 0; i < cols; i++) {
@@ -177,31 +146,23 @@ export default function TopographicBackground({
             }
           }
         }
-      }
 
-      ctx.stroke(); // Perform a single GPU draw call for all lines
+        ctx.stroke();
+        ctx.beginPath();
+      }
     };
 
-    let lastTime = performance.now();
-    const animate = (now: number) => {
-      // Skip rendering when offscreen — saves ~30% idle CPU
-      if (!visibleRef.current) return;
-
-      const dt = Math.min((now - lastTime) / 1000, 0.1);
-      lastTime = now;
-
-      timeRef.current += animated ? dt * 2.4 : 0;
+    const animate = () => {
+      timeRef.current += animated ? 0.04 : 0;
       drawContours(timeRef.current);
       animFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animFrameRef.current = requestAnimationFrame(animate);
+    animate();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      clearTimeout(resizeTimeout);
+      window.removeEventListener("resize", resize);
       cancelAnimationFrame(animFrameRef.current);
-      observer.disconnect();
     };
   }, [lineColor, backgroundColor, lineCount, animated]);
 
@@ -210,7 +171,6 @@ export default function TopographicBackground({
       ref={canvasRef}
       className={`block ${className}`}
       style={{ background: backgroundColor, width: "100%", height: "100%", display: "block" }}
-      aria-hidden="true"
     />
   );
 }

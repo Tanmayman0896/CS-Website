@@ -109,6 +109,7 @@ export default function Navbar() {
       return;
     }
     setMenuOpen(false);
+    window.location.reload();
   }, [pathname]);
 
   const navItems = [

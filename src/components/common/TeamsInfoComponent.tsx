@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { useInView } from "framer-motion";
-import Image from "next/image";
 
 
 function easeOutExpo(x: number) {
@@ -66,7 +65,6 @@ function ParticleCanvas() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d")!;
     let W = 0, H = 0, raf = 0;
-    let isVisible = true;
 
     const pts = Array.from({ length: 60 }, () => ({
       x: Math.random(),
@@ -77,32 +75,15 @@ function ParticleCanvas() {
       o: Math.random() * 0.15 + 0.05,
     }));
 
-    // Pause when offscreen to save CPU
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-        if (entry.isIntersecting) {
-          cancelAnimationFrame(raf);
-          raf = requestAnimationFrame(draw);
-        }
-      },
-      { threshold: 0 }
-    );
-    observer.observe(canvas);
-
     function resize() {
       W = canvas!.width = canvas!.offsetWidth;
       H = canvas!.height = canvas!.offsetHeight;
     }
 
     function draw() {
-      if (!isVisible || !W) { 
-        if (isVisible) raf = requestAnimationFrame(draw);
-        return; 
-      }
+      if (!W) { raf = requestAnimationFrame(draw); return; }
       ctx.clearRect(0, 0, W, H);
 
-      // Draw particles
       pts.forEach((p) => {
         p.x = (p.x + p.vx + 1) % 1;
         p.y = (p.y + p.vy + 1) % 1;
@@ -112,19 +93,17 @@ function ParticleCanvas() {
         ctx.fill();
       });
 
-      // Batch all connection lines into a single draw call
-      ctx.lineWidth = 0.5;
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
           const dx = (pts[i].x - pts[j].x) * W;
           const dy = (pts[i].y - pts[j].y) * H;
-          const d = dx * dx + dy * dy; // Compare squared distance to avoid sqrt
-          if (d < 14400) { // 120 * 120 = 14400
-            const dist = Math.sqrt(d);
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 120) {
             ctx.beginPath();
             ctx.moveTo(pts[i].x * W, pts[i].y * H);
             ctx.lineTo(pts[j].x * W, pts[j].y * H);
-            ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - dist / 120)})`;
+            ctx.strokeStyle = `rgba(255,255,255,${0.04 * (1 - d / 120)})`;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
@@ -139,7 +118,6 @@ function ParticleCanvas() {
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
-      observer.disconnect();
     };
   }, []);
 
@@ -147,7 +125,6 @@ function ParticleCanvas() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none z-0"
-      aria-hidden="true"
     />
   );
 }
@@ -269,15 +246,11 @@ export default function TeamsInfoComponent() {
       <div className="flex flex-col items-center lg:items-start gap-6 lg:gap-10 w-full lg:w-[40vw] px-6 lg:px-0 mb-12 lg:mb-0">
         <h1 className="font-bold text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left">IEEE CS MUJ</h1>
         <h1 className="text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left lg:-translate-y-10">Since 2019</h1>
-        <div className="h-[30vh] md:h-[40vh] lg:h-[50vh] w-full relative">
-          <Image
-            src="/images/events/2.avif"
-            alt="IEEE CS MUJ Event Showcase"
-            fill
-            sizes="(max-width: 1024px) 100vw, 40vw"
-            className="object-contain"
-          />
-        </div>
+        <img
+          className="h-[30vh] md:h-[40vh] lg:h-[50vh] object-contain"
+          src="/images/events/2.avif"
+          alt="img"
+        />
       </div>
 
       <div className="relative w-full lg:w-[50vw] px-4 lg:px-0">

@@ -71,7 +71,7 @@ export default function RollingSections() {
       
       <section
         ref={landingRef}
-        className="h-dvh sticky top-0 flex items-center justify-between px-32 bg-[#1a1a1a] text-white z-10 relative"
+        className="h-screen sticky top-0 flex items-center justify-between px-32 bg-[#1a1a1a] text-white z-10 relative"
       >
         <div className="z-10 translate-x-30">
           <p
@@ -174,13 +174,7 @@ export default function RollingSections() {
                       if (ev.type === "image") {
                         return (
                           <div key={ev.id} className={styles.eventImageWrapper} style={{ animationDelay: `${evIdx * 0.08}s` }}>
-                             <Image
-                             src={ev.imageSrc!}
-                             alt={ev.title}
-                             fill
-                             sizes="300px"
-                             className={styles.eventImage}
-                           />
+                             <img src={ev.imageSrc} alt={ev.title} className={styles.eventImage} />
                           </div>
                         );
                       }

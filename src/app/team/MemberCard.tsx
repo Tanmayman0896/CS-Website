@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 
 import { TeamMember } from "@/data/teamData";
 
@@ -46,16 +45,15 @@ export default function MemberCard({ member }: { member: TeamMember }) {
       }}
     >
       {/* Portrait — grayscale by default, color on hover */}
-      <Image
+      <img
         src={member.image}
         alt={member.name}
-        fill
-        sizes="(max-width: 768px) 50vw, 20vw"
         style={{
-          objectFit: "cover",
+          width: "100%", height: "100%", objectFit: "cover", display: "block",
           filter: hovered ? "grayscale(0)" : "grayscale(1)",
           transition: "filter 0.5s ease",
         }}
+        loading="lazy"
       />
 
       {/* Gradient overlay */}

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 import React from "react";
 import TiltedPhotoGrid from "@/components/common/TiltedPhotoGrid";
 import Eventcard from "@/components/common/Eventcard";
@@ -37,7 +36,7 @@ export default function Event() {
     <>
       <section
         ref={landingRef}
-        className="h-dvh sticky top-0 flex items-center justify-between px-32 bg-[#1a1a1a] text-white z-10 relative"
+        className="h-screen sticky top-0 flex items-center justify-between px-32 bg-[#1a1a1a] text-white z-10 relative"
       >
         <TiltedPhotoGrid />
       </section>
@@ -46,15 +45,11 @@ export default function Event() {
         ref={section2Ref}
         className="relative h-fit flex items-center justify-center bg-black text-white z-20"
       >
-        <div className="absolute w-full h-[200px] -top-[200px] pointer-events-none">
-          <Image
-            src="/images/events/tear.svg"
-            alt="tear divider"
-            fill
-            sizes="100vw"
-            className="object-cover object-bottom"
-          />
-        </div>
+        <img
+          src="/images/events/tear.svg"
+          alt="tear divider"
+          className="absolute w-full -top-[200px] opacity-100"
+        />
         <section className="bg-black w-screen overflow-hidden z-40 flex items-center justify-center">
           <Eventcard />
         </section>

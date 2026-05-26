@@ -15,16 +15,17 @@ export default function HorizontalGallery() {
     if (!scroller.current || !wrapper.current) return;
     const wrapperEl = wrapper.current;
 
+    ScrollTrigger.normalizeScroll(true);
+
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
       const sections = gsap.utils.toArray<HTMLElement>('.skill-set');
-      const textElements = wrapperEl.querySelectorAll('.text-\\[\\#f9ba1f\\]');
 
       const st = ScrollTrigger.create({
         trigger: scroller.current,
         pin: true,
-        scrub: 0.5,
+        scrub: 1,
         invalidateOnRefresh: true,
         anticipatePin: 1,
         end: () => '+=' + (sections.length - 1) * window.innerWidth,
@@ -32,24 +33,6 @@ export default function HorizontalGallery() {
           xPercent: -100 * (sections.length - 1),
           ease: 'none',
         }),
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const alpha = Math.min(0.8, progress);
-          
-          // Warm ivory-to-transparent multi-stop gradient for a premium, non-muddy atmospheric glow
-          wrapperEl.style.background = `linear-gradient(to bottom, 
-            rgba(250, 246, 238, ${alpha}) 0%, 
-            rgba(250, 246, 238, ${alpha * 0.85}) 40%, 
-            rgba(240, 233, 219, ${alpha * 0.4}) 70%, 
-            rgba(13, 13, 13, 0) 100%
-          )`;
-          
-          // Dynamically transition text color to dark yellow for legibility and branding
-          textElements.forEach((el) => {
-            const color = gsap.utils.interpolate("#f9ba1f", "#8c620c", progress);
-            (el as HTMLElement).style.color = color;
-          });
-        }
       });
 
       const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div');
@@ -76,9 +59,9 @@ export default function HorizontalGallery() {
 
       ScrollTrigger.create({
         trigger: scroller.current,
-        scrub: 0.5,
+        scrub: 0.8,
         start: 'top top',
-        end: () => '+=' + (sections.length - 1) * window.innerWidth,
+        end: () => '+=' + scroller.current!.offsetWidth,
         animation: gsap.to(section2Items, {
           y: 0,
           x: 0,
@@ -87,8 +70,6 @@ export default function HorizontalGallery() {
           stagger: 0.05,
         }),
       });
-
-      return () => {};
     });
 
     // Mobile specific animations if any
@@ -110,33 +91,6 @@ export default function HorizontalGallery() {
           }
         );
       });
-
-      ScrollTrigger.create({
-        trigger: scroller.current,
-        start: "top 20%",
-        end: "bottom bottom",
-        scrub: true,
-        onUpdate: (self) => {
-          const alpha = self.progress;
-          const currentAlpha = Math.min(0.95, alpha * 1.5);
-          
-          // Warm ivory-to-transparent multi-stop gradient on mobile
-          wrapperEl.style.background = `linear-gradient(to bottom, 
-            rgba(245, 242, 235, ${currentAlpha}) 0%, 
-            rgba(245, 242, 235, ${currentAlpha * 0.8}) 50%, 
-            rgba(235, 230, 220, ${currentAlpha * 0.3}) 80%, 
-            rgba(13, 13, 13, 0) 100%
-          )`;
-
-          // Dynamically transition text color on mobile
-          const textElements = wrapperEl.querySelectorAll('.text-\\[\\#f9ba1f\\]');
-          textElements.forEach((el) => {
-            const progress = Math.min(1, alpha * 1.5);
-            const color = gsap.utils.interpolate("#f9ba1f", "#8c620c", progress);
-            (el as HTMLElement).style.color = color;
-          });
-        }
-      });
     });
 
     return () => {
@@ -147,11 +101,11 @@ export default function HorizontalGallery() {
   return (
     <div
       ref={wrapper}
-      className="overflow-hidden"
+      className="overflow-hidden transition-colors duration-500"
       style={{
-        background: "transparent",
-        maskImage: "linear-gradient(to bottom, black 0%, black 50%, rgba(0,0,0,0.9) 65%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.2) 92%, transparent 100%)",
-        WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, rgba(0,0,0,0.9) 65%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.2) 92%, transparent 100%)",
+        backgroundColor: "rgba(255,255,255,0)",
+        maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
       }}
     >
       <div
@@ -190,6 +144,7 @@ export default function HorizontalGallery() {
               fill
               className="object-contain object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
+              priority
             />
           </div>
 
@@ -201,6 +156,7 @@ export default function HorizontalGallery() {
               fill
               className="object-contain object-right md:object-left"
               sizes="(max-width: 768px) 100vw, 50vw"
+              priority
             />
           </div>
 
@@ -221,6 +177,7 @@ export default function HorizontalGallery() {
               fill
               className="object-contain object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
+              priority
             />
           </div>
 
@@ -232,6 +189,7 @@ export default function HorizontalGallery() {
               fill
               className="object-contain object-right md:object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
+              priority
             />
           </div>
 
@@ -243,6 +201,7 @@ export default function HorizontalGallery() {
               fill
               className="object-contain object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
+              priority
             />
           </div>
 
@@ -254,6 +213,7 @@ export default function HorizontalGallery() {
               fill
               className="object-contain object-right md:object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
+              priority
             />
           </div>
 
@@ -265,6 +225,7 @@ export default function HorizontalGallery() {
               fill
               className="object-contain object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
+              priority
             />
           </div>
 
@@ -282,6 +243,7 @@ export default function HorizontalGallery() {
               fill
               className="object-contain object-left"
               sizes="(max-width: 768px) 100vw, 70vw"
+              priority
             />
           </div>
         </section>

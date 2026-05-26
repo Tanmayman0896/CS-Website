@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -65,35 +64,23 @@ export default function NewComponent() {
         ref={imageDivRef}
         className="relative w-full lg:w-[40vw] h-[50vh] lg:h-[80vh] will-change-transform flex items-center justify-center lg:block"
       >
-        <div className="relative w-[80%] lg:w-full h-full lg:translate-x-20">
-          <Image
-            src="/images/events/2.avif"
-            alt="Drivers Champion Event Cover"
-            fill
-            sizes="(max-width: 1024px) 80vw, 40vw"
-            className="object-cover"
-          />
-        </div>
+        <img
+          src="/images/events/2.avif"
+          alt="cover"
+          className="h-full object-cover lg:translate-x-20"
+        />
 
-        <div className="absolute top-[5vh] lg:top-[20vh] right-[5vw] lg:right-[2vh] w-[25%] lg:w-[30%] h-[25%] lg:h-[30%] lg:translate-x-20">
-          <Image
-            src="/images/team/pic3.svg"
-            alt="Team member portrait decor 1"
-            fill
-            sizes="(max-width: 1024px) 25vw, 12vw"
-            className="object-cover"
-          />
-        </div>
+        <img
+          src="/images/team/pic3.svg"
+          alt="cover"
+          className="top-[5vh] lg:top-[20vh] right-[5vw] lg:right-[2vh] absolute h-[25%] lg:h-[30%] object-cover lg:translate-x-20"
+        />
 
-        <div className="absolute -bottom-[5vh] lg:-bottom-[8vh] left-[5vw] lg:-left-20 w-[25%] lg:w-[30%] h-[25%] lg:h-[30%] lg:translate-x-20">
-          <Image
-            src="/images/team/pic4.svg"
-            alt="Team member portrait decor 2"
-            fill
-            sizes="(max-width: 1024px) 25vw, 12vw"
-            className="object-cover"
-          />
-        </div>
+        <img
+          src="/images/team/pic4.svg"
+          alt="cover"
+          className="-bottom-[5vh] lg:-bottom-[8vh] left-[5vw] lg:-left-20 absolute h-[25%] lg:h-[30%] object-cover lg:translate-x-20"
+        />
       </div>
     </div>
   );

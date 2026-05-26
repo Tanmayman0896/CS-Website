@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { TeamMember } from '@/data/teamData';
 
 const LinkedInIcon = () => (
@@ -29,11 +28,10 @@ export default function ECCard({ member }: { member: TeamMember }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <Image
+      <img
         src={member.image} alt={member.name}
-        fill
-        sizes="(max-width: 768px) 50vw, 20vw"
-        style={{ objectFit:'cover', filter: hovered ? 'grayscale(0)' : 'grayscale(1)', transition:'filter 0.5s ease, transform 0.5s ease', transform: hovered ? 'scale(1.05)' : 'scale(1)' }}
+        style={{ width:'100%', height:'100%', objectFit:'cover', display:'block', filter: hovered ? 'grayscale(0)' : 'grayscale(1)', transition:'filter 0.5s ease, transform 0.5s ease', transform: hovered ? 'scale(1.05)' : 'scale(1)' }}
+        loading="lazy"
       />
       <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.25) 55%, transparent 100%)' }} />
       {/* Social icons */}

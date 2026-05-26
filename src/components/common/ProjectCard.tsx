@@ -5,8 +5,7 @@ import Image from "next/image";
 import { Barlow_Condensed, Barlow } from 'next/font/google';
 
 function progressToBg(t: number): string {
-  const alpha = Math.min(0.8, Math.max(0, t));
-  return `rgba(255,255,255,${alpha})`;
+  return "rgba(0,0,0,0)";
 }
 
 const barlowCondensed = Barlow_Condensed({
@@ -132,15 +131,8 @@ const Card = ({ image, title, description, github }: CardProps) => {
   );
 };
 
-const MobileGrid = ({ onProgress, progress }: { onProgress: (p: number) => void; progress: number }) => {
+const MobileGrid = ({ onProgress }: { onProgress: (p: number) => void }) => {
   const sectionRef = useRef<HTMLElement>(null);
-
-  // Smoothly transition title color from white to brand yellow (#f9ba1f) as soon as the background appears
-  const colorProgress = Math.min(1, progress * 4);
-  const r = Math.round(255 - (255 - 249) * colorProgress);
-  const g = Math.round(255 - (255 - 186) * colorProgress);
-  const b = Math.round(255 - (255 - 31) * colorProgress);
-  const titleColor = `rgb(${r}, ${g}, ${b})`;
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -172,7 +164,7 @@ const MobileGrid = ({ onProgress, progress }: { onProgress: (p: number) => void;
         style={{
           textAlign: "center",
           fontWeight: "bold",
-          color: titleColor,
+          color: "white",
           fontSize: "clamp(1.6rem, 6vw, 3rem)",
           letterSpacing: "3px",
           textTransform: "uppercase",
@@ -192,16 +184,9 @@ const MobileGrid = ({ onProgress, progress }: { onProgress: (p: number) => void;
   );
 };
 
-const DesktopScroll = ({ onProgress, progress }: { onProgress: (p: number) => void; progress: number }) => {
+const DesktopScroll = ({ onProgress }: { onProgress: (p: number) => void }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [visibleCount, setVisibleCount] = useState(0);
-
-  // Smoothly transition title color from white to brand yellow (#f9ba1f) as soon as the background appears
-  const colorProgress = Math.min(1, progress * 4);
-  const r = Math.round(255 - (255 - 249) * colorProgress);
-  const g = Math.round(255 - (255 - 186) * colorProgress);
-  const b = Math.round(255 - (255 - 31) * colorProgress);
-  const titleColor = `rgb(${r}, ${g}, ${b})`;
 
   useEffect(() => {
     const container = containerRef.current;
@@ -253,14 +238,14 @@ const DesktopScroll = ({ onProgress, progress }: { onProgress: (p: number) => vo
           style={{
             textAlign: "center",
             fontWeight: "bold",
-            color: titleColor,
+            color: "white",
             fontSize: "clamp(1.8rem, 5vmin, 3rem)",
             letterSpacing: "3px",
             textTransform: "uppercase",
             marginBottom: "2rem",
             opacity: visibleCount > 0 ? 1 : 0,
             transform: visibleCount > 0 ? "translateY(0px)" : "translateY(40px)",
-            transition: "color 0.5s ease, opacity 0.7s ease, transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)",
+            transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)",
           }}
         >
           Our Projects
@@ -293,11 +278,10 @@ const DesktopScroll = ({ onProgress, progress }: { onProgress: (p: number) => vo
 
 const CascadingCards = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [progress, setProgress] = useState(0);
 
-  const handleProgress = useCallback((p: number) => {
-    setProgress(p);
-  }, []);
+  // progressToBg always returns transparent, so no state needed.
+  // Using a no-op callback avoids setState during scroll entirely.
+  const handleProgress = useCallback((_progress: number) => {}, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -307,25 +291,17 @@ const CascadingCards = () => {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  const alpha = Math.min(0.8, progress);
-  const backgroundStyle = `linear-gradient(to bottom, 
-    rgba(250, 246, 238, ${alpha}) 0%, 
-    rgba(250, 246, 238, ${alpha * 0.85}) 40%, 
-    rgba(240, 233, 219, ${alpha * 0.4}) 70%, 
-    rgba(13, 13, 13, 0) 100%
-  )`;
-
   return (
     <div
       style={{
-        background: backgroundStyle,
-        maskImage: "linear-gradient(to bottom, black 0%, black 50%, rgba(0,0,0,0.9) 65%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.2) 92%, transparent 100%)",
-        WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, rgba(0,0,0,0.9) 65%, rgba(0,0,0,0.6) 80%, rgba(0,0,0,0.2) 92%, transparent 100%)",
+        backgroundColor: 'transparent',
+        maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
       }}
     >
       {isMobile
-        ? <MobileGrid onProgress={handleProgress} progress={progress} />
-        : <DesktopScroll onProgress={handleProgress} progress={progress} />}
+        ? <MobileGrid onProgress={handleProgress} />
+        : <DesktopScroll onProgress={handleProgress} />}
     </div>
   );
 };
