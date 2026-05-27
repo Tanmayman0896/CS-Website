@@ -108,8 +108,11 @@ export default function Navbar() {
       isFirstRender.current = false;
       return;
     }
-    setMenuOpen(false);
-    window.location.reload();
+    const timer = setTimeout(() => {
+      setMenuOpen(false);
+      window.location.reload();
+    }, 0);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   const navItems = [

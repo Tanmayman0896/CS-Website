@@ -46,7 +46,7 @@ function CinematicLine({ children }: { children: React.ReactNode }) {
         hidden: {},
         visible: {},
       }}
-      className="relative flex justify-center items-center select-none w-full -my-2 sm:-my-4"
+      className="relative flex justify-center items-center select-none w-full -my-1 sm:-my-2"
     >
       {/* Boxed Reveal Container bounds the block to the text dimensions with ample vertical padding */}
       <div className="relative overflow-hidden px-4 py-3 sm:py-5 flex items-center justify-center">
@@ -101,7 +101,7 @@ export default function ImpactText() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-10% 0px" }}
-            className="text-[1.7rem] sm:text-[3rem] md:text-[4.2rem] lg:text-[5.5rem] xl:text-[6.5rem] leading-[0.9] sm:leading-[0.85] lg:leading-[0.8] tracking-tight uppercase font-black flex flex-col items-center w-full"
+            className="text-[1.7rem] sm:text-[3rem] md:text-[4.2rem] lg:text-[5.5rem] xl:text-[6.5rem] leading-[1.0] sm:leading-[0.95] lg:leading-[0.9] tracking-tight uppercase font-black flex flex-col items-center w-full"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
 

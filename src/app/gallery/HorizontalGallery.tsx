@@ -161,8 +161,8 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:right-[0px] md:top-[120px] w-full md:w-[28vw] py-10 md:py-0 text-left md:text-right">
-            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn't matter where</p>
-            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it's how you</p>
+            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn&apos;t matter where</p>
+            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it&apos;s how you</p>
             <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">progress from there.</p>
           </div>
         </section>
@@ -231,7 +231,7 @@ export default function HorizontalGallery() {
 
           <div className="relative md:absolute md:right-[200px] md:bottom-[180px] w-full md:w-[30vw] py-10 md:py-0 text-center md:text-left">
             <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">Since I was 7 years old and had my first</p>
-            <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">experience with kart racing, I've worked</p>
+            <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">experience with kart racing, I&apos;ve worked</p>
             <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">tirelessly to make that dream come true.</p>
           </div>
 

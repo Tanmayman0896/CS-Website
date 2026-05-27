@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import React, { useRef } from "react";
 const TeamCard = dynamic(() => import('@/app/team/TeamCard'), { ssr: false });
 import DecryptedText from "@/components/DecryptedText";
@@ -26,10 +26,11 @@ const ScrollControlled = ({
     offset: ["start end", "end start"],
   });
 
-  const x =
-    direction === "left"
-      ? useTransform(scrollYProgress, [0.7, 1], [-300, 0])
-      : useTransform(scrollYProgress, [0.7, 1], [300, 0]);
+  const x = useTransform(
+    scrollYProgress,
+    [0.7, 1],
+    direction === "left" ? [-300, 0] : [300, 0]
+  );
   const smoothX = useSpring(x, {
     stiffness: 90,
     damping: 25,
@@ -126,7 +127,7 @@ const LinePath = ({
   scrollYProgress,
 }: {
   className: string;
-  scrollYProgress: any;
+  scrollYProgress: MotionValue<number>;
 }) => {
   const pathLength = useTransform(scrollYProgress, [0, 1], [0.37, 1]);
 

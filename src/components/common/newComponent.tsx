@@ -41,7 +41,7 @@ export default function NewComponent() {
       
       <div className="flex flex-col justify-center gap-6 lg:gap-10 w-full lg:w-[40vw] px-6 lg:px-0">
         <h1 className="font-bold text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left">
-          World <br className="hidden lg:block" /> Drivers'
+          World <br className="hidden lg:block" /> Drivers&apos;
         </h1>
 
         <h1 className="text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left lg:-translate-y-10 font-serif">

@@ -82,7 +82,7 @@ const Card = () => {
             >
               <div
                 data-text={edition.title}
-                style={{ ["--r" as any]: edition.rotation }}
+                style={{ "--r": edition.rotation } as React.CSSProperties}
                 className="glass"
               >
                 <img

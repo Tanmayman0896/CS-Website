@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, createContext, useContext } from "react";
+import { useEffect, useRef, createContext, useContext, useState } from "react";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -18,6 +18,7 @@ export default function SmoothScrollProvider({
 }: {
     children: React.ReactNode;
 }) {
+    const [lenis, setLenis] = useState<Lenis | null>(null);
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
@@ -32,6 +33,9 @@ export default function SmoothScrollProvider({
         });
 
         lenisRef.current = lenis;
+        const timer = setTimeout(() => {
+            setLenis(lenis);
+        }, 0);
 
         // Force scroll to top on mount and after Lenis init
         if ('scrollRestoration' in history) {
@@ -48,11 +52,13 @@ export default function SmoothScrollProvider({
         gsap.ticker.lagSmoothing(0);
 
         return () => {
+            clearTimeout(timer);
             gsap.ticker.remove(tickerFn);
             lenis.off("scroll", handleLenisScroll);
             ScrollTrigger.getAll().forEach((t) => t.kill(true));
             lenis.destroy();
             lenisRef.current = null;
+            setLenis(null);
             document.body.style.overflow = "auto";
             document.documentElement.style.overflow = "auto";
             ScrollTrigger.refresh();
@@ -60,7 +66,7 @@ export default function SmoothScrollProvider({
     }, []);
 
     return (
-        <LenisContext.Provider value={lenisRef.current}>
+        <LenisContext.Provider value={lenis}>
             {children}
         </LenisContext.Provider>
     );

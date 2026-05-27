@@ -47,8 +47,6 @@ export function LoadingProvider({ children }: { children: React.ReactNode }) {
       }, 500);
       return () => clearTimeout(timer);
     }
-    // Only reset while we have never finished loading
-    setAssetsLoaded(false);
   }, [progress, active]);
 
   const isReady = isAssetsLoaded && isVideoFinished;
