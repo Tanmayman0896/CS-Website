@@ -22,6 +22,7 @@ export default function AboutPage() {
         <div id="about-scroll-canvas" className={styles.scrollCanvas}>
           <div className={styles.stickyHero}>
             <h1
+              id="about-hero-title"
               className={`font-bold tracking-tighter leading-none uppercase text-white ${styles.heroTitle}`}
             >
               About Us

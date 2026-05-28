@@ -83,12 +83,24 @@ export default function Navbar() {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
+    let rafId = 0;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
+      // Throttle to one check per animation frame to avoid
+      // flooding React with setState during Lenis smooth scroll
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        const isScrolled = window.scrollY > 60;
+        // Only setState when the value actually changes
+        setScrolled((prev) => (prev === isScrolled ? prev : isScrolled));
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   useEffect(() => {
@@ -96,8 +108,11 @@ export default function Navbar() {
       isFirstRender.current = false;
       return;
     }
-    setMenuOpen(false);
-    window.location.reload();
+    const timer = setTimeout(() => {
+      setMenuOpen(false);
+      window.location.reload();
+    }, 0);
+    return () => clearTimeout(timer);
   }, [pathname]);
 
   const navItems = [
@@ -121,7 +136,7 @@ export default function Navbar() {
         <div className={style.headerContainer}>
           <div className={style.logo} onClick={() => router.push("/")}>
             <Image
-              src="/logos/ieee-cs-logo.png"
+              src="/logos/ieee-cs-logo.avif"
               alt="IEEE CS MUJ Logo"
               width={240}
               height={60}

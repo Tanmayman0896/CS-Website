@@ -126,7 +126,10 @@
 
 
 html {
-  scroll-behavior: smooth;
+  /* Do NOT use scroll-behavior: smooth here — Lenis handles smooth scrolling.
+     Having both causes the browser and Lenis to fight over scroll position,
+     producing visible scroll-position oscillation/jumps. */
+  scroll-behavior: auto;
 }
 
 * {
@@ -143,13 +146,6 @@ body {
 }
 
 /* ── Performance hints ── */
-
-/* Promote known heavy animation containers to their own GPU layer */
-[style*="position: sticky"],
-[style*="will-change"] {
-  transform: translateZ(0);
-  isolation: isolate;
-}
 
 /* Improve image rendering across the site */
 img {

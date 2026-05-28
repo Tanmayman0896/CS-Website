@@ -13,20 +13,24 @@ export default function NewComponent() {
   useEffect(() => {
     if (!sectionRef.current || !imageDivRef.current) return;
 
-    gsap.fromTo(
-      imageDivRef.current,
-      { yPercent: 10 },
-      {
-        yPercent: -10,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5, 
-        },
-      }
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        imageDivRef.current,
+        { yPercent: 10 },
+        {
+          yPercent: -10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1.5, 
+          },
+        }
+      );
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -37,7 +41,7 @@ export default function NewComponent() {
       
       <div className="flex flex-col justify-center gap-6 lg:gap-10 w-full lg:w-[40vw] px-6 lg:px-0">
         <h1 className="font-bold text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left">
-          World <br className="hidden lg:block" /> Drivers'
+          World <br className="hidden lg:block" /> Drivers&apos;
         </h1>
 
         <h1 className="text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left lg:-translate-y-10 font-serif">
@@ -61,7 +65,7 @@ export default function NewComponent() {
         className="relative w-full lg:w-[40vw] h-[50vh] lg:h-[80vh] will-change-transform flex items-center justify-center lg:block"
       >
         <img
-          src="/images/events/2.png"
+          src="/images/events/2.avif"
           alt="cover"
           className="h-full object-cover lg:translate-x-20"
         />

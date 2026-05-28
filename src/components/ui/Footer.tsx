@@ -132,7 +132,7 @@ export default function Footer() {
               >
                 <div style={{ marginBottom: '1.25rem', width: '9rem' }}>
                   <img
-                    src="/logos/ieee-cs-logo.png"
+                    src="/logos/ieee-cs-logo.avif"
                     alt="IEEE CS Logo"
                     style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
                   />

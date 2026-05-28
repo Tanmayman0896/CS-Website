@@ -4,28 +4,27 @@ import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Environment, ContactShadows, useTexture } from "@react-three/drei";
 import * as THREE from "three";
-import { useEffect } from "react";
-
-import { useScroll, useTransform } from "framer-motion";
+import gsap from "gsap";
 
 function HeroModel({ scrollContainerRef }: { scrollContainerRef?: React.RefObject<HTMLElement | null> }) {
-  const { scene } = useGLTF("/Hero.glb");
+  const { scene } = useGLTF("/Hero.glb", true);
   const ref = useRef<THREE.Group>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: scrollContainerRef,
-    offset: ["start start", "end end"]
-  });
-  
-  // Animate through the entire pin duration (0 to 1)
-  const scale = useTransform(scrollYProgress, [0, 1], [4, 2]);
-  const zPos = useTransform(scrollYProgress, [0, 1], [-2, -20]);
 
   useFrame(() => {
-    if (ref.current) {
-      ref.current.scale.setScalar(scale.get());
-      ref.current.position.z = zPos.get();
-    }
+    if (!scrollContainerRef?.current || !ref.current) return;
+
+    // Calculate scroll progress manually based on trigger container scroll position
+    const rect = scrollContainerRef.current.getBoundingClientRect();
+    const totalScroll = rect.height - window.innerHeight;
+    const currentScroll = -rect.top;
+    const progress = Math.max(0, Math.min(1, currentScroll / totalScroll));
+
+    // Interpolate values using GSAP's utility function
+    const targetScale = gsap.utils.interpolate(4, 2, progress);
+    const targetZ = gsap.utils.interpolate(-2, -20, progress);
+
+    ref.current.scale.setScalar(targetScale);
+    ref.current.position.z = targetZ;
   });
 
   return (
@@ -36,6 +35,8 @@ function HeroModel({ scrollContainerRef }: { scrollContainerRef?: React.RefObjec
     />
   );
 }
+
+useGLTF.preload("/Hero.glb");
 
 function IEEEModel() {
   const { scene } = useGLTF("");
@@ -71,7 +72,7 @@ export default function Hero3D({ scrollContainerRef }: { scrollContainerRef?: Re
         />
         <Suspense fallback={null}>
           <HeroModel scrollContainerRef={scrollContainerRef} />
-          <Environment preset="city" />
+          <Environment files="/potsdamer_platz_1k.hdr" />
         </Suspense>
       </Canvas>
     </div>

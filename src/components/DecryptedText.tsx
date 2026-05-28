@@ -188,7 +188,7 @@ export default function DecryptedText({
       {...hoverProps}
       {...props}
     >
-      <span className="sr-only">{displayText}</span>
+      <span className="sr-only">{text}</span>
 
       <span aria-hidden="true">
         {displayText.split('').map((char, index) => {

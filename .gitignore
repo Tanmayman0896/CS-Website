@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# backups from media optimization
+public/Hero_backup.glb
+public/logos/ieee_backup.glb
+public/Heroimg_backup/
+

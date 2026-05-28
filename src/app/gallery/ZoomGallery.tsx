@@ -8,15 +8,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const IMAGES = [
-    '/images/events/1.png',
+    '/images/events/1.avif',
     '/images/team/pic2.svg',
-    '/images/events/3.png',
+    '/images/events/3.avif',
     '/images/team/pic4.svg',
-    '/images/events/5.png',
-    '/images/events/6.png',
-    '/images/events/7.png',
-    '/images/events/2.png',
-    '/images/events/4.png',
+    '/images/events/5.avif',
+    '/images/events/6.avif',
+    '/images/events/7.avif',
+    '/images/events/2.avif',
+    '/images/events/4.avif',
     '/images/team/photo1.svg',
 ];
 

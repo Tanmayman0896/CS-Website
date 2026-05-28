@@ -13,7 +13,7 @@
   bottom: -4rem;
   left: -8rem;
   right: -8rem;
-  height: 250%;
+  height: 120%;
   pointer-events: none;
   z-index: 0;
   background:
@@ -23,6 +23,7 @@
   -webkit-mask-image: linear-gradient(to top, black 0%, black 30%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
   mask-image: linear-gradient(to top, black 0%, black 30%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
   filter: blur(55px);
+  contain: strict;
 }
 
 .footerCard {
@@ -97,7 +98,9 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  /* Removed backdrop-filter: blur(10px) — it forces the browser to
+     composite all layers behind this element on every frame during
+     scroll, causing significant compositing overhead and jitter. */
   border: 1px solid rgba(249, 115, 22, 0.18);
 }
 

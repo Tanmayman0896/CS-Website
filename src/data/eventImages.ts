@@ -1,11 +1,11 @@
 
 
 export const eventImages = [
-    "/images/events/1.png",
-    "/images/events/2.png",
-    "/images/events/3.png",
-    "/images/events/4.png",
-    "/images/events/5.png",
-    "/images/events/6.png",
-    "/images/events/7.png",
+    "/images/events/1.avif",
+    "/images/events/2.avif",
+    "/images/events/3.avif",
+    "/images/events/4.avif",
+    "/images/events/5.avif",
+    "/images/events/6.avif",
+    "/images/events/7.avif",
 ];

@@ -14,19 +14,19 @@ const Card = () => {
   const editions: NewsletterEdition[] = [
     {
       title: "December Edition",
-      image: "/images/[7]%20December.png",
+      image: "/images/[7]%20December.avif",
       link: "https://example.com/[7]December.png",
       rotation: -15,
     },
     {
       title: "January Edition",
-      image: "/images/[8]%20January.png",
+      image: "/images/[8]%20January.avif",
       link: "https://example.com/january",
       rotation: 5,
     },
     {
       title: "February Edition",
-      image: "/images/[9]%20February.png",
+      image: "/images/[9]%20February.avif",
       link: "https://example.com/february",
       rotation: 25,
     },
@@ -82,7 +82,7 @@ const Card = () => {
             >
               <div
                 data-text={edition.title}
-                style={{ ["--r" as any]: edition.rotation }}
+                style={{ "--r": edition.rotation } as React.CSSProperties}
                 className="glass"
               >
                 <img
@@ -120,7 +120,7 @@ const StyledWrapper = styled.div`
     position: relative;
     width: 280px;
     height: 400px;
-    background: linear-gradient(#fff2, transparent);
+    background: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.02));
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
     display: flex;
@@ -129,7 +129,8 @@ const StyledWrapper = styled.div`
     transition: 0.5s;
     border-radius: 10px;
     margin: 0 -80px;
-    backdrop-filter: blur(10px);
+    /* Removed backdrop-filter: blur(10px) — forces per-frame recompositing
+       of all layers behind this element during scroll, causing jitter. */
     transform: rotate(calc(var(--r) * 1deg));
     overflow: hidden;
   }
@@ -152,7 +153,7 @@ const StyledWrapper = styled.div`
     bottom: 0;
     width: 100%;
     height: 52px;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,7 +163,6 @@ const StyledWrapper = styled.div`
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     z-index: 10;
-    backdrop-filter: blur(5px);
   }
 
   /* ---------- Responsive ---------- */

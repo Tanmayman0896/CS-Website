@@ -32,12 +32,12 @@ const COLOR_MAP: Record<string, string> = {
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const SAMPLE_EVENTS: CalendarEvent[] = [
-  { id: 1, title: "Venom", type: "image", color: "orange", month: 0, imageSrc: "/images/events/1.png" },
-  { id: 2, title: "Snatch", type: "image", color: "orange", month: 1, imageSrc: "/images/events/2.png" },
-  { id: 3, title: "Bazinga", type: "image", color: "orange", month: 2, imageSrc: "/images/events/3.png" },
-  { id: 4, title: "hackathon", type: "image", color: "orange", month: 2, imageSrc: "/images/events/4.png" },
-  { id: 5, title: "hackathon", type: "image", color: "orange", month: 2, imageSrc: "/images/events/5.png" },
-  { id: 6, title: "OVER", type: "image", color: "orange", month: 3, imageSrc: "/images/events/6.png" },
+  { id: 1, title: "Venom", type: "image", color: "orange", month: 0, imageSrc: "/images/events/1.avif" },
+  { id: 2, title: "Snatch", type: "image", color: "orange", month: 1, imageSrc: "/images/events/2.avif" },
+  { id: 3, title: "Bazinga", type: "image", color: "orange", month: 2, imageSrc: "/images/events/3.avif" },
+  { id: 4, title: "hackathon", type: "image", color: "orange", month: 2, imageSrc: "/images/events/4.avif" },
+  { id: 5, title: "hackathon", type: "image", color: "orange", month: 2, imageSrc: "/images/events/5.avif" },
+  { id: 6, title: "OVER", type: "image", color: "orange", month: 3, imageSrc: "/images/events/6.avif" },
 ];
 
 export default function RollingSections() {
@@ -98,7 +98,7 @@ export default function RollingSections() {
           <div className="logoWrapper relative flex items-center justify-center">
             <Image
               ref={logoRef}
-              src="/logos/calendar-logo-center.png"
+              src="/logos/calendar-logo-center.avif"
               alt="cal-logo"
               width={350}
               height={350}

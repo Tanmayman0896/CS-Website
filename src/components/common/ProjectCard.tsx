@@ -5,8 +5,7 @@ import Image from "next/image";
 import { Barlow_Condensed, Barlow } from 'next/font/google';
 
 function progressToBg(t: number): string {
-  const alpha = Math.min(0.85, Math.max(0, t));
-  return `rgba(255,255,255,${alpha})`;
+  return "rgba(0,0,0,0)";
 }
 
 const barlowCondensed = Barlow_Condensed({
@@ -138,17 +137,25 @@ const MobileGrid = ({ onProgress }: { onProgress: (p: number) => void }) => {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+    let rafId = 0;
     const onScroll = () => {
-      const rect = section.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      const total = rect.height + windowH;
-      const scrolled = windowH - rect.top;
-      const progress = Math.min(1, Math.max(0, scrolled / total));
-      onProgress(progress);
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        const rect = section.getBoundingClientRect();
+        const windowH = window.innerHeight;
+        const total = rect.height + windowH;
+        const scrolled = windowH - rect.top;
+        const progress = Math.min(1, Math.max(0, scrolled / total));
+        onProgress(progress);
+      });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [onProgress]);
 
   return (
@@ -184,29 +191,44 @@ const DesktopScroll = ({ onProgress }: { onProgress: (p: number) => void }) => {
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    let rafId = 0;
+    let lastCount = 0;
 
     const onScroll = () => {
-      const rect = container.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      const scrolled = -rect.top;
-      const totalScrollable = rect.height - windowH;
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = 0;
+        const rect = container.getBoundingClientRect();
+        const windowH = window.innerHeight;
+        const scrolled = -rect.top;
+        const totalScrollable = rect.height - windowH;
 
-      if (scrolled < 0) {
-        onProgress(0);
-        setVisibleCount(0);
-        return;
-      }
+        if (scrolled < 0) {
+          onProgress(0);
+          if (lastCount !== 0) {
+            lastCount = 0;
+            setVisibleCount(0);
+          }
+          return;
+        }
 
-      const clampedScrolled = Math.min(scrolled, totalScrollable);
-      const progress = clampedScrolled / totalScrollable;
-      onProgress(Math.min(1, Math.max(0, progress)));
-      const count = Math.min(cards.length, Math.floor(progress * cards.length) + 1);
-      setVisibleCount(count);
+        const clampedScrolled = Math.min(scrolled, totalScrollable);
+        const progress = clampedScrolled / totalScrollable;
+        onProgress(Math.min(1, Math.max(0, progress)));
+        const count = Math.min(cards.length, Math.floor(progress * cards.length) + 1);
+        if (count !== lastCount) {
+          lastCount = count;
+          setVisibleCount(count);
+        }
+      });
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [onProgress]);
 
   return (
@@ -256,25 +278,29 @@ const DesktopScroll = ({ onProgress }: { onProgress: (p: number) => void }) => {
 
 const CascadingCards = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [bgColor, setBgColor] = useState("rgba(255,255,255,0)");
 
-  const handleProgress = useCallback((progress: number) => {
-    setBgColor(progressToBg(progress));
-  }, []);
+  // progressToBg always returns transparent, so no state needed.
+  // Using a no-op callback avoids setState during scroll entirely.
+  const handleProgress = useCallback((_progress: number) => {}, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
-    setIsMobile(mq.matches);
+    const initialMatch = mq.matches;
+    const timer = setTimeout(() => {
+      setIsMobile(initialMatch);
+    }, 0);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    return () => {
+      clearTimeout(timer);
+      mq.removeEventListener("change", handler);
+    };
   }, []);
 
   return (
     <div
       style={{
-        backgroundColor: bgColor,
-        transition: "background-color 0.05s linear",
+        backgroundColor: 'transparent',
         maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
         WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
       }}

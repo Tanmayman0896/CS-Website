@@ -219,10 +219,6 @@
     color: #b48c3c;
 }
 
-.navLink:hover {
-    transform: translateX(10px);
-}
-
 .scribble {
     position: absolute;
     left: -5%;
@@ -290,9 +286,7 @@
         text-align: center;
     }
     
-    .navLink:hover {
-        transform: none; 
-    }
+
 }
 
 /* Landscape Mode for Small Heights */

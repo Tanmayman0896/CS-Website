@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,17 +12,17 @@ export default function HorizontalGallery() {
   const scroller = useRef<HTMLDivElement | null>(null);
   const wrapper = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!scroller.current || !wrapper.current) return;
-    const wrapperEl = wrapper.current;
 
-    ScrollTrigger.normalizeScroll(true);
+    // Scoped query for sections to prevent transition conflicts
+    const sections = gsap.utils.toArray<HTMLElement>('.skill-set', wrapper.current);
+    if (sections.length === 0) return;
 
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      const sections = gsap.utils.toArray<HTMLElement>('.skill-set');
-
+      // 1. Pinned Horizontal Track ScrollTrigger
       const st = ScrollTrigger.create({
         trigger: scroller.current,
         pin: true,
@@ -35,14 +36,8 @@ export default function HorizontalGallery() {
         }),
       });
 
-      const tickerFn = () => {
-        const progress = st.progress ?? 0;
-        const alpha = Math.min(0.8, progress);
-        wrapperEl.style.backgroundColor = `rgba(255,255,255,${alpha})`;
-      };
-      gsap.ticker.add(tickerFn);
-
-      const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div');
+      // 2. Section 1 Items Fade/Slide-in
+      const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div', wrapper.current);
       gsap.set(section1Items, { y: 120, x: 60, opacity: 0 });
 
       ScrollTrigger.create({
@@ -61,14 +56,15 @@ export default function HorizontalGallery() {
         },
       });
 
-      const section2Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(2) > div');
+      // 3. Section 2 Items Scrub Transition (Perfectly synced with pin)
+      const section2Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(2) > div', wrapper.current);
       gsap.set(section2Items, { y: 120, x: 60, opacity: 0 });
 
       ScrollTrigger.create({
         trigger: scroller.current,
         scrub: 0.8,
         start: 'top top',
-        end: () => '+=' + scroller.current!.offsetWidth,
+        end: () => '+=' + (sections.length - 1) * window.innerWidth, // Synced to prevent drift or layer splits
         animation: gsap.to(section2Items, {
           y: 0,
           x: 0,
@@ -77,16 +73,12 @@ export default function HorizontalGallery() {
           stagger: 0.05,
         }),
       });
-
-      return () => {
-        gsap.ticker.remove(tickerFn);
-      };
     });
 
     // Mobile specific animations if any
     mm.add("(max-width: 767px)", () => {
-      const items = gsap.utils.toArray<HTMLElement>('.skill-set > div');
-      
+      const items = gsap.utils.toArray<HTMLElement>('.skill-set > div', wrapper.current);
+
       items.forEach((item) => {
         gsap.fromTo(item, 
           { y: 50, opacity: 0 },
@@ -102,24 +94,19 @@ export default function HorizontalGallery() {
           }
         );
       });
-
-      ScrollTrigger.create({
-        trigger: scroller.current,
-        start: "top 20%",
-        end: "bottom bottom",
-        scrub: true,
-        onUpdate: (self) => {
-          const alpha = self.progress;
-          // Transition to a background color similar to the reference (lighter beige/grey)
-          wrapperEl.style.backgroundColor = `rgba(230, 230, 225, ${Math.min(0.95, alpha * 1.5)})`;
-        }
-      });
     });
 
+    // Safe delayed refresh to allow images/fonts/Next.js hydration layout to stabilize
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
     return () => {
+      clearTimeout(timer);
       mm.revert();
     };
-  }, []);
+  }, { scope: wrapper });
+
 
   return (
     <div
@@ -184,8 +171,8 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:right-[0px] md:top-[120px] w-full md:w-[28vw] py-10 md:py-0 text-left md:text-right">
-            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn't matter where</p>
-            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it's how you</p>
+            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn&apos;t matter where</p>
+            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it&apos;s how you</p>
             <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">progress from there.</p>
           </div>
         </section>
@@ -254,7 +241,7 @@ export default function HorizontalGallery() {
 
           <div className="relative md:absolute md:right-[200px] md:bottom-[180px] w-full md:w-[30vw] py-10 md:py-0 text-center md:text-left">
             <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">Since I was 7 years old and had my first</p>
-            <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">experience with kart racing, I've worked</p>
+            <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">experience with kart racing, I&apos;ve worked</p>
             <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">tirelessly to make that dream come true.</p>
           </div>
 
