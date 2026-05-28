@@ -15,13 +15,9 @@ export default function Gallery() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    const isSafari =
-      /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-    if (isSafari) {
-      video.muted = true;
-    }
+    video.muted = true;
+    video.load();
+    video.play().catch(() => {});
   }, []);
 
   return (<>
@@ -39,6 +35,7 @@ export default function Gallery() {
             <video
               ref={videoRef}
               autoPlay
+              muted
               playsInline
               loop={false}
               controls={false}
