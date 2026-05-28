@@ -5,7 +5,7 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.16, // gorgeous overlapping stagger cascade (approx. 14.5% of duration)
+      staggerChildren: 0.18, // slightly faster stagger (approx 14% of duration)
       delayChildren: 0.08,
     },
   },
@@ -20,7 +20,7 @@ const textVariants = {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 1.1, // premium weighty duration
+      duration: 1.3, // premium weighty duration (slightly faster than 1.5s)
       ease: [0.22, 1, 0.36, 1] as const,
     },
   },
@@ -33,7 +33,7 @@ const boxVariants = {
   visible: {
     x: "103%", // slides out cleanly to reveal text
     transition: {
-      duration: 1.1, // matching weighted duration
+      duration: 1.3, // matching weighted duration
       ease: [0.22, 1, 0.36, 1] as const,
     },
   },
@@ -100,7 +100,7 @@ export default function ImpactText() {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-10% 0px" }}
+            viewport={{ once: true, margin: "-25% 0px" }}
             className="text-[1.7rem] sm:text-[3rem] md:text-[4.2rem] lg:text-[5.5rem] xl:text-[6.5rem] leading-[1.0] sm:leading-[0.95] lg:leading-[0.9] tracking-tight uppercase font-black flex flex-col items-center w-full"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
