@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { eventsData, type EventItem } from "@/src/data/eventsData";
+import { eventsData, type EventItem } from "@/data/eventsData";
 
 interface EventCardProps {
   exhibition: EventItem;
