@@ -15,29 +15,23 @@ interface CalendarEvent {
   type: "bar" | "card" | "image";
   color: string;
   month: number; // 0=Jan … 11=Dec
+  time?: string;
   progress?: number;
   attachments?: number;
   imageSrc?: string;
 }
 
-const COLOR_MAP: Record<string, string> = {
-  teal: styles.eventTeal,
-  orange: styles.eventOrange,
-  pink: styles.eventPink,
-  purple: styles.eventPurple,
-  green: styles.eventGreen,
-  blue: styles.eventBlue,
-};
+// color map removed (events rendered as unified pill style)
 
 const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const SAMPLE_EVENTS: CalendarEvent[] = [
-  { id: 1, title: "Venom", type: "image", color: "orange", month: 0, imageSrc: "/images/events/1.png" },
-  { id: 2, title: "Snatch", type: "image", color: "orange", month: 1, imageSrc: "/images/events/2.png" },
-  { id: 3, title: "Bazinga", type: "image", color: "orange", month: 2, imageSrc: "/images/events/3.png" },
-  { id: 4, title: "hackathon", type: "image", color: "orange", month: 2, imageSrc: "/images/events/4.png" },
-  { id: 5, title: "hackathon", type: "image", color: "orange", month: 2, imageSrc: "/images/events/5.png" },
-  { id: 6, title: "OVER", type: "image", color: "orange", month: 3, imageSrc: "/images/events/6.png" },
+  { id: 1, title: "Venom", type: "image", color: "orange", month: 0,  },
+  { id: 2, title: "Snatch", type: "image", color: "orange", month: 1,  },
+  { id: 3, title: "Bazinga", type: "image", color: "orange", month: 2,  },
+  { id: 4, title: "Hackathon", type: "image", color: "orange", month: 2, },
+  { id: 5, title: "Workshop", type: "image", color: "orange", month: 2,  },
+  { id: 6, title: "OVER", type: "image", color: "orange", month: 3,  },
 ];
 
 export default function RollingSections() {
@@ -171,44 +165,16 @@ export default function RollingSections() {
                     )}
 
                     {monthEvents.map((ev: CalendarEvent, evIdx: number) => {
-                      if (ev.type === "image") {
-                        return (
-                          <div key={ev.id} className={styles.eventImageWrapper} style={{ animationDelay: `${evIdx * 0.08}s` }}>
-                             <img src={ev.imageSrc} alt={ev.title} className={styles.eventImage} />
-                          </div>
-                        );
-                      }
-                      return ev.type === "bar" ? (
+                      return (
                         <div
                           key={ev.id}
-                          className={`${styles.eventBar} ${COLOR_MAP[ev.color] || styles.eventTeal}`}
+                          className={styles.pillEvent}
                           style={{ animationDelay: `${evIdx * 0.08}s` }}
                         >
-                          <span className={styles.eventText}>{ev.title}</span>
-                          <span className={styles.eventIcon}>✓</span>
-                        </div>
-                      ) : (
-                        <div
-                          key={ev.id}
-                          className={styles.eventCard}
-                          style={{ animationDelay: `${evIdx * 0.08}s` }}
-                        >
-                          <div className={styles.cardHeader}>
-                            <span className={styles.cardTitle}>{ev.title}</span>
-                            <span className={styles.cardMenu}>•••</span>
-                          </div>
-                          {ev.progress !== undefined && (
-                            <span className={styles.cardProgress}>
-                              {ev.progress}%
-                            </span>
+                          <span className={styles.pillTitle}>{ev.title}</span>
+                          {ev.time && (
+                            <span className={styles.pillTime} aria-hidden>{ev.time}</span>
                           )}
-                          <div className={styles.cardFooter}>
-                            {ev.attachments && (
-                              <span className={styles.cardAttachment}>
-                                📎 {ev.attachments}
-                              </span>
-                            )}
-                          </div>
                         </div>
                       );
                     })}

@@ -4,14 +4,14 @@ import Link from "next/link";
 import { eventsData } from "@/src/data/eventsData";
 
 interface EventPageProps {
-  params: Promise<{
+  params: {
     id: string;
-  }>;
+  };
 }
 
 export default async function EventDetail({ params }: EventPageProps) {
-  const resolvedParams = await params;
-  const eventId = Number(resolvedParams.id);
+  const { id } = await params as { id: string };
+  const eventId = Number(id);
   const event = eventsData.find((e) => e.id === eventId);
 
   if (!event) {

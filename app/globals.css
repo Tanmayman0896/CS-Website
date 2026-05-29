@@ -175,6 +175,43 @@ img {
   overflow:hidden;
 }
 
+/* (eventsTitle and eventsGradient removed to restore original styles) */
+
+/* Events split-title styling (safe font fallbacks) */
+.eventsTitle{
+  font-family: var(--font-playfair), var(--font-inter), var(--font-prata), var(--font-eb-garamond), Georgia, "Times New Roman", Times, serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow: visible; /* ensure transforms aren't clipped */
+  padding-top: 6px;
+  padding-bottom: 6px;
+  transform-style: preserve-3d;
+  text-shadow: none;
+  position: relative;
+  z-index: 9999;
+  text-transform: none;
+}
+
+.eventsGradient{
+  background: linear-gradient(90deg, #ffffff 0%, #f4a119 35%, #9ac53f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.eventsWord {
+  display: inline-block;
+}
+
+.eventsChar {
+  display: inline-block;
+  will-change: transform, opacity;
+  backface-visibility: visible;
+  transform-style: preserve-3d;
+}
+
+/* Subtle pop-in animation for the Events heading */
+/* No JS-driven heading animations — keep visual styling only */
+
 .logoGlow{
   filter: drop-shadow(0 0 12px rgba(250,204,21,0.6));
 }
