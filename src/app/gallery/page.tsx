@@ -23,10 +23,15 @@ export default function Gallery() {
   return (<>
 
     <SmoothScrollProvider>
-      <div className="relative min-h-screen bg-black w-full">
+      <div className="relative min-h-screen bg-transparent w-full">
 
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <LineBackground />
+        <div className="fixed inset-0 -z-10 pointer-events-none">
+          <LineBackground
+            lineColor="rgba(180, 140, 60, 0.75)"
+            backgroundColor="#0d0d0d"
+            lineCount={14}
+            animated={true}
+          />
         </div>
 
         <div className="relative z-10 w-full">
