@@ -74,6 +74,54 @@ function NorrisText({
   );
 }
 
+const isLightColor = (colorStr: string): boolean => {
+  const match = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+  if (!match) return false;
+  
+  const r = parseInt(match[1], 10);
+  const g = parseInt(match[2], 10);
+  const b = parseInt(match[3], 10);
+  const a = match[4] !== undefined ? parseFloat(match[4]) : 1;
+  
+  if (a < 0.1) return false; // semi-transparent treated as dark
+  
+  const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+  return luminance > 180;
+};
+
+const checkLuminanceAtElement = (targetEl: HTMLElement | null): boolean => {
+  if (!targetEl) return false;
+  
+  try {
+    const rect = targetEl.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    
+    const elements = document.elementsFromPoint(x, y);
+    const header = document.querySelector(`header`);
+    
+    for (const el of elements) {
+      if (header && header.contains(el)) {
+        continue;
+      }
+      
+      let currentEl: HTMLElement | null = el as HTMLElement;
+      while (currentEl) {
+        const style = window.getComputedStyle(currentEl);
+        const bg = style.backgroundColor;
+        if (bg && bg !== "transparent" && bg !== "rgba(0, 0, 0, 0)") {
+          return isLightColor(bg);
+        }
+        currentEl = currentEl.parentElement;
+      }
+    }
+  } catch (e) {
+    console.error("Error detecting background color under element:", e);
+  }
+  
+  return false;
+};
+
 export default function Navbar() {
   const [cursorActive, setCursorActive] = useState(false);
   const router = useRouter();
@@ -82,26 +130,46 @@ export default function Navbar() {
   const pathname = usePathname();
   const isFirstRender = useRef(true);
 
+  const [isLogoLightBg, setIsLogoLightBg] = useState(false);
+  const [isMenuLightBg, setIsMenuLightBg] = useState(false);
+
+  const logoRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     let rafId = 0;
+    
+    const updateContrast = () => {
+      const isLogoLight = checkLuminanceAtElement(logoRef.current);
+      const isMenuLight = checkLuminanceAtElement(menuRef.current);
+      
+      setIsLogoLightBg((prev) => (prev === isLogoLight ? prev : isLogoLight));
+      setIsMenuLightBg((prev) => (prev === isMenuLight ? prev : isMenuLight));
+    };
+
     const handleScroll = () => {
-      // Throttle to one check per animation frame to avoid
-      // flooding React with setState during Lenis smooth scroll
       if (rafId) return;
       rafId = requestAnimationFrame(() => {
         rafId = 0;
         const isScrolled = window.scrollY > 60;
-        // Only setState when the value actually changes
         setScrolled((prev) => (prev === isScrolled ? prev : isScrolled));
+        updateContrast();
       });
     };
 
+    updateContrast();
+    const timer = setTimeout(updateContrast, 100);
+
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateContrast, { passive: true });
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateContrast);
       if (rafId) cancelAnimationFrame(rafId);
+      clearTimeout(timer);
     };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (isFirstRender.current) {
@@ -144,19 +212,24 @@ export default function Navbar() {
         onMouseLeave={() => setCursorActive(false)}
       >
         <div className={style.headerContainer}>
-          <div className={style.logo} onClick={() => router.push("/")}>
+          <div 
+            ref={logoRef} 
+            className={style.logo} 
+            onClick={() => router.push("/")}
+          >
             <Image
               src="/logos/ieee-cs-logo.avif"
               alt="IEEE CS MUJ Logo"
               width={240}
               height={60}
-              className={style.logoImage}
+              className={`${style.logoImage} ${isLogoLightBg ? style.logoLightBg : ""}`}
               priority
             />
           </div>
 
           <button
-            className={style.menuToggle}
+            ref={menuRef}
+            className={`${style.menuToggle} ${isMenuLightBg && !menuOpen ? style.menuToggleLightBg : ""}`}
             onClick={() => setMenuOpen(!menuOpen)}
           >
             {menuOpen ? <X size={32} /> : <Menu size={32} />}

@@ -140,9 +140,15 @@ export default function ScrollGrid() {
     const containerRef = useRef<HTMLDivElement>(null);
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
     const [gridComplete, setGridComplete] = useState(false);
+    const [mounted, setMounted] = useState(false);
+    
+    useEffect(() => {
+        setMounted(true);
+    }, []);
     
     // Check if on mobile view
-    const isMobile = useMediaQuery({ maxWidth: 767 });
+    const isMobileQuery = useMediaQuery({ maxWidth: 767 });
+    const isMobile = mounted ? isMobileQuery : false;
     
     const cols = isMobile ? 3 : 5;
     const heroIndex = isMobile ? 4 : 7;

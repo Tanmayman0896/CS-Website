@@ -3,11 +3,15 @@
 import dynamic from "next/dynamic";
 import FadishBlackBackground from "@/components/FadishBlackBackground";
 import SmoothScrollProvider from "@/components/common/SmoothScrollProvider";
-import ChairpersonSection from "@/components/about/ChairpersonSection";
 import styles from "./about.module.css";
 
 const LogoScrollWrapper = dynamic(
   () => import("@/components/common/LogoScrollWrapper"),
+  { ssr: false }
+);
+
+const ChairpersonSection = dynamic(
+  () => import("@/components/about/ChairpersonSection"),
   { ssr: false }
 );
 

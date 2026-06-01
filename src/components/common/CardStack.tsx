@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import styles from "@/components/common/CardStack.module.css";
+import { motion } from "framer-motion";
+import BoxReveal from "./BoxReveal";
 
 const images = [
   "/images/events/1.avif",
@@ -44,19 +46,45 @@ export default function CardStack() {
 
   return (
     <div id="card-stack-section">
-      <h2 style={{
-        textAlign: "center",
-        fontWeight: "bold",
-        color: "white",
-        fontSize: "clamp(1.8rem, 5vmin, 3rem)",
-        letterSpacing: "3px",
-        textTransform: "uppercase",
-        marginBottom: "2rem",
-        paddingTop: "3rem",
-      }}>
-        Our Events
-      </h2>
-      <section ref={containerRef} className={styles.container} style={{ minHeight: "100vh", paddingBottom: "10rem", paddingTop: "4rem" }}>
+      <style>{`
+        @media (max-width: 767px) {
+          .mobile-events-title-container {
+            padding-top: clamp(6rem, 15vh, 10rem) !important;
+          }
+          .mobile-events-cards-section {
+            min-height: 60vh !important;
+            padding-bottom: clamp(4rem, 10vh, 6rem) !important;
+            padding-top: 2rem !important;
+          }
+        }
+      `}</style>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10% 0px" }}
+        className="mobile-events-title-container w-full flex justify-center"
+        style={{
+          paddingTop: "3rem",
+          marginBottom: "2rem",
+        }}
+      >
+        <BoxReveal align="justify-center" boxColor="#f9ba1f" widthClass="w-fit">
+          <h2 style={{
+            display: "inline-block",
+            textAlign: "center",
+            fontWeight: "bold",
+            color: "white",
+            fontSize: "clamp(1.8rem, 5vmin, 3rem)",
+            letterSpacing: "3px",
+            textTransform: "uppercase",
+            margin: 0,
+            padding: 0,
+          }}>
+            Our Events
+          </h2>
+        </BoxReveal>
+      </motion.div>
+      <section ref={containerRef} className={`${styles.container} mobile-events-cards-section`} style={{ minHeight: "100vh", paddingBottom: "10rem", paddingTop: "4rem" }}>
         <div className={`${styles.cards} ${open ? styles.open : ""}`}>
           {images.map((src, index) => (
             <div key={index} className={styles.card}>

@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 const TeamsInfoComponent = dynamic(() => import("@/components/common/TeamsInfoComponent"), { ssr: false });
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import FAQ from "@/components/FAQ";
 const TeamCard = dynamic(() => import("@/app/team/TeamCard"), { ssr: false });
 const HorizontalGallery = dynamic(() => import("@/app/gallery/HorizontalGallery"), { ssr: false });
 const CardStack = dynamic(() => import("@/components/common/CardStack"), { ssr: false });
@@ -17,8 +16,10 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 const NewComponent = dynamic(() => import("@/components/common/newComponent"),{ ssr: false });
 import LineBackground from "@/components/LineBackground";
-import Newsletter from "@/components/Newsletter";
 import ScrollVelocity from "@/components/ScrollVelocity";
+
+const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
+const Newsletter = dynamic(() => import("@/components/Newsletter"), { ssr: false });
 
 const HELLO_LANGUAGES = [
   "नमस्ते",
@@ -202,7 +203,7 @@ export default function Home() {
       <div className="relative z-20">
         <LandingText />
       </div>
-      <div className="mt-32">
+      <div>
         <HorizontalGallery />
       </div>
       <div>

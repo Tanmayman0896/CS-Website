@@ -246,7 +246,14 @@ function StatCell({
 
 export default function TeamsInfoComponent() {
   return (
-    <div className="relative min-h-screen py-20 lg:py-0 lg:h-screen flex flex-col lg:flex-row items-center justify-center overflow-x-hidden lg:overflow-hidden">
+    <div className="mobile-teams-info-section relative min-h-screen py-20 lg:py-0 lg:h-screen flex flex-col lg:flex-row items-center justify-center overflow-x-hidden lg:overflow-hidden">
+      <style>{`
+        @media (max-width: 767px) {
+          .mobile-teams-info-section {
+            padding-bottom: clamp(3rem, 8vh, 5rem) !important;
+          }
+        }
+      `}</style>
 
       <div className="flex flex-col items-center lg:items-start gap-6 lg:gap-10 w-full lg:w-[40vw] px-6 lg:px-0 mb-12 lg:mb-0">
         <h1 className="font-bold text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left">IEEE CS MUJ</h1>

@@ -36,8 +36,16 @@ export default function NewComponent() {
   return (
     <div
       ref={sectionRef}
-      className="relative min-h-screen py-20 lg:py-0 lg:h-screen flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-[10vh] overflow-x-hidden"
+      className="mobile-new-component-section relative min-h-screen py-20 lg:py-0 lg:h-screen flex flex-col lg:flex-row items-center justify-center gap-10 lg:gap-[10vh] overflow-x-hidden"
     >
+      <style>{`
+        @media (max-width: 1023px) {
+          .mobile-new-component-section {
+            padding-top: clamp(6rem, 15vh, 10rem) !important;
+            padding-bottom: clamp(6rem, 18vh, 10rem) !important;
+          }
+        }
+      `}</style>
       
       <div className="flex flex-col justify-center gap-6 lg:gap-10 w-full lg:w-[40vw] px-6 lg:px-0">
         <h1 className="font-bold text-[#f9a71f] text-4xl md:text-5xl lg:text-6xl text-center lg:text-left">

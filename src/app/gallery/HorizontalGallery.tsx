@@ -5,6 +5,18 @@ import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { motion } from 'framer-motion';
+import BoxReveal from '@/components/common/BoxReveal';
+
+const textContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.15,
+    },
+  },
+};
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,21 +34,38 @@ export default function HorizontalGallery() {
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      // 1. Pinned Horizontal Track ScrollTrigger
+      const getScrollDistance = () => {
+        if (!scroller.current) return 0;
+        return scroller.current.scrollWidth - window.innerWidth;
+      };
+
+      // 1. Pinned Horizontal Track ScrollTrigger (Handles locking full-screen at top top)
       const st = ScrollTrigger.create({
         trigger: scroller.current,
         pin: true,
         scrub: 1,
         invalidateOnRefresh: true,
         anticipatePin: 1,
-        end: () => '+=' + (sections.length - 1) * window.innerWidth,
-        animation: gsap.to(sections, {
-          xPercent: -100 * (sections.length - 1),
-          ease: 'none',
-        }),
+        start: "top top",
+        end: () => '+=' + getScrollDistance(),
+        id: "gallery-pin",
       });
 
-      // 2. Section 1 Items Fade/Slide-in
+      // 2. Horizontal Translation Animation ScrollTrigger (Starts sliding early at 50% scroll)
+      ScrollTrigger.create({
+        trigger: scroller.current,
+        scrub: 1,
+        invalidateOnRefresh: true,
+        start: "top center", // Starts horizontal translation early when gallery reaches center
+        end: () => '+=' + (getScrollDistance() + window.innerHeight / 2), // Total scroll distance from center to end of pin
+        animation: gsap.to(scroller.current, {
+          x: () => -getScrollDistance(),
+          ease: 'none',
+        }),
+        id: "gallery-anim",
+      });
+
+      // 3. Section 1 Items Fade/Slide-in
       const section1Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(1) > div', wrapper.current);
       gsap.set(section1Items, { y: 120, x: 60, opacity: 0 });
 
@@ -54,17 +83,18 @@ export default function HorizontalGallery() {
             duration: 0.9,
           });
         },
+        id: "gallery-fade-in-1",
       });
 
-      // 3. Section 2 Items Scrub Transition (Perfectly synced with pin)
+      // 4. Section 2 Items Scrub Transition (Synced with anim start)
       const section2Items = gsap.utils.toArray<HTMLElement>('.skill-set:nth-child(2) > div', wrapper.current);
       gsap.set(section2Items, { y: 120, x: 60, opacity: 0 });
 
       ScrollTrigger.create({
         trigger: scroller.current,
         scrub: 0.8,
-        start: 'top top',
-        end: () => '+=' + (sections.length - 1) * window.innerWidth, // Synced to prevent drift or layer splits
+        start: 'top center', // Synced with animation start at center
+        end: () => '+=' + (getScrollDistance() + window.innerHeight / 2),
         animation: gsap.to(section2Items, {
           y: 0,
           x: 0,
@@ -72,6 +102,7 @@ export default function HorizontalGallery() {
           ease: 'power2.out',
           stagger: 0.05,
         }),
+        id: "gallery-scrub-2",
       });
     });
 
@@ -80,7 +111,7 @@ export default function HorizontalGallery() {
       const items = gsap.utils.toArray<HTMLElement>('.skill-set > div:not(.no-gsap)', wrapper.current);
 
       items.forEach((item) => {
-        gsap.fromTo(item, 
+        gsap.fromTo(item,
           { y: 50, opacity: 0 },
           {
             y: 0,
@@ -112,12 +143,17 @@ export default function HorizontalGallery() {
     <div
       ref={wrapper}
       className="overflow-hidden transition-colors duration-500"
-      style={{
-        backgroundColor: "rgba(255,255,255,0)",
-        maskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
-        WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 100%)",
-      }}
     >
+      <style>{`
+        @media (max-width: 767px) {
+          .mobile-gallery-section {
+            padding-top: clamp(6rem, 15vh, 10rem) !important;
+          }
+          .mobile-gallery-end-section {
+            padding-bottom: clamp(6rem, 15vh, 10rem) !important;
+          }
+        }
+      `}</style>
       <div
         ref={scroller}
         className="flex flex-col md:flex-row md:w-[200vw] w-full min-h-screen text-white relative bg-transparent"
@@ -133,9 +169,20 @@ export default function HorizontalGallery() {
         </div>
 
         {/* SECTION 1 */}
-        <section className="skill-set relative w-full md:w-screen h-auto md:h-full px-6 md:px-12 py-20 md:py-0 flex flex-col md:block gap-32 md:gap-20">
+        <section className="skill-set mobile-gallery-section relative w-full md:w-screen h-auto md:h-full px-6 md:px-12 pt-[clamp(3.5rem,10vw,6rem)] pb-20 md:py-0 flex flex-col md:block gap-32 md:gap-20">
           <div className="relative md:absolute md:right-[600px] md:top-[150px] w-[80%] md:w-[25vw] h-[40vh] md:h-[35vh] ml-auto mt-8 md:mt-0">
-            <p className="relative z-20 text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:mb-2 md:translate-y-[-25px] md:absolute right-0 md:right-auto">QATAR_2024</p>
+            <BoxReveal
+              align="justify-start md:justify-end"
+              className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR_2024</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa04b14a1ca33c0b25_ln-home-horiz-1.webp"
               alt="Image 1"
@@ -147,7 +194,18 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:right-[600px] md:bottom-[120px] w-[65%] md:w-[15vw] h-[35vh] md:h-[20vh] mr-auto">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute">QATAR_2024</p>
+            <BoxReveal
+              align="justify-start"
+              className="md:translate-y-[-25px] md:absolute mb-2"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR_2024</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baab12220595c8223b3_ln-home-horiz-2.webp"
               alt="Image 2"
@@ -159,7 +217,18 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:right-[0px] md:bottom-[120px] w-[75%] md:w-[28vw] h-[45vh] md:h-[45vh] ml-auto">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute right-0 md:right-auto">QATAR_2024</p>
+            <BoxReveal
+              align="justify-start md:justify-end"
+              className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">QATAR_2024</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302babcf12f0111d96322e_ln-home-horiz-3-p-500.webp"
               alt="Image 3"
@@ -170,17 +239,42 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[0px] md:top-[120px] w-full md:w-[28vw] pb-4 -translate-y-16 md:translate-y-0 md:mt-0 md:pb-0 md:py-0 text-center md:text-right no-gsap">
-            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn&apos;t matter where</p>
-            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it&apos;s how you</p>
-            <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">progress from there.</p>
+          <div className="relative md:absolute md:right-[0px] md:top-[120px] w-full md:w-[28vw] pb-4 -translate-y-16 md:translate-y-0 md:mt-0 md:pb-0 md:py-0 text-center md:text-right no-gsap flex flex-col items-center md:items-end">
+            <motion.div
+              variants={textContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-10% 0px" }}
+              className="w-full flex flex-col items-center md:items-end"
+            >
+              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
+                <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">It doesn&apos;t matter where</p>
+              </BoxReveal>
+              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
+                <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">you start, it&apos;s how you</p>
+              </BoxReveal>
+              <BoxReveal align="justify-center md:justify-end" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
+                <p className="text-[#f9ba1f] text-[18px] md:text-[12px]">progress from there.</p>
+              </BoxReveal>
+            </motion.div>
           </div>
         </section>
 
         {/* SECTION 2 */}
-        <section className="skill-set relative w-full md:w-screen h-auto md:h-full flex flex-col md:items-center md:justify-center px-6 md:px-12 py-20 md:py-0 gap-32 md:gap-20">
+        <section className="skill-set mobile-gallery-end-section relative w-full md:w-screen h-auto md:h-full flex flex-col md:items-center md:justify-center px-6 md:px-12 py-20 md:py-0 gap-32 md:gap-20">
           <div className="relative md:absolute md:left-[100px] md:top-[150px] w-[60%] md:w-[18vw] h-[35vh] md:h-[18vh] mr-auto">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute">MONACO, 2023</p>
+            <BoxReveal
+              align="justify-start"
+              className="md:translate-y-[-25px] md:absolute mb-2"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">MONACO, 2023</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa798e2cc6e02ac38a_ln-home-horiz-4-p-500.webp"
               alt="Image 4"
@@ -192,7 +286,18 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:left-[180px] md:bottom-[180px] w-[80%] md:w-[27vw] h-[45vh] md:h-[27vh] ml-auto">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute right-0 md:right-auto">BRITAIN, 2025</p>
+            <BoxReveal
+              align="justify-start md:justify-end"
+              className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">BRITAIN, 2025</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68da85d632bfefc552a0faac_Britain-25%20(1).webp"
               alt="Image 5"
@@ -204,7 +309,18 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:left-[570px] md:bottom-[80px] w-[70%] md:w-[25vw] h-[40vh] md:h-[25vh] mr-auto">
-            <p className="relative z-20 -translate-y-6 text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-15px] md:absolute">BATTERSEA, 2024</p>
+            <BoxReveal
+              align="justify-start"
+              className="-translate-y-6 md:translate-y-[-25px] md:absolute mb-2 z-20"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">BATTERSEA, 2024</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baa14a96f3cdd2f9a95_ln-home-horiz-6-p-500.webp"
               alt="Image 6"
@@ -216,7 +332,18 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:right-[720px] md:top-[180px] w-[65%] md:w-[20vw] h-[35vh] md:h-[20vh] ml-auto">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute right-0 md:right-auto">HIGH PERFORMANCE GALA, 2024</p>
+            <BoxReveal
+              align="justify-start md:justify-end"
+              className="md:translate-y-[-25px] md:absolute right-0 md:right-auto mb-2"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">HIGH PERFORMANCE GALA, 2024</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302bab3ee6e26b1f434a7d_ln-home-horiz-7.webp"
               alt="Image 7"
@@ -228,7 +355,18 @@ export default function HorizontalGallery() {
           </div>
 
           <div className="relative md:absolute md:right-[200px] md:top-[150px] w-[85%] md:w-[30vw] h-[55vh] md:h-[48vh] mr-auto">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute">BARCELONA, 2024</p>
+            <BoxReveal
+              align="justify-start"
+              className="md:translate-y-[-25px] md:absolute mb-2"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">BARCELONA, 2024</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302baaedf821dd2e3a7c74_ln-home-horiz-8-p-500.webp"
               alt="Image 8"
@@ -239,14 +377,39 @@ export default function HorizontalGallery() {
             />
           </div>
 
-          <div className="relative md:absolute md:right-[200px] md:bottom-[180px] w-full md:w-[30vw] py-10 md:py-0 text-center md:text-left">
-            <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">Since I was 7 years old and had my first</p>
-            <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">experience with kart racing, I&apos;ve worked</p>
-            <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">tirelessly to make that dream come true.</p>
+          <div className="relative md:absolute md:right-[200px] md:bottom-[180px] w-full md:w-[30vw] py-10 md:py-0 text-center md:text-left flex flex-col items-center md:items-start">
+            <motion.div
+              variants={textContainerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-10% 0px" }}
+              className="w-full flex flex-col items-center md:items-start"
+            >
+              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
+                <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">Since I was 7 years old and had my first</p>
+              </BoxReveal>
+              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
+                <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">experience with kart racing, I&apos;ve worked</p>
+              </BoxReveal>
+              <BoxReveal align="justify-center md:justify-start" boxColor="#f9ba1f" duration={2.5} widthClass="w-fit">
+                <p className="text-[#f9ba1f] text-[20px] md:text-[22px] p-0">tirelessly to make that dream come true.</p>
+              </BoxReveal>
+            </motion.div>
           </div>
 
           <div className="relative md:absolute md:right-[40px] md:bottom-[130px] w-full md:w-[10vw] h-[40vh] md:h-[25vh]">
-            <p className="text-[#f9ba1f] text-[10px] md:text-[7px] mb-2 md:translate-y-[-25px] md:absolute">BARCELONA, 2024</p>
+            <BoxReveal
+              align="justify-start"
+              className="md:translate-y-[-25px] md:absolute mb-2"
+              widthClass="w-fit"
+              marginClass="my-0"
+              paddingClass="p-0"
+              boxColor="#f9ba1f"
+              duration={2.5}
+              standalone={true}
+            >
+              <p className="text-[#f9ba1f] text-[10px] md:text-[7px]">BARCELONA, 2024</p>
+            </BoxReveal>
             <Image
               src="https://cdn.prod.website-files.com/67b5a02dc5d338960b17a7e9/68302bab4f762cdbc5e93415_ln-home-horiz-10.webp"
               alt="Image 9"

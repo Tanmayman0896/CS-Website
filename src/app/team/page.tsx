@@ -3,8 +3,10 @@
 import { useEffect } from 'react'
 import HeroSection from '@/app/team/HeroSection'
 import MainContent from '@/app/team/MainContent'
-import StackedSections from '@/app/team/StackedSections'
 import SmoothScrollProvider from '@/app/team/SmoothScrollProvider'
+import dynamic from 'next/dynamic'
+
+const StackedSections = dynamic(() => import('@/app/team/StackedSections'), { ssr: false })
 
 export default function TeamPage() {
   useEffect(() => {

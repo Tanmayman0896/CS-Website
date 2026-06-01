@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import BoxReveal from './BoxReveal';
 
 const containerVariants = {
   hidden: {},
@@ -10,70 +11,6 @@ const containerVariants = {
     },
   },
 };
-
-const textVariants = {
-  hidden: {
-    opacity: 0,
-    x: -15, // elegant cinematic shift following the sweep
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 1.3, // premium weighty duration (slightly faster than 1.5s)
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-
-const boxVariants = {
-  hidden: {
-    x: "0%", // gold box is static and present initially
-  },
-  visible: {
-    x: "103%", // slides out cleanly to reveal text
-    transition: {
-      duration: 1.3, // matching weighted duration
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  },
-};
-
-function CinematicLine({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.div
-      variants={{
-        hidden: {},
-        visible: {},
-      }}
-      className="relative flex justify-center items-center select-none w-full -my-1 sm:-my-2"
-    >
-      {/* Boxed Reveal Container bounds the block to the text dimensions with ample vertical padding */}
-      <div className="relative overflow-hidden px-4 py-3 sm:py-5 flex items-center justify-center">
-        {/* Animated text layer */}
-        <motion.div
-          variants={textVariants}
-          className="relative z-10 transform-gpu flex items-center justify-center py-1"
-          style={{
-            willChange: "transform, opacity",
-          }}
-        >
-          {children}
-        </motion.div>
-
-        {/* Solid gold reveal block */}
-        <motion.div
-          variants={boxVariants}
-          className="absolute inset-0 bg-[#F4A119] z-20 pointer-events-none transform-gpu"
-          style={{
-            willChange: "transform",
-            backfaceVisibility: "hidden",
-          }}
-        />
-      </div>
-    </motion.div>
-  );
-}
 
 function Word({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   return (
@@ -91,9 +28,15 @@ export default function ImpactText() {
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@700;800;900&display=swap');
+        
+        @media (max-width: 767px) {
+          .mobile-hero-section {
+            padding-bottom: clamp(6rem, 18vh, 10rem) !important;
+          }
+        }
       `}</style>
 
-      <section className="w-full py-6 sm:py-8 lg:py-10 flex justify-center items-center px-4 md:px-8 bg-transparent relative z-10 selection:bg-[#F4A119] selection:text-black">
+      <section className="mobile-hero-section w-full pt-6 pb-[clamp(3.5rem,12vw,7rem)] sm:py-8 lg:py-10 flex justify-center items-center px-4 md:px-8 bg-transparent relative z-10 selection:bg-[#F4A119] selection:text-black">
         <div className="max-w-[85rem] mx-auto text-center flex flex-col items-center justify-center text-[#e4e4e1]">
 
           <motion.h2
@@ -106,80 +49,58 @@ export default function ImpactText() {
           >
 
             {/* Line 1 */}
-            <CinematicLine>
-              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-full">
+            <BoxReveal duration={2.5} widthClass="w-fit">
+              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
                 <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
                   <span className="uppercase">REDEFINING</span>
                 </Word>
-                <Word>LIMITS,</Word>
+                <Word>BOUNDARIES,</Word>
               </div>
-            </CinematicLine>
+            </BoxReveal>
 
             {/* Line 2 */}
-            <CinematicLine>
-              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-full">
-                <Word>FIGHTING</Word>
-                <Word>FOR</Word>
-                <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
-                  <span className="uppercase">WINS,</span>
-                </Word>
-              </div>
-            </CinematicLine>
+            <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
+              <BoxReveal duration={2.5} widthClass="w-fit">
+                <div className="flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-6">
+                  <Word>DRIVING</Word>
+                  <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
+                    <span className="uppercase">INNOVATION</span>
+                  </Word>
+                </div>
+              </BoxReveal>
+              <BoxReveal duration={2.5} widthClass="w-fit">
+                <Word>FORWARD.</Word>
+              </BoxReveal>
+            </div>
 
             {/* Line 3 */}
-            <CinematicLine>
-              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-full">
-                <Word>BRINGING</Word>
-                <Word>IT</Word>
-                <Word>ALL</Word>
-                <Word>IN</Word>
+            <BoxReveal duration={2.5} widthClass="w-fit">
+              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
+                <Word>UNITING</Word>
+                <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
+                  <span className="uppercase">STRENGTHS,</span>
+                </Word>
               </div>
-            </CinematicLine>
+            </BoxReveal>
 
             {/* Line 4 */}
-            <CinematicLine>
-              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-full">
-                <Word>ALL</Word>
-                <Word>WAYS.</Word>
-                <Word>DEFINING</Word>
-                <Word>A</Word>
-              </div>
-            </CinematicLine>
-
-            {/* Line 5 */}
-            <CinematicLine>
-              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-full">
+            <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-fit">
+              <BoxReveal duration={2.5} widthClass="w-fit">
+                <div className="flex items-center gap-x-2 sm:gap-x-4 lg:gap-x-6">
+                  <Word>SHAPING</Word>
+                  <Word>TECHNOLOGY'S</Word>
+                </div>
+              </BoxReveal>
+              <BoxReveal duration={2.5} widthClass="w-fit">
                 <Word className="text-[#F4A119] font-normal tracking-normal lowercase" style={{ fontFamily: "'Playfair Display', serif", fontVariant: 'small-caps' }}>
-                  <span className="uppercase">LEGACY</span>
+                  <span className="uppercase">FUTURE.</span>
                 </Word>
-                <Word>IN</Word>
-                <Word>FORMULA</Word>
-                <Word>1</Word>
-              </div>
-            </CinematicLine>
-
-            {/* Line 6 */}
-            <CinematicLine>
-              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-full">
-                <Word>ON</Word>
-                <Word>AND</Word>
-                <Word>OFF</Word>
-                <Word>THE</Word>
-              </div>
-            </CinematicLine>
-
-            {/* Line 7 */}
-            <CinematicLine>
-              <div className="flex flex-wrap justify-center items-center gap-x-2 sm:gap-x-4 lg:gap-x-6 w-full">
-                <Word>TRACK.</Word>
-              </div>
-            </CinematicLine>
+              </BoxReveal>
+            </div>
 
           </motion.h2>
         </div>
       </section>
-
-      <br /><br /><br /><br /><br />
     </>
   );
 }
