@@ -42,8 +42,6 @@ export default function HeroSection() {
   useLayoutEffect(() => {
     if (!isReady) return
 
-    ScrollTrigger.config({ ignoreMobileResize: true })
-
     const ctx = gsap.context(() => {
       // ENTRANCE: content slides up
       gsap.from(contentRef.current, {
@@ -120,7 +118,6 @@ export default function HeroSection() {
             scrub: 0.5,
             pin: true,
             anticipatePin: 1,
-            invalidateOnRefresh: true,
           },
         })
 
@@ -138,7 +135,7 @@ export default function HeroSection() {
         tl.to(
           mobileCollageWrapperRef.current,
           {
-            clipPath: 'circle(120% at 380% 50%)',
+            clipPath: 'circle(120% at 220% 50%)',
             ease: 'power2.inOut',
             duration: 4.5,
           },
