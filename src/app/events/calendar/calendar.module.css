@@ -479,3 +479,21 @@
     font-size: 1.4rem;
   }
 }
+
+.responsiveLogoWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 240px;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .responsiveLogoWrapper {
+    width: 350px;
+    height: 350px;
+  }
+}
+
