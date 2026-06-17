@@ -10,7 +10,7 @@ export interface TeamMember {
 export const EC_MEMBERS: TeamMember[] = [
     {
     name: "Samaksh Gupta",
-    image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/samaksh-gupta.avif",
+    image: "https://images.prismic.io/ieeemuj/ZnJjw5m069VX13S1_IMG-20240405-WA0024~2-SamakshGupta.jpg?auto=format,compress",
     role: "Chairperson",
     linkedin: "https://www.linkedin.com/in/samakshgupta04",
     github: "https://github.com/AwesomeSam9523/",
@@ -18,7 +18,7 @@ export const EC_MEMBERS: TeamMember[] = [
   },
  {
   name: "Tamanna Yadav",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/tamanna-yadav.avif",
+  image: "https://images.prismic.io/ieeemuj/ZnHEBZm069VX12wA_IMG_20240617_153104-TamannaYadav.jpg?auto=format,compress",
   role: "Vice Chairperson",
   linkedin: "https://www.linkedin.com/in/tamanna-yadav-4251a6234",
   github: "",
@@ -26,7 +26,7 @@ export const EC_MEMBERS: TeamMember[] = [
 },
 {
   name: "Salaj Singh Bisht",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/salaj-singh-bisht.avif",
+  image: "https://images.prismic.io/ieeemuj/ZnHLL5m069VX12yn_IMG_20240416_161408-SalajBisht.jpg?auto=format,compress",
   role: "General Secretary",
   linkedin: "https://www.linkedin.com/in/salaj-singh-bisht-837899248",
   github: "",
@@ -34,7 +34,7 @@ export const EC_MEMBERS: TeamMember[] = [
 },
 {
   name: "Aryan Verma",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/aryan-verma.avif",
+  image: "https://images.prismic.io/ieeemuj/aENAFrh8WN-LVx3f_IMG_0788-AryanVerma.jpeg?auto=format,compress",
   role: "Managing Director",
   linkedin: "https://www.linkedin.com/in/aryannnnverma",
   github: "https://github.com/aryannverse",
@@ -42,7 +42,7 @@ export const EC_MEMBERS: TeamMember[] = [
 },
 {
   name: "Vinayak Jajoo",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/vinayak-jajoo.avif",
+  image: "https://images.prismic.io/ieeemuj/aENAfrh8WN-LVx4C_IMG_6284-VinayakJajoo.heic?auto=format,compress",
   role: "Treasurer",
   linkedin: "https://www.linkedin.com/in/vinayak-jajoo-414823250?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   github: "",
@@ -50,7 +50,7 @@ export const EC_MEMBERS: TeamMember[] = [
 },
 {
   name: "Bhavya Jaggi",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/bhavya-jaggi.avif",
+  image: "https://images.prismic.io/ieeemuj/aEM_tbh8WN-LVx3E_20250421_183325-BhavyaJaggi.jpg?auto=format,compress",
   role: "Human Resource Director",
   linkedin: "https://www.linkedin.com/in/bhavya-jaggi-20b768284?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "https://github.com/BhavyaJaggi12",
@@ -58,7 +58,7 @@ export const EC_MEMBERS: TeamMember[] = [
 },
 {
   name: "Neil Gupta",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/neil-gupta.avif",
+  image: "https://images.prismic.io/ieeemuj/aENAUbh8WN-LVx31_IMG_2745-NeilGupta.jpeg?auto=format,compress",
   role: "Technical Secretary",
   linkedin: "https://www.linkedin.com/in/neil-gupta-97a0242a1",
   github: "",
@@ -100,7 +100,7 @@ export const WEB_MEMBERS: TeamMember[] = [
 export const CORE_MEMBERS: TeamMember[] = [
   {
   name: "Aarush Dayal",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/aarush-dayal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD2-Irh8WN-LVfO7_aarushdayal-ieeeweb-img-AarushDayal.jpeg?auto=format,compress",
   role: "Head of Programs",
   linkedin: "https://www.linkedin.com/in/aarush-dayal-790812215/",
   github: "",
@@ -108,7 +108,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Tejas Bhadauria",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/tejas-bhadauria.avif",
+  image: "https://images.prismic.io/ieeemuj/aD2-_rh8WN-LVfP9_cropped-image-1--CrystalFire.png?auto=format,compress",
   role: "Joint Head of Programs",
   linkedin: "https://www.linkedin.com/in/tejas-bhadauria-513a78293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "https://github.com/CrystalFire1o8",
@@ -116,7 +116,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Devang Sabarwal",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/devang-sabarwal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD2_s7h8WN-LVfQp_IMG_8475_Original-Devang.jpeg?auto=format,compress",
   role: "Senior Coordinator of Programs",
   linkedin: "https://www.linkedin.com/in/devang-sabbarwal-397563249?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   github: "",
@@ -124,7 +124,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Saksham Jain",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/saksham-jain.avif",
+  image: "https://images.prismic.io/ieeemuj/aD2__bh8WN-LVfRL_Image-SakshamJain.jpg?auto=format,compresss",
   role: "Senior Coordinator of Programs",
   linkedin: "http://www.linkedin.com/in/saksham-jain-x7",
   github: "",
@@ -132,7 +132,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Kavya Sharma",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/kavya-sharma.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3AI7h8WN-LVfRa_1000077001-1--KavyaSharma.jpg?auto=format,compress",
   role: "Senior Coordinator of Programs",
   linkedin: "https://www.linkedin.com/in/kavya-sharma-479839335",
   github: "",
@@ -140,7 +140,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Arnav Pawar",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/arnav-pawar.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3ASbh8WN-LVfRg_ArnavPawar-ArnavPawar.jpg?auto=format,compress",
   role: "Senior Coordinator of Programs",
   linkedin: "https://linkedin.com/in/arnav-pawar-080867349/",
   github: "",
@@ -148,7 +148,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Aradhya Bansal",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/aradhya-bansal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Avbh8WN-LVfSG_ProfilePic-AradhyaBansal.jpg?auto=format,compress",
   role: "Senior Coordinator of Programs",
   linkedin: "www.linkedin.com/in/aradhyabansal2407",
   github: "",
@@ -156,7 +156,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Sanidhya Jaiswal",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/sanidhya-jaiswal.avif",
+  image: "https://images.prismic.io/ieeemuj/aEM3hbh8WN-LVxrj_WhatsAppImage2025-06-05at14.39.33_3699181e.jpg?auto=format,compress",
   role: "Senior Coordinator of Programs",
   linkedin: "https://www.linkedin.com/in/sanidhya-jaiswal-033378325/",
   github: "https://github.com/Sanidhya-Jaiswal",
@@ -164,7 +164,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Tamanna",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/tamanna.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3BY7h8WN-LVfS9_InShot_20250528_192147924-TamannaMalhotra.jpg?auto=format,compress",
   role: "Senior Coordinator of Programs",
   linkedin: "www.linkedin.com/in/tamannamalhotra24",
   github: "",
@@ -172,7 +172,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Hemank Kumar",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/hemank-kumar.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3B_Lh8WN-LVfTR_pong-arty.jpeg?auto=format,compress",
   role: "Head of Technical Projects",
   linkedin: "https://www.linkedin.com/in/hemankkumar24/",
   github: "https://github.com/artyish",
@@ -180,7 +180,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Disha Chopra",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/disha-chopra.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3CJbh8WN-LVfTa_cropped-image-2--Disha.png?auto=format,compress",
   role: "Joint Head of Technical Projects",
   linkedin: "https://www.linkedin.com/in/disha-chopra-116244339",
   github: "",
@@ -188,7 +188,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Tanmoy Mandal",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/tanmoy-mandal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3EmLh8WN-LVfVO_photo-Tanmay.jpg?auto=format,compresss",
   role: "Senior Coordinator of Technical Projects",
   linkedin: "https://www.linkedin.com/in/tanmoy-mandal-014a23326/",
   github: "https://github.com/Tanmayman0896",
@@ -196,7 +196,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Shubh Somani",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/shubh-somani.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3DELh8WN-LVfUO_DA96186B-1752-4663-85A2-0A869CB9A5DC-ShubhSomani.jpeg?auto=format,compress",
   role: "Senior Coordinator of Technical Projects",
   linkedin: "https://www.linkedin.com/in/shubh-somani-aa4a49284",
   github: "https://github.com/ShubhxYT",
@@ -204,7 +204,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Siddharth Meena",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/siddharth-meena.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Dkbh8WN-LVfUm_1000093770-1--Siddarth.jpg?auto=format,compress",
   role: "Senior Coordinator of Technical Projects",
   linkedin: "https://www.linkedin.com/in/siddharth--meena",
   github: "https://github.com/SiddDevZ",
@@ -212,7 +212,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Saksham Tyagi",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/saksham-tyagi.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3D-7h8WN-LVfUw_IMG_20250527_151837-SakshamTyagi.jpg?auto=format,compress",
   role: "Senior Coordinator of Technical Projects",
   linkedin: "https://www.linkedin.com/in/saksham-tyagi-369109288?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "https://github.com/SakshamTyagi17",
@@ -220,7 +220,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Ayush Ranjan",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/ayush-ranjan.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3EIrh8WN-LVfU3_Ayush_Ranjan-AyushRanjan.jpg?auto=format,compress",
   role: "Senior Coordinator of Technical Projects",
   linkedin: "https://www.linkedin.com/in/ayush-ranjan-muj-cse/",
   github: "https://github.com/Ayush007-pro",
@@ -228,7 +228,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Kushagra Kaushik",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/kushagra-kaushik.avif",
+  image: "https://images.prismic.io/ieeemuj/aEM2dLh8WN-LVxqH_WhatsAppImage2025-06-05at01.47.53_da5b4988.jpg?auto=format,compress",
   role: "Senior Coordinator of Technical Projects",
   linkedin: "www.linkedin.com/in/kushagrakaushik19",
   github: "",
@@ -236,7 +236,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Abishri V K",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/abishri-v-k.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Harh8WN-LVfW4_20250528_143558-AbishriVK.jpg?auto=format,compress",
   role: "Senior Coordinator of Technical Projects",
   linkedin: "https://www.linkedin.com/in/abishri-v-k-199bb6333?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "",
@@ -244,7 +244,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Anushka Singh",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/anushka-singh.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Hprh8WN-LVfXD_IMG-20250528-WA0013-Anushka.jpg?auto=format,compress",
   role: "Senior Coordinator of Technical Projects",
   linkedin: "https://in.linkedin.com/in/anushka-singh-413098294",
   github: "https://github.com/anushkasinghxx",
@@ -252,7 +252,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Abhijay Shrivastava",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/abhijay-shrivastava.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3IH7h8WN-LVfXW_Screenshot_20250528-131631-Abhijay.png?auto=format,compress",
   role: "Head of Graphic Design",
   linkedin: "https://www.linkedin.com/in/abhijay-shrivastava",
   github: "https://github.com/Abhijay0910",
@@ -260,7 +260,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Arindam Sharmaa",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/arindam-sharmaa.avif",
+  image: "https://images.prismic.io/ieeemuj/aEM4ILh8WN-LVxsP_IEEE3%5B1%5D.JPG?auto=format,compress",
   role: "Joint Head of Graphic Design",
   linkedin: "https://www.linkedin.com/in/arindam~sharma~5906",
   github: "",
@@ -268,7 +268,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Kartik Garg",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/kartik-garg.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3QSbh8WN-LVfeY_sqaurephoto-KartikGarg.jpg?auto=format,compress",
   role: "Senior Coordinator of Graphic Design",
   linkedin: "www.linkedin.com/in/kartikgarg123",
   github: "https://github.com/Kartik-Garg-13",
@@ -276,7 +276,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Abhinav Singh Negi",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/abhinav-singh-negi.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Qe7h8WN-LVfep_avi3-1-%5B1%5D-aaravispro12.png?auto=format,compress",
   role: "Senior Coordinator of Graphic Design",
   linkedin: "https://www.linkedin.com/in/abhinav-singh-negi-28360a32a/",
   github: "https://github.com/AbhinvSinghNegi",
@@ -284,7 +284,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Arjun Khanna",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/arjun-khanna.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Qubh8WN-LVfey_IMG_1473-arjunkhanna.jpeg?auto=format,compress",
   role: "Senior Coordinator of Graphic Design",
   linkedin: "https://www.linkedin.com/in/arjun-khanna8",
   github: "",
@@ -292,7 +292,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Aabha Rajpal ",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/aabha-rajpal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Q_7h8WN-LVfe7_Aabha_Rajpal-AabhaRajpal.jpg?auto=format,compress",
   role: "Head of Promotions",
   linkedin: "https://www.linkedin.com/in/aabha-rajpal-630b41300?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "",
@@ -300,7 +300,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Shreyas Kumar Singh",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/shreyas-kumar-singh.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3RPbh8WN-LVffH_shreyaskrs-ShreyasKumarSingh.jpg?auto=format,compress",
   role: "Joint Head of Promotions",
   linkedin: "https://www.linkedin.com/in/shreyaskrs/",
   github: "https://github.com/shreyyaz",
@@ -308,7 +308,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Samaira Agarwal",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/samaira-agarwal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3RZrh8WN-LVffJ_IEEEpicture-SamairaAgarwal.jpeg?auto=format,compress",
   role: "Senior Coordinator of Promotions",
   linkedin: "https://www.linkedin.com/in/samaira-agarwal-3608b2247/",
   github: "",
@@ -316,7 +316,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Dev Kumar Raikwar",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/dev-kumar-raikwar.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Rjbh8WN-LVffL_94a7460e-ff3c-42fc-b6d1-603d1469d725-DevRaikwar.jpeg?auto=format,compress",
   role: "Senior Coordinator of Promotions",
   linkedin: "https://www.linkedin.com/in/dev-kumar-raikwar-x7/",
   github: "",
@@ -324,7 +324,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Aarav Shah",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/aarav-shah.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3RwLh8WN-LVffS_aaravshahIeee-AaravShah.jpeg?auto=format,compress",
   role: "Senior Coordinator of Promotions",
   linkedin: "https://www.linkedin.com/in/aarav-shah-741983349/",
   github: "",
@@ -332,7 +332,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Rashmi Singh",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/rashmi-singh.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3SC7h8WN-LVffa_IMG_20250528_124026-RashmiSingh.jpg?auto=format,compress",
   role: "Senior Coordinator of Promotions",
   linkedin: "https://www.linkedin.com/in/rashmi-singh-6a743234a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "",
@@ -340,7 +340,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Sahanaa Vashishth",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/sahanaa-vashishth.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3SLrh8WN-LVffg_sana.2-sahanaav.jpg?auto=format,compress",
   role: "Senior Coordinator of Promotions",
   linkedin: "www.linkedin.com/in/sahanaa-vashishth-ba32a4332",
   github: "",
@@ -348,7 +348,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Amiya Sharma",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/amiya-sharma.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Xubh8WN-LVfhz_IMG_3863-AmiyaSharma.jpg?auto=format,compress",
   role: "Senior Coordinator of Promotions",
   linkedin: "https://www.linkedin.com/in/amiya-sharma-75490933a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   github: "",
@@ -356,7 +356,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Sara Pansuriya",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/sara-pansuriya.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3YAbh8WN-LVfh5_IMG_0013_1_1080x1080-SaraPansuriya.jpeg?auto=format,compress",
   role: "Head of Editorial",
   linkedin: "https://www.linkedin.com/in/sara-pansuriya-936299338",
   github: "",
@@ -364,7 +364,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Shreya Daljeet",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/shreya-daljeet.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3Yebh8WN-LVfh7_IMG_7571-shreya.jpeg?auto=format,compress",
   role: "Joint Head of Editorial",
   linkedin: "https://www.linkedin.com/in/shreya-daljeet-4b7195231?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   github: "",
@@ -372,7 +372,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Brinda Kashyap",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/brinda-kashyap.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3YtLh8WN-LVfh__IMG_20250528_132203-BrindaKashyap.jpg?auto=format,compress",
   role: "Senior Coordinator of Editorial",
   linkedin: "https://www.linkedin.com/in/brinda-kashyap-b16933331/",
   github: "",
@@ -380,7 +380,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Divyanshi",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/divyanshi.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_14rh8WN-LVkcP_IMG-20250527-WA0002-RaseshwariMishra.jpg?auto=format,compress",
   role: "Senior Coordinator of Editorial",
   linkedin: "https://www.linkedin.com/in/divyanshi-gusainwal-5b6b70350?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "",
@@ -388,7 +388,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Bhavika Yadav",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/bhavika-yadav.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3aTrh8WN-LVfi3_IMG_1301-BhavikaYadav.jpeg?auto=format,compress",
   role: "Senior Coordinator of Editorial",
   linkedin: "http://linkedin.com/in/bhavika-yadav-7b4b3a333",
   github: "",
@@ -396,7 +396,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Dolly Srivastava",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/dolly-srivastava.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3a2rh8WN-LVfjA_wowkyaphotohai-DollySrivastava.jpg?auto=format,compress",
   role: "Head of Corporate Affairs",
   linkedin: "https://www.linkedin.com/in/dollysrivastava",
   github: "https://github.com/idkdolly",
@@ -404,7 +404,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Charu Malik",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/charu-malik.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3bG7h8WN-LVfjD_IMG_20250528_111333-CharuMalik.jpg?auto=format,compress",
   role: "Joint Head of Corporate Affairs",
   linkedin: "https://www.linkedin.com/in/charu-malik-56636733a",
   github: "",
@@ -412,7 +412,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Disha Khemka",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/disha-khemka.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3bYbh8WN-LVfjL_ycl34430-DISHAKHEMKA.jpg?auto=format,compress",
   role: "Senior Coordinator of Corporate Affairs",
   linkedin: "https://www.linkedin.com/in/disha-khemka-868b3a35b/",
   github: "https://github.com/Disha-Khemka",
@@ -420,7 +420,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Saharsh Vaibhav Lal ",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/saharsh-vaibhav-lal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3eK7h8WN-LVfkw_IMG-20250527-WA0019_edited-2023AABAAD.jpeg?auto=format,compress",
   role: "Senior Coordinator of Corporate Affairs",
   linkedin: "https://www.linkedin.com/in/saharsh-vaibhav-lal-65061b317/",
   github: "",
@@ -428,7 +428,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Ayush Tanwar",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/ayush-tanwar.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_ue7h8WN-LVkY0_IMG_20250109_032258763~2-AyushTanwar.jpg?auto=format,compress",
   role: "Head of Curations",
   linkedin: "https://www.linkedin.com/in/ayush-tanwar-x7/",
   github: "",
@@ -436,7 +436,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Mehul Manohar Shah",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/mehul-manohar-shah.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_uubh8WN-LVkY6_IMG_6490-MehulManoharSah.JPG?auto=format,compress",
   role: "Joint Head of Curations",
   linkedin: "https://www.linkedin.com/in/mehul-manohar-sah-087a3835b",
   github: "",
@@ -444,7 +444,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Samarth Majumbdar",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/samarth-majumbdar.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_u3Lh8WN-LVkY9_Samarth-SamarthMujumdar.jpg?auto=format,compress",
   role: "Senior Coordinator of Curations",
   linkedin: "www.linkedin.com/in/samarth-mujumdar-680468332",
   github: "https://github.com/SamarthMujumdar",
@@ -452,7 +452,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Aditya Chauhan",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/aditya-chauhan.avif",
+  image: "https://images.prismic.io/ieeemuj/aEM2xLh8WN-LVxqf_WhatsAppImage2025-06-06at14.29.29_170f729b.jpg?auto=format,compress",
   role: "Senior Coordinator of Curations",
   linkedin: "https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav",
   github: "https://github.com/adityaaachauhannn",
@@ -460,7 +460,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Harshita Agarwal",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/harshita-agarwal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_vQbh8WN-LVkZG_IMG_5088-Harshitaagarwal.JPG?auto=format,compress",
   role: "Senior Coordinator of Curations",
   linkedin: "https://www.linkedin.com/in/harshita-agarwal-a0578834b/",
   github: "https://github.com/harshita0102",
@@ -468,7 +468,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Utkarsh Saxena",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/utkarsh-saxena.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_veLh8WN-LVkZL_myphotoforieeewebsiteandinstapage-Utkarshsaxena.jpg?auto=format,compress",
   role: "Head of Logistics",
   linkedin: "https://www.linkedin.com/in/utkarsh-saxena-193163349/",
   github: "",
@@ -476,7 +476,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Keshav Anand",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/keshav-anand.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_vnLh8WN-LVkZP_96ad7182-9dd4-46bc-8a16-9f3a61cb9b04-KeshavAnand.jpeg?auto=format,compress",
   role: "Joint Head of Logistics",
   linkedin: "http://linkedin.com/in/keshav-anand-479712327",
   github: "",
@@ -484,7 +484,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Samriddh Dwivedi",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/samriddh-dwivedi.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_v3bh8WN-LVkZV_IMG_20250529_185415-SamriddhDwivedi.jpg?auto=format,compress",
   role: "Head of Media",
   linkedin: "https://www.linkedin.com/in/samriddhdwivedi/",
   github: "",
@@ -492,7 +492,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Drishti Verma",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/drishti-verma.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_wC7h8WN-LVkZb_IMG-20250330-WA0347~2-drishtiverma.jpg?auto=format,compress",
   role: "Head of Social Media",
   linkedin: "https://www.linkedin.com/in/drishti-verma-240b2b302",
   github: "",
@@ -500,7 +500,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Arush Pradhan",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/arush-pradhan.avif",
+  image: "https://images.prismic.io/ieeemuj/aD3ByLh8WN-LVfTL_IMG-20250527-WA0009-ArushPradhan.jpg?auto=format,compress",
   role: "Joint Head of Social Media",
   linkedin: "https://www.linkedin.com/in/arush-pradhan-b2023b316?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "",
@@ -508,7 +508,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Arunika Jain",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/arunika-jain.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_wW7h8WN-LVkZn_IMG_6900-ArunikaJain.jpeg?auto=format,compress",
   role: "Senior Coordinator of Social Media",
   linkedin: "https://www.linkedin.com/in/arunika-jain22",
   github: "",
@@ -516,7 +516,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Ishika Taneja",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/ishika-taneja.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_xH7h8WN-LVkZ7_4fb3d037-8257-4691-97c1-2d300677d0d8-IshikaTaneja.jpeg?auto=format,compress",
   role: "Senior Coordinator of Social Media",
   linkedin: "https://www.linkedin.com/in/ishika-taneja",
   github: "",
@@ -524,7 +524,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Janvi Singh",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/janvi-singh.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_xeLh8WN-LVkaA_ZeeResizer-JanviSingh.png?auto=format,compress",
   role: "Senior Coordinator of Social Media",
   linkedin: "https://www.linkedin.com/in/janvi-singh-55b680303?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
   github: "",
@@ -532,7 +532,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Anushka Kalaskar",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/anushka-kalaskar.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_xrrh8WN-LVkaI_IMG-20250528-WA0003-AnushkaKalaskar.jpg?auto=format,compress",
   role: "Senior Coordinator of Social Media",
   linkedin: "https://www.linkedin.com/in/anushka-kalaskar-714933327",
   github: "",
@@ -540,7 +540,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Treshaa",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/treshaa.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_xy7h8WN-LVkaW_91971a82-9c1e-491e-80f6-db251cf5fe9c-TreshaaPathak.jpeg?auto=format,compress",
   role: "Senior Coordinator of Social Media",
   linkedin: "https://www.linkedin.com/in/treshaa-pathak",
   github: "https://github.com/dontcuttrees",
@@ -548,7 +548,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Sindhuja Dubey",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/sindhuja-dubey.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_x_7h8WN-LVkaf_c3134d90-11c9-45a8-91b9-80bcf7f88aa5-sindoooja.jpeg?auto=format,compress",
   role: "Head of Coverage",
   linkedin: "http://linkedin.com/in/sindhuja-d-b368a7256",
   github: "",
@@ -556,7 +556,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Vaishak Yadav",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/vaishak-yadav.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_yKLh8WN-LVkaj_IMG_4762-VaishakYadav.jpeg?auto=format,compress",
   role: "Joint Head of Coverage",
   linkedin: "https://www.linkedin.com/in/vaishak-yadav-234481324?",
   github: "",
@@ -564,7 +564,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Harshvardhan Pathak",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/harshvardhan-pathak.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_yYrh8WN-LVkat_IMG_20250528_153136_796-HarshPat.jpg?auto=format,compress",
   role: "Senior Coordinator of Coverage",
   linkedin: "https://www.linkedin.com/in/harsh-pathak-v14",
   github: "",
@@ -572,7 +572,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Rakshit Dubey",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/rakshit-dubey.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_yoLh8WN-LVkay_IMG_0821-RakshitDubey.jpeg?auto=format,compress",
   role: "Head of Community",
   linkedin: "https://www.linkedin.com/in/rakshit-dubey-b9b799283?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
   github: "",
@@ -580,7 +580,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Rahul Durgapal",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/rahul-durgapal.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_y37h8WN-LVka4_pic-RahulDurgapal.jpg?auto=format,compress",
   role: "Joint Head of Community",
   linkedin: "https://www.linkedin.com/in/rahuldurgapal555",
   github: "https://github.com/techie-rahul",
@@ -588,7 +588,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Sanskar Gupta",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/sanskar-gupta.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_zBLh8WN-LVka-_Sanskar_Gupta_Senior_Photo-SanskarGupta.jpg?auto=format,compress",
   role: "Senior Coordinator of Community",
   linkedin: "https://www.linkedin.com/in/sanskargupta2709/",
   github: "",
@@ -596,7 +596,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Anshuman Singh",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/anshuman-singh.avif",
+  image: "https://images.prismic.io/ieeemuj/aEM3B7h8WN-LVxqu_20250405_211338-AnshumanSingh.jpg?auto=format,compress",
   role: "Senior Coordinator of Community",
   linkedin: "https://www.linkedin.com/in/anshuman-singh-766088368/",
   github: "",
@@ -604,7 +604,7 @@ export const CORE_MEMBERS: TeamMember[] = [
 },
 {
   name: "Aarush Chandra",
-  image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/aarush-chandra.avif",
+  image: "https://images.prismic.io/ieeemuj/aD_zbLh8WN-LVkbL_What_Image_3e47uu3e47uu3e47-AarushChandra.png?auto=format,compress",
   role: "Senior Coordinator of Community",
   linkedin: "www.linkedin.com/in/aarush-chandra-4r724",
   github: "",
