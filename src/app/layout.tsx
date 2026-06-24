@@ -34,7 +34,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "ieee cs muj",
+  title: "IEEE CS MUJ",
   description: "ieee cs muj website",
   icons: {
     icon: [

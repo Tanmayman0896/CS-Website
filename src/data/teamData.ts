@@ -15,7 +15,7 @@ export const CORE_MEMBERS: TeamMember[] = [
   {
     name: "Vidhyanshu Kumar",
     role: "Senior Coordinator of Technical Projects",
-    image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/vidhyanshu-kumar.avif",
+    image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/team-photos/vidhyanshu-kumar-cropped-v3-1781885800373.avif",
     linkedin: "https://www.linkedin.com/in/viidhyanshu/",
     github: "https://github.com/Viidhyanshu",
   },

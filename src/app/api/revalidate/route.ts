@@ -14,6 +14,8 @@ export async function POST(request: NextRequest) {
 
   if (tag === 'team') {
     revalidatePath('/team', 'page');
+  } else if (tag === 'events') {
+    revalidatePath('/events', 'layout');
   }
 
   return NextResponse.json({ revalidated: true, tag });

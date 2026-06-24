@@ -14,20 +14,20 @@ const Card = () => {
   const editions: NewsletterEdition[] = [
     {
       title: "December Edition",
-      image: "/images/december.avif",
-      link: "https://example.com/[7]December.png",
+      image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938278806_4brat5.avif",
+      link: "https://drive.google.com/file/d/1ENxnjOMPHC0sKmIHTOVrUUPhiByjjb94/view?usp=drive_link",
       rotation: -15,
     },
     {
       title: "January Edition",
-      image: "/images/january.avif",
-      link: "https://example.com/january",
+      image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938292685_sjmw6x.avif",
+      link: "https://drive.google.com/file/d/1oKVilyYfa5voYXlreLnsZRVlEhcemeb9/view?usp=drive_link",
       rotation: 5,
     },
     {
       title: "February Edition",
-      image: "/images/february.avif",
-      link: "https://example.com/february",
+      image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938286381_62c7ei.avif",
+      link: "https://drive.google.com/file/d/1OFuQI6MQBNebnPUIsR3xxa8WZFcCsCBN/view?usp=drive_link",
       rotation: 25,
     },
   ];
@@ -69,16 +69,33 @@ const Card = () => {
       `}</style>
       <h2 style={{
         textAlign: "center",
-        fontWeight: "bold",
-        color: "white",
-        fontSize: "clamp(1.8rem, 5vmin, 3rem)",
-        letterSpacing: "3px",
-        textTransform: "uppercase",
-        marginBottom: "2rem",
+        fontFamily: "'Playfair Display', serif",
+        fontWeight: 900,
+        background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        fontSize: "clamp(2.75rem, 8vw, 5.25rem)",
+        lineHeight: 1.15,
+        paddingBottom: "0.15em",
+        letterSpacing: "-0.03em",
+        marginBottom: "0px",
         paddingTop: "2rem",
       }}>
         Our Newsletter
       </h2>
+      <div
+        style={{
+          width: "40px",
+          height: "3px",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+          marginTop: "10px",
+          marginBottom: "5rem",
+          marginLeft: "auto",
+          marginRight: "auto",
+          borderRadius: "999px",
+        }}
+      />
       <StyledWrapper>
         <div className="container">
           {editions.map((edition, index) => (

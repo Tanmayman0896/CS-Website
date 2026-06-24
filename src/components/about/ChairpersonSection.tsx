@@ -21,71 +21,71 @@ interface Leader {
 
 const LEADERS: Leader[] = [
     {
-        name: "Samaksh Gupta",
+        name: "Tanmoy Mandal",
         role: "Chairperson, IEEE CS MUJ",
         eyebrow: "A Message From Our",
-        title: ["Chairperson's", "Words"],
-        image: "https://images.prismic.io/ieeemuj/ZnJjw5m069VX13S1_IMG-20240405-WA0024~2-SamakshGupta.jpg?auto=format,compress",
+        title: ["Chairperson", ""],
+        image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781889254081_37vzf.avif",
         quote: "Serving computing at its best with inclusion and diversity is the prime motto of the IEEE Computer Society. We aim to empower every student to push the boundaries of technology and innovation.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     },
     {
-        name: "Tamanna Yadav",
+        name: "Aarush Dayal",
         role: "Vice Chairperson, IEEE CS MUJ",
         eyebrow: "A Message From Our",
         title: ["Vice", "Chairperson"],
-        image: "https://images.prismic.io/ieeemuj/ZnHEBZm069VX12wA_IMG_20240617_153104-TamannaYadav.jpg?auto=format,compress",
+        image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782011016796_cp9pt.avif",
         quote: "Collaboration is the key to creating impactful technology. At IEEE CS, we foster an environment where diverse ideas converge to solve real-world problems and nurture future leaders.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     },
     {
-        name: "Salaj Singh Bisht",
+        name: "Keshav Anand",
         role: "General Secretary, IEEE CS MUJ",
         eyebrow: "A Message From Our",
         title: ["General", "Secretary"],
-        image: "https://images.prismic.io/ieeemuj/ZnHLL5m069VX12yn_IMG_20240416_161408-SalajBisht.jpg?auto=format,compress",
+        image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782010963088_pv6ol.avif",
         quote: "Operational excellence and transparent communication form the backbone of our community. We strive to create seamless opportunities for growth, learning, and student empowerment.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     },
     {
-        name: "Aryan Verma",
+        name: "Sara Pansuriya",
         role: "Managing Director, IEEE CS MUJ",
         eyebrow: "A Message From Our",
         title: ["Managing", "Director"],
-        image: "https://images.prismic.io/ieeemuj/aENAFrh8WN-LVx3f_IMG_0788-AryanVerma.jpeg?auto=format,compress",
+        image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782011183627_rhr4p8.avif",
         quote: "Turning vision into execution is our goal. By managing resources and coordinating initiatives effectively, we ensure our members have the platform to build and excel.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     },
     {
-        name: "Vinayak Jajoo",
+        name: "Dolly Srivastava",
         role: "Treasurer, IEEE CS MUJ",
         eyebrow: "A Message From Our",
         title: ["Treasurer's", "Perspective"],
-        image: "https://images.prismic.io/ieeemuj/aENAfrh8WN-LVx4C_IMG_6284-VinayakJajoo.heic?auto=format,compress",
+        image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782011075286_croi2.avif",
         quote: "Investing in student potential yields the greatest returns. We manage our resources diligently to fund cutting-edge workshops, hackathons, and projects that drive innovation.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     },
     {
-        name: "Bhavya Jaggi",
+        name: "Shreya Daljeet",
         role: "HR Director, IEEE CS MUJ",
         eyebrow: "A Message From Our",
         title: ["Human", "Resources"],
-        image: "https://images.prismic.io/ieeemuj/aEM_tbh8WN-LVx3E_20250421_183325-BhavyaJaggi.jpg?auto=format,compress",
+        image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782011046860_vnl36l.avif",
         quote: "People are our greatest asset. Our mission is to nurture talent, build strong bonds within our team, and maintain a supportive, growth-oriented culture for all members.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
     },
     {
-        name: "Neil Gupta",
-        role: "Technical Secretary, IEEE CS MUJ",
+        name: "Anshuman Singh",
+        role: "Community And Media Director",
         eyebrow: "A Message From Our",
-        title: ["Technical", "Insights"],
-        image: "https://images.prismic.io/ieeemuj/aENAUbh8WN-LVx31_IMG_2745-NeilGupta.jpeg?auto=format,compress",
+        title: ["Community", "Insights"],
+        image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782011000004_fukov.avif",
         quote: "Innovation is born from curiosity and code. We are committed to building robust technical foundations, encouraging hands-on experimentation, and mastering next-generation technologies.",
         bgColor: "#0d0d0d",
         fadeColor: "#0d0d0d"
@@ -142,7 +142,7 @@ export default function ChairpersonSection() {
     }, []);
 
     return (
-        <div ref={containerRef} className={styles.container}>
+        <div ref={containerRef} id="about-chairperson-section" className={styles.container}>
             {LEADERS.map((leader, index) => (
                 <section
                     key={leader.name}
@@ -160,7 +160,13 @@ export default function ChairpersonSection() {
                         <div className={styles.titleCol}>
                             <span className={styles.eyebrow}>{leader.eyebrow}</span>
                             <h2 className={styles.title}>
-                                {leader.title[0]}<br />{leader.title[1]}
+                                {leader.title[0]}
+                                {leader.title[1] && (
+                                    <>
+                                        <br />
+                                        {leader.title[1]}
+                                    </>
+                                )}
                             </h2>
                         </div>
 

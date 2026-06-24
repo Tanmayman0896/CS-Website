@@ -35,11 +35,16 @@ export default function LogoScrollWrapper() {
     const endY = () => vh() * 0.75 - logoH() * 0.5;
 
     let tl: gsap.core.Timeline;
+    let fadeOutTl: gsap.core.Timeline;
 
     const buildTimeline = () => {
       if (tl) {
         tl.scrollTrigger?.kill();
         tl.kill();
+      }
+      if (fadeOutTl) {
+        fadeOutTl.scrollTrigger?.kill();
+        fadeOutTl.kill();
       }
 
       // Pre-set fresh values to prevent layout flash on build
@@ -121,31 +126,41 @@ export default function LogoScrollWrapper() {
           0
         );
       }
+
+      // Smoothly fade out the logo as the chairperson section comes into view
+      const baseOpacity = isMobile() ? 0.85 : 1;
+      fadeOutTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#about-chairperson-section",
+          start: "top bottom",
+          end: "top 20%",
+          scrub: true,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      fadeOutTl.fromTo(el,
+        {
+          opacity: baseOpacity,
+          visibility: "visible",
+        },
+        {
+          opacity: 0,
+          visibility: "hidden",
+          ease: "none",
+        }
+      );
     };
 
     buildTimeline();
     ScrollTrigger.addEventListener("refreshInit", buildTimeline);
 
-    // Smoothly fade out the logo as the about-content-section moves out of view
-    const fadeOutTrigger = ScrollTrigger.create({
-      trigger: "#about-content-section",
-      start: "top top",
-      end: "bottom 50%",
-      scrub: true,
-      onUpdate: (self) => {
-        const baseOpacity = isMobile() ? 0.85 : 1;
-        gsap.set(el, { opacity: baseOpacity * (1 - self.progress) });
-      },
-      onLeaveBack: () => {
-        gsap.set(el, { opacity: isMobile() ? 0.85 : 1 });
-      },
-    });
-
     return () => {
       ScrollTrigger.removeEventListener("refreshInit", buildTimeline);
       tl?.scrollTrigger?.kill();
       tl?.kill();
-      fadeOutTrigger.kill();
+      fadeOutTl?.scrollTrigger?.kill();
+      fadeOutTl?.kill();
     };
   }, []);
 

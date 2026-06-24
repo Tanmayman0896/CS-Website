@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { eventsData, type EventItem } from "@/data/eventsData";
+import { type EventItem } from "@/data/eventsData";
 
 interface EventCardProps {
   exhibition: EventItem;
@@ -66,9 +66,21 @@ function EventCard({ exhibition }: EventCardProps) {
   );
 }
 
-export default function PastExhibitions() {
-  const filtered = eventsData;
+interface PastExhibitionsProps {
+  events: EventItem[];
+}
+
+export default function PastExhibitions({ events }: PastExhibitionsProps) {
+  const filtered = events;
   const titleRef = useRef<HTMLHeadingElement | null>(null);
+
+  const getCharStyle = (index: number) => ({
+    background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+    backgroundSize: "600% 100%",
+    backgroundPosition: `${(index / 5) * 100}% 0%`,
+    WebkitBackgroundClip: "text" as const,
+    WebkitTextFillColor: "transparent" as const,
+  });
 
   useEffect(() => {
     const heading = titleRef.current;
@@ -152,22 +164,50 @@ export default function PastExhibitions() {
       <div className="relative z-10 mt-0 mx-4 mb-16 md:m-24 max-w-7xl justify-items-center px-8 pt-0 md:pt-8 pb-32 flex flex-col items-center gap-12 md:gap-15">
         {/* Header */}
 
-        <h1
-          ref={titleRef}
-          className="relative text-6xl md:text-8xl lg:text-9xl font-extrabold leading-tight tracking-tight text-center w-full mb-4 md:mb-8 eventsTitle"
-          style={{ color: "white", textShadow: "0 0 30px rgba(244,161,25,0.2)" }}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: "100%",
+            marginBottom: "2rem",
+          }}
         >
-          <span className="eventsWord">
-            <span className="eventsChar text-white">E</span>
-            <span className="eventsChar text-white">V</span>
-            <span className="eventsChar text-white">E</span>
-          </span>
-          <span className="eventsWord">
-            <span className="eventsChar" style={{ color: "#F4A119" }}>N</span>
-            <span className="eventsChar" style={{ color: "#F4A119" }}>T</span>
-            <span className="eventsChar" style={{ color: "#F4A119" }}>S</span>
-          </span>
-        </h1>
+          <h1
+            ref={titleRef}
+            className="relative leading-tight tracking-tight text-center w-full eventsTitle"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 900,
+              fontSize: "clamp(2.75rem, 8vw, 6.5rem)",
+              lineHeight: 1.15,
+              paddingBottom: "0.15em",
+              letterSpacing: "-0.03em",
+              margin: 0,
+            }}
+          >
+            <span className="eventsWord">
+              <span className="eventsChar" style={getCharStyle(0)}>E</span>
+              <span className="eventsChar" style={getCharStyle(1)}>V</span>
+              <span className="eventsChar" style={getCharStyle(2)}>E</span>
+            </span>
+            <span className="eventsWord">
+              <span className="eventsChar" style={getCharStyle(3)}>N</span>
+              <span className="eventsChar" style={getCharStyle(4)}>T</span>
+              <span className="eventsChar" style={getCharStyle(5)}>S</span>
+            </span>
+          </h1>
+          <div
+            style={{
+              width: "40px",
+              height: "3px",
+              backgroundColor: "#ffffff",
+              boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+              marginTop: "10px",
+              borderRadius: "999px",
+            }}
+          />
+        </div>
 
         <div className="flex flex-row items-center justify-between gap-6 sm:gap-6 mb-24 w-full border-b border-zinc-800 pb-8 flex-nowrap">
 
@@ -177,9 +217,9 @@ export default function PastExhibitions() {
 
           <Link
             href="/events/calendar"
-            className="shrink-0 whitespace-nowrap text-xs sm:text-sm text-[#F4A119] tracking-widest uppercase flex items-center gap-2 sm:gap-3 font-bold hover:gap-4 transition-all"
+            className="shrink-0 whitespace-nowrap text-base sm:text-lg md:text-xl text-[#F4A119] tracking-widest uppercase flex items-center gap-2 sm:gap-3 font-bold hover:gap-4 transition-all"
           >
-            View calendar <span className="text-lg">→</span>
+            View calendar <span className="text-xl sm:text-2xl">→</span>
           </Link>
         </div>
 

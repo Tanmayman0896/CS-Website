@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 const TeamsInfoComponent = dynamic(() => import("@/components/common/TeamsInfoComponent"), { ssr: false });
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 const TeamCard = dynamic(() => import("@/app/team/TeamCard"), { ssr: false });
 const HorizontalGallery = dynamic(() => import("@/app/gallery/HorizontalGallery"), { ssr: false });
@@ -14,7 +13,7 @@ import SmoothScrollProvider from "@/components/common/SmoothScrollProvider";
 import { useLoading } from "@/context/LoadingContext";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-const NewComponent = dynamic(() => import("@/components/common/newComponent"),{ ssr: false });
+//const NewComponent = dynamic(() => import("@/components/common/newComponent"),{ ssr: false });
 import LineBackground from "@/components/LineBackground";
 import ScrollVelocity from "@/components/ScrollVelocity";
 
@@ -154,8 +153,8 @@ export default function Home() {
           {/* ScrollVelocity (behind) */}
           <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
             <ScrollVelocity
-              texts={['We Are IEEE CS,', 'We Are IEEE CS']} 
-              velocity={30}
+              texts={['WE ARE IEEE CS,', 'WE ARE IEEE CS']} 
+              velocity={35}
               className="custom-scroll-text"
               scrollContainerRef={heroPinRef}
             />
@@ -206,10 +205,12 @@ export default function Home() {
       <div>
         <HorizontalGallery />
       </div>
-      <div>
+
+      {/*<div>
         <NewComponent />
-      </div>
+      </div>*/}
       {/* CardStack and TeamsInfoComponent in normal scroll flow */}
+      
       <div className="relative">
         <div>
           <CardStack />
@@ -219,8 +220,6 @@ export default function Home() {
         </div>
       </div>
 
-
-      
       <div>
         <ProjectCard />
       </div>

@@ -27,28 +27,28 @@ interface CardProps {
 
 const cards: CardProps[] = [
   {
-    title: "Project",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, veniam.",
-    image: "/images/team/photo1.svg",
-    github: "https://github.com",
+    title: "Venom Portal",
+    description: "The VENOM portal gave teams their room numbers, threw tasks at them, and kept the whole game running in real time. Avoiding boards and manual back and forth .",
+    image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781890098603_s975e.avif",
+    github: "https://github.com/Tanmayman0896/Snakes-ladders.git",
   },
   {
-    title: "Project",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, veniam.",
-    image: "/images/team/pic2.svg",
-    github: "https://github.com",
+    title: "Campus Cab",
+    description: "CampusCab lets verified students coordinate rides, split costs, and get around without the chaos .No waiting, no strangers, no guesswork. Just open the app and you’re ready to go.",
+    image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781890043018_ugfop6.avif",
+    github: "https://github.com/Tanmayman0896/Campus-cab-project.git",
   },
   {
-    title: "Project",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, veniam.",
-    image: "/images/team/pic3.svg",
-    github: "https://github.com",
+    title: "CScrypt",
+    description: "CScrypt is an interactive encryption and decryption website developed by IEEE CS MUJ to help users explore and understand classical cryptography techniques.",
+    image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781890052192_ziz7r5.avif",
+    github: "https://github.com/idkdolly/CS-Crypt.git",
   },
   {
-    title: "Project",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, veniam.",
-    image: "/images/team/pic4.svg",
-    github: "https://github.com",
+    title: "CS Tijori",
+    description: "CS Tijori is IEEE CS MUJ's in-house financial platform. It’s built to track budgets, invoices, and expenses without the mess. One centralized system. Full transparency. Every rupee accounted for.",
+    image: "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781890266264_66l66g.avif",
+    github: "https://github.com/AwesomeSam9523/expense-tracker.git",
   },
 ];
 
@@ -163,16 +163,33 @@ const MobileGrid = ({ onProgress }: { onProgress: (p: number) => void }) => {
       <h2
         style={{
           textAlign: "center",
-          fontWeight: "bold",
-          color: "white",
-          fontSize: "clamp(1.6rem, 6vw, 3rem)",
-          letterSpacing: "3px",
-          textTransform: "uppercase",
-          marginBottom: "1.5rem",
+          fontFamily: "'Playfair Display', serif",
+          fontWeight: 900,
+          background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          fontSize: "clamp(2.75rem, 8vw, 5.25rem)",
+          lineHeight: 1.15,
+          paddingBottom: "0.15em",
+          letterSpacing: "-0.03em",
+          marginBottom: "0px",
         }}
       >
         Our Projects
       </h2>
+      <div
+        style={{
+          width: "32px",
+          height: "3px",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+          marginTop: "10px",
+          marginBottom: "2rem",
+          marginLeft: "auto",
+          marginRight: "auto",
+          borderRadius: "999px",
+        }}
+      />
       <div className="grid grid-cols-2 gap-[12px]">
         {cards.map((card, index) => (
           <div key={index} style={{ minHeight: "clamp(220px, 55vw, 340px)" }}>
@@ -234,22 +251,45 @@ const DesktopScroll = ({ onProgress }: { onProgress: (p: number) => void }) => {
   return (
     <div ref={containerRef} style={{ height: `${cards.length * 100}vh` }} className="relative">
       <div className="sticky top-0 w-full h-screen flex flex-col items-center justify-center px-4 md:px-8">
-        <h2
+        <div
           style={{
-            textAlign: "center",
-            fontWeight: "bold",
-            color: "white",
-            fontSize: "clamp(1.8rem, 5vmin, 3rem)",
-            letterSpacing: "3px",
-            textTransform: "uppercase",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             marginBottom: "2rem",
             opacity: visibleCount > 0 ? 1 : 0,
             transform: visibleCount > 0 ? "translateY(0px)" : "translateY(40px)",
             transition: "opacity 0.7s ease, transform 0.7s cubic-bezier(0.19, 1, 0.22, 1)",
           }}
         >
-          Our Projects
-        </h2>
+          <h2
+            style={{
+              textAlign: "center",
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 900,
+              background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontSize: "clamp(2.75rem, 8vw, 5.25rem)",
+              lineHeight: 1.15,
+              paddingBottom: "0.15em",
+              letterSpacing: "-0.03em",
+              margin: 0,
+            }}
+          >
+            Our Projects
+          </h2>
+          <div
+            style={{
+              width: "32px",
+              height: "3px",
+              backgroundColor: "#ffffff",
+              boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+              marginTop: "10px",
+              borderRadius: "999px",
+            }}
+          />
+        </div>
         <div className="max-w-7xl mx-auto flex flex-wrap justify-center gap-[20px]">
           {cards.map((card, index) => {
             const isVisible = index < visibleCount;

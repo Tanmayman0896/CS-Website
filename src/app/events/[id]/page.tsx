@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { eventsData } from "@/data/eventsData";
+import { getEventById } from "@/lib/getEvents";
 
 interface EventPageProps {
   params: {
@@ -11,8 +11,7 @@ interface EventPageProps {
 
 export default async function EventDetail({ params }: EventPageProps) {
   const { id } = await params as { id: string };
-  const eventId = Number(id);
-  const event = eventsData.find((e) => e.id === eventId);
+  const event = await getEventById(id);
 
   if (!event) {
     notFound();

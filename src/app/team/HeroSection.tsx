@@ -4,7 +4,6 @@ import React, { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-import AnimatedText from './AnimatedText'
 import ECCard from '@/app/team/ECCard'
 import type { TeamMember } from '@/data/teamData'
 
@@ -61,12 +60,12 @@ function buildRightClip(): string {
 
 // Newspaper collage images — dark, B&W grid of event photos
 const COLLAGE_PHOTOS = [
-  '/images/team/photo1.svg',
-  '/images/team/pic2.svg',
-  '/images/team/pic3.svg',
-  '/images/team/pic4.svg',
-  'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=80',
-  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80',
+  'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938613491_jcpn7n.svg',
+  'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938637933_qzvdsl.svg',
+  'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938619711_vjiu3q.svg',
+  'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938626698_lp3yqr.svg',
+  'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1782228521495_a530ik.avif',
+  'https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781938964231_adrg5b.avif',
 ]
 
 //to write something on images
@@ -270,22 +269,44 @@ export default function HeroSection({ ecMembers }: { ecMembers: TeamMember[] }) 
                 className="flex flex-col items-center text-center justify-center absolute inset-0"
               >
                 <h1
-                  className="text-white font-black"
                   style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontWeight: 900,
+                    background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
                     fontSize: 'clamp(8rem, 14vw, 13rem)',
-                    lineHeight: '1.0',
+                    lineHeight: '1.15',
+                    paddingBottom: '0.15em',
+                    letterSpacing: "-0.03em",
+                    margin: 0,
                   }}
                 >
-                  <AnimatedText duration={2}>
-                    IEEE CS
-                  </AnimatedText>
+                  IEEE CS
                 </h1>
+                <div
+                  style={{
+                    width: "40px",
+                    height: "3px",
+                    backgroundColor: "#ffffff",
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+                    marginTop: "10px",
+                    borderRadius: "999px",
+                  }}
+                />
                 <h2
                   style={{
-                    color: '#EF9E00',
+                    fontFamily: "'Playfair Display', serif",
+                    fontWeight: 900,
+                    background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
                     fontSize: 'clamp(2rem, 3.5vw, 4rem)',
-                    lineHeight: '1.0',
-                    marginTop: '0.5rem',
+                    lineHeight: '1.15',
+                    paddingBottom: '0.15em',
+                    letterSpacing: "-0.03em",
+                    marginTop: '20px',
+                    margin: 0,
                   }}
                 >
                   Meet Our Team
@@ -315,26 +336,44 @@ export default function HeroSection({ ecMembers }: { ecMembers: TeamMember[] }) 
                 style={{ transform: 'translateY(-10vh)' }}
               >
                 <h1
-                  className="text-white"
                   style={{
-                    fontSize: 'clamp(4rem, 15vw, 6rem)',
-                    fontFamily: 'Henju, serif',
+                    fontFamily: "'Playfair Display', serif",
                     fontWeight: 900,
-                    lineHeight: '1.0',
+                    background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    fontSize: 'clamp(4rem, 15vw, 6rem)',
+                    lineHeight: '1.15',
+                    paddingBottom: '0.15em',
+                    letterSpacing: "-0.03em",
+                    margin: 0,
                   }}
                 >
-                  <AnimatedText duration={2}>
-                    IEEE CS
-                  </AnimatedText>
+                  IEEE CS
                 </h1>
+                <div
+                  style={{
+                    width: "32px",
+                    height: "3px",
+                    backgroundColor: "#ffffff",
+                    boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+                    marginTop: "10px",
+                    borderRadius: "999px",
+                  }}
+                />
                 <h2
                   style={{
-                    color: '#EF9E00',
+                    fontFamily: "'Playfair Display', serif",
+                    fontWeight: 900,
+                    background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
                     fontSize: 'clamp(1.2rem, 4.5vw, 2.2rem)',
-                    fontFamily: 'Henju, serif',
-                    fontWeight: 700,
-                    lineHeight: '1.1',
-                    marginTop: '0.5rem',
+                    lineHeight: '1.15',
+                    paddingBottom: '0.15em',
+                    letterSpacing: "-0.03em",
+                    marginTop: '20px',
+                    margin: 0,
                     maxWidth: '80vw',
                   }}
                 >

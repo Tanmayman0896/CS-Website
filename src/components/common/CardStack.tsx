@@ -2,16 +2,15 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "@/components/common/CardStack.module.css";
 import { motion } from "framer-motion";
-import BoxReveal from "./BoxReveal";
 
 const images = [
-  "/images/events/1.avif",
-  "/images/events/2.avif",
-  "/images/events/3.avif",
-  "/images/events/4.avif",
-  "/images/events/5.avif",
-  "/images/events/6.avif",
-  "/images/events/7.avif",
+  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781932982587_dsmmlt.avif",
+  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781932593544_yg7km7.avif",
+  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781890098603_s975e.avif",
+  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781931700933_k94jd.avif",
+  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781931822598_b2n7xi.avif",
+  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781932315150_odb4va.avif",
+  "https://pub-2b91df05320148438318902a8dc7795b.r2.dev/media/1781932135318_m303ra.avif",
 ];
 
 export default function CardStack() {
@@ -62,27 +61,38 @@ export default function CardStack() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-10% 0px" }}
-        className="mobile-events-title-container w-full flex justify-center"
+        className="mobile-events-title-container w-full flex flex-col items-center"
         style={{
           paddingTop: "3rem",
-          marginBottom: "2rem",
+          marginBottom: "1rem",
         }}
       >
-        <BoxReveal align="justify-center" boxColor="#f9ba1f" widthClass="w-fit">
           <h2 style={{
             display: "inline-block",
             textAlign: "center",
-            fontWeight: "bold",
-            color: "white",
-            fontSize: "clamp(1.8rem, 5vmin, 3rem)",
-            letterSpacing: "3px",
-            textTransform: "uppercase",
+            fontFamily: "'Playfair Display', serif",
+            fontWeight: 900,
+            background: "linear-gradient(to right, #ffffff, #f9ba1f)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontSize: "clamp(2.75rem, 8vw, 5.25rem)",
+            lineHeight: 1.15,
+            padding: "0px 0px 0.15em 0px",
+            letterSpacing: "-0.03em",
             margin: 0,
-            padding: 0,
           }}>
             Our Events
           </h2>
-        </BoxReveal>
+          <div
+            style={{
+              width: "32px",
+              height: "3px",
+              backgroundColor: "#ffffff",
+              boxShadow: "0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5)",
+              marginTop: "10px",
+              borderRadius: "999px",
+            }}
+          />
       </motion.div>
       <section ref={containerRef} className={`${styles.container} mobile-events-cards-section`} style={{ minHeight: "100vh", paddingBottom: "10rem", paddingTop: "4rem" }}>
         <div className={`${styles.cards} ${open ? styles.open : ""}`}>

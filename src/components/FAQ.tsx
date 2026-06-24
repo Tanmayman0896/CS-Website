@@ -184,18 +184,22 @@ export default function FAQ() {
           font-family: 'Playfair Display', serif;
           font-size: 84px;
           font-weight: 900;
-          line-height: 0.9;
+          background: linear-gradient(to right, #ffffff, #f9ba1f);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          line-height: 1.15;
+          padding-bottom: 0.15em;
           letter-spacing: -0.03em;
-          color: #ffffff;
           margin: 0;
         }
 
         .faq-divider {
-          margin-top: 32px;
+          margin-top: 20px;
           width: 32px;
           height: 3px;
           border-radius: 999px;
           background: #ffffff;
+          box-shadow: 0 0 8px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.5);
         }
 
         .faq-subtitle {
@@ -228,15 +232,19 @@ export default function FAQ() {
           .faq-left {
             width: 100%;
             position: static;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
           }
 
           .faq-heading {
             font-size: 56px;
-            line-height: 1;
+            line-height: 1.15;
           }
 
           .faq-divider {
-            margin-top: 20px;
+            margin-top: 10px;
           }
 
           .faq-subtitle {
