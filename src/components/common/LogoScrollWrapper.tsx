@@ -127,11 +127,11 @@ export default function LogoScrollWrapper() {
         );
       }
 
-      // Smoothly fade out the logo as the pillars section comes into view
+      // Smoothly fade out the logo as the chairperson section comes into view
       const baseOpacity = isMobile() ? 0.85 : 1;
       fadeOutTl = gsap.timeline({
         scrollTrigger: {
-          trigger: "#about-pillars-section",
+          trigger: "#about-chairperson-section",
           start: "top bottom",
           end: "top 20%",
           scrub: true,
